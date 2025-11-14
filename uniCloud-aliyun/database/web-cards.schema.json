@@ -1,0 +1,106 @@
+{
+  "bsonType": "object",
+  "description": "网页卡片表",
+  "required": ["title", "url"],
+  "properties": {
+    "_id": {
+      "description": "卡片 ID"
+    },
+    "title": {
+      "bsonType": "string",
+      "description": "卡片标题",
+      "label": "标题",
+      "title": "卡片标题"
+    },
+    "description": {
+      "bsonType": "string",
+      "description": "卡片描述",
+      "label": "描述",
+      "title": "描述"
+    },
+    "url": {
+      "bsonType": "string",
+      "description": "目标网页 URL",
+      "label": "网址",
+      "title": "网页地址"
+    },
+    "icon_name": {
+      "bsonType": "string",
+      "description": "图标名称",
+      "label": "图标",
+      "title": "图标名称",
+      "defaultValue": "Globe"
+    },
+    "icon_type": {
+      "bsonType": "string",
+      "description": "图标类型",
+      "enum": ["builtin", "custom"],
+      "defaultValue": "builtin"
+    },
+    "icon_color": {
+      "bsonType": "string",
+      "description": "图标颜色",
+      "label": "图标颜色",
+      "title": "图标颜色",
+      "defaultValue": "#3b82f6"
+    },
+    "open_mode": {
+      "bsonType": "string",
+      "description": "打开方式",
+      "label": "打开方式",
+      "title": "打开方式",
+      "enum": ["iframe", "external", "auto"],
+      "defaultValue": "external"
+    },
+    "navigation_tab": {
+      "bsonType": "string",
+      "description": "所属导航标签",
+      "label": "导航标签",
+      "title": "导航标签",
+      "enum": ["教研", "服务", "AI工具箱"],
+      "defaultValue": "服务"
+    },
+    "cities": {
+      "bsonType": "array",
+      "description": "关联城市列表",
+      "label": "关联城市",
+      "title": "关联城市",
+      "defaultValue": ["all"]
+    },
+    "departments": {
+      "bsonType": "array",
+      "description": "关联部门列表",
+      "label": "关联部门",
+      "title": "关联部门",
+      "defaultValue": ["all"]
+    },
+    "is_active": {
+      "bsonType": "bool",
+      "description": "是否启用",
+      "label": "启用状态",
+      "title": "是否启用",
+      "defaultValue": true
+    },
+    "sort_order": {
+      "bsonType": "int",
+      "description": "排序权重",
+      "label": "排序",
+      "title": "排序权重",
+      "defaultValue": 0
+    },
+    "created_at": {
+      "bsonType": "timestamp",
+      "description": "创建时间",
+      "forceDefaultValue": {
+        "$env": "now"
+      }
+    },
+    "updated_at": {
+      "bsonType": "timestamp",
+      "description": "更新时间",
+      "forceDefaultValue": {
+        "$env": "now"
+      }
+    }
+  }
+}

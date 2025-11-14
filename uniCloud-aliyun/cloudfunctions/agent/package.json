@@ -1,0 +1,11 @@
+{
+  "name": "agent",
+  "version": "1.0.0",
+  "description": "智能体管理云对象",
+  "main": "index.obj.js",
+  "cloudfunction-config": {
+    "memorySize": 256,
+    "timeout": 60
+  },
+  "dependencies": {}
+}

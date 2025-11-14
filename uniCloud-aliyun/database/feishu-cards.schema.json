@@ -1,0 +1,109 @@
+{
+  "bsonType": "object",
+  "description": "飞书数据卡片表",
+  "required": ["title", "app_id", "app_secret", "table_url"],
+  "properties": {
+    "_id": {
+      "description": "飞书卡片 ID"
+    },
+    "title": {
+      "bsonType": "string",
+      "description": "卡片标题",
+      "label": "标题",
+      "title": "卡片标题"
+    },
+    "description": {
+      "bsonType": "string",
+      "description": "卡片描述",
+      "label": "描述",
+      "title": "描述"
+    },
+    "app_id": {
+      "bsonType": "string",
+      "description": "飞书应用 ID",
+      "label": "应用ID",
+      "title": "飞书应用ID"
+    },
+    "app_secret": {
+      "bsonType": "string",
+      "description": "飞书应用密钥",
+      "label": "应用密钥",
+      "title": "飞书应用密钥"
+    },
+    "table_url": {
+      "bsonType": "string",
+      "description": "飞书表格 URL",
+      "label": "表格地址",
+      "title": "飞书表格URL"
+    },
+    "navigation_tab": {
+      "bsonType": "string",
+      "description": "所属导航标签",
+      "label": "导航标签",
+      "title": "导航标签",
+      "enum": ["教研", "服务", "AI工具箱"],
+      "defaultValue": "服务"
+    },
+    "cities": {
+      "bsonType": "array",
+      "description": "关联城市列表",
+      "label": "关联城市",
+      "title": "关联城市",
+      "defaultValue": ["all"]
+    },
+    "departments": {
+      "bsonType": "array",
+      "description": "关联部门列表",
+      "label": "关联部门",
+      "title": "关联部门",
+      "defaultValue": ["all"]
+    },
+    "icon_url": {
+      "bsonType": "string",
+      "description": "图标 URL",
+      "label": "图标",
+      "title": "图标地址"
+    },
+    "is_active": {
+      "bsonType": "bool",
+      "description": "是否启用",
+      "label": "启用状态",
+      "title": "是否启用",
+      "defaultValue": true
+    },
+    "sort_order": {
+      "bsonType": "int",
+      "description": "排序权重",
+      "label": "排序",
+      "title": "排序权重",
+      "defaultValue": 0
+    },
+    "display_fields": {
+      "bsonType": "array",
+      "description": "折叠状态显示字段列表",
+      "label": "显示字段",
+      "title": "折叠显示字段",
+      "defaultValue": []
+    },
+    "filter_config": {
+      "bsonType": "object",
+      "description": "筛选配置",
+      "label": "筛选配置",
+      "title": "数据筛选配置"
+    },
+    "created_at": {
+      "bsonType": "timestamp",
+      "description": "创建时间",
+      "forceDefaultValue": {
+        "$env": "now"
+      }
+    },
+    "updated_at": {
+      "bsonType": "timestamp",
+      "description": "更新时间",
+      "forceDefaultValue": {
+        "$env": "now"
+      }
+    }
+  }
+}

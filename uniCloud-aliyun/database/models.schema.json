@@ -1,0 +1,50 @@
+{
+  "bsonType": "object",
+  "description": "AI 模型表",
+  "required": ["name", "api_url", "api_key"],
+  "properties": {
+    "_id": {
+      "description": "模型 ID"
+    },
+    "name": {
+      "bsonType": "string",
+      "description": "模型名称",
+      "label": "模型名称",
+      "title": "模型名称"
+    },
+    "api_url": {
+      "bsonType": "string",
+      "description": "API 地址",
+      "label": "API地址",
+      "title": "API地址"
+    },
+    "api_key": {
+      "bsonType": "string",
+      "description": "API 密钥",
+      "label": "API密钥",
+      "title": "API密钥"
+    },
+    "model_type": {
+      "bsonType": "string",
+      "description": "模型类型",
+      "label": "模型类型",
+      "title": "模型类型",
+      "enum": ["openai", "volcengine", "custom"],
+      "defaultValue": "openai"
+    },
+    "created_at": {
+      "bsonType": "timestamp",
+      "description": "创建时间",
+      "forceDefaultValue": {
+        "$env": "now"
+      }
+    },
+    "updated_at": {
+      "bsonType": "timestamp",
+      "description": "更新时间",
+      "forceDefaultValue": {
+        "$env": "now"
+      }
+    }
+  }
+}

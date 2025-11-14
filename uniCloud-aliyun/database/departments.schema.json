@@ -1,0 +1,50 @@
+{
+  "bsonType": "object",
+  "description": "部门表",
+  "required": ["name"],
+  "properties": {
+    "_id": {
+      "description": "部门 ID"
+    },
+    "name": {
+      "bsonType": "string",
+      "description": "部门名称",
+      "label": "部门名称",
+      "title": "部门名称"
+    },
+    "description": {
+      "bsonType": "string",
+      "description": "部门描述",
+      "label": "描述",
+      "title": "部门描述"
+    },
+    "sort_order": {
+      "bsonType": "int",
+      "description": "排序权重",
+      "label": "排序",
+      "title": "排序权重",
+      "defaultValue": 0
+    },
+    "is_active": {
+      "bsonType": "bool",
+      "description": "是否启用",
+      "label": "启用状态",
+      "title": "是否启用",
+      "defaultValue": true
+    },
+    "created_at": {
+      "bsonType": "timestamp",
+      "description": "创建时间",
+      "forceDefaultValue": {
+        "$env": "now"
+      }
+    },
+    "updated_at": {
+      "bsonType": "timestamp",
+      "description": "更新时间",
+      "forceDefaultValue": {
+        "$env": "now"
+      }
+    }
+  }
+}

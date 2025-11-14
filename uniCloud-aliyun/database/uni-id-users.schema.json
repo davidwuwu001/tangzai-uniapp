@@ -1,0 +1,115 @@
+{
+  "bsonType": "object",
+  "description": "用户表 - 基于 uni-id 扩展",
+  "required": ["username"],
+  "properties": {
+    "_id": {
+      "description": "用户 ID，系统自动生成"
+    },
+    "username": {
+      "bsonType": "string",
+      "description": "用户名",
+      "label": "用户名",
+      "title": "用户名"
+    },
+    "mobile": {
+      "bsonType": "string",
+      "description": "手机号",
+      "label": "手机号",
+      "pattern": "^1[3-9]\\d{9}$",
+      "title": "手机号"
+    },
+    "mobile_confirmed": {
+      "bsonType": "int",
+      "description": "手机号是否验证，0 未验证 1 已验证",
+      "defaultValue": 0
+    },
+    "password": {
+      "bsonType": "password",
+      "description": "密码，加密存储"
+    },
+    "password_secret_version": {
+      "bsonType": "int",
+      "description": "密码加密版本"
+    },
+    "city": {
+      "bsonType": "int",
+      "description": "所属城市 ID",
+      "label": "城市",
+      "title": "城市"
+    },
+    "city_name": {
+      "bsonType": "string",
+      "description": "城市名称",
+      "label": "城市名称",
+      "title": "城市名称"
+    },
+    "department": {
+      "bsonType": "string",
+      "description": "所属部门",
+      "label": "部门",
+      "title": "部门",
+      "enum": ["经理", "顾客部", "开拓部", "教研部", "商务部", "财务部", "法务部", "伙伴"]
+    },
+    "is_admin": {
+      "bsonType": "bool",
+      "description": "是否为管理员",
+      "defaultValue": false,
+      "label": "管理员",
+      "title": "是否管理员"
+    },
+    "avatar": {
+      "bsonType": "string",
+      "description": "用户头像 URL",
+      "label": "头像",
+      "title": "头像"
+    },
+    "nickname": {
+      "bsonType": "string",
+      "description": "昵称",
+      "label": "昵称",
+      "title": "昵称"
+    },
+    "role": {
+      "bsonType": "array",
+      "description": "用户角色",
+      "label": "角色",
+      "title": "角色",
+      "defaultValue": ["user"]
+    },
+    "permission": {
+      "bsonType": "array",
+      "description": "用户权限列表",
+      "label": "权限",
+      "title": "权限",
+      "defaultValue": []
+    },
+    "register_date": {
+      "bsonType": "timestamp",
+      "description": "注册时间",
+      "forceDefaultValue": {
+        "$env": "now"
+      }
+    },
+    "register_ip": {
+      "bsonType": "string",
+      "description": "注册 IP"
+    },
+    "last_login_date": {
+      "bsonType": "timestamp",
+      "description": "最后登录时间"
+    },
+    "last_login_ip": {
+      "bsonType": "string",
+      "description": "最后登录 IP"
+    },
+    "token": {
+      "bsonType": "array",
+      "description": "token 数组"
+    },
+    "token_expired": {
+      "bsonType": "timestamp",
+      "description": "token 过期时间"
+    }
+  }
+}

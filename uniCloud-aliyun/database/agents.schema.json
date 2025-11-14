@@ -1,0 +1,128 @@
+{
+  "bsonType": "object",
+  "description": "智能体表",
+  "required": ["name", "system_prompt"],
+  "properties": {
+    "_id": {
+      "description": "智能体 ID"
+    },
+    "name": {
+      "bsonType": "string",
+      "description": "智能体名称",
+      "label": "名称",
+      "title": "智能体名称"
+    },
+    "description": {
+      "bsonType": "string",
+      "description": "智能体描述",
+      "label": "描述",
+      "title": "描述"
+    },
+    "system_prompt": {
+      "bsonType": "string",
+      "description": "系统提示词",
+      "label": "系统提示词",
+      "title": "系统提示词"
+    },
+    "max_tokens": {
+      "bsonType": "int",
+      "description": "最大 Token 数",
+      "label": "最大 Token",
+      "title": "最大 Token",
+      "defaultValue": 2000
+    },
+    "temperature": {
+      "bsonType": "double",
+      "description": "温度参数 0-1",
+      "label": "温度",
+      "title": "温度参数",
+      "defaultValue": 0.7
+    },
+    "model_id": {
+      "bsonType": "string",
+      "description": "关联的模型 ID",
+      "label": "模型",
+      "title": "AI 模型"
+    },
+    "navigation_tab": {
+      "bsonType": "string",
+      "description": "所属导航标签",
+      "label": "导航标签",
+      "title": "导航标签",
+      "enum": ["教研", "服务", "AI工具箱"],
+      "defaultValue": "教研"
+    },
+    "cities": {
+      "bsonType": "array",
+      "description": "关联城市列表，['all'] 表示所有城市",
+      "label": "关联城市",
+      "title": "关联城市",
+      "defaultValue": ["all"]
+    },
+    "departments": {
+      "bsonType": "array",
+      "description": "关联部门列表，['all'] 表示所有部门",
+      "label": "关联部门",
+      "title": "关联部门",
+      "defaultValue": ["all"]
+    },
+    "agent_type": {
+      "bsonType": "string",
+      "description": "智能体类型",
+      "label": "类型",
+      "title": "智能体类型",
+      "enum": ["openai", "volcengine"],
+      "defaultValue": "openai"
+    },
+    "volc_service_id": {
+      "bsonType": "string",
+      "description": "火山引擎服务 ID",
+      "label": "火山服务ID"
+    },
+    "volc_config": {
+      "bsonType": "object",
+      "description": "火山引擎配置"
+    },
+    "icon_name": {
+      "bsonType": "string",
+      "description": "图标名称",
+      "label": "图标",
+      "title": "图标名称",
+      "defaultValue": "Bot"
+    },
+    "icon_type": {
+      "bsonType": "string",
+      "description": "图标类型",
+      "enum": ["builtin", "custom"],
+      "defaultValue": "builtin"
+    },
+    "icon_color": {
+      "bsonType": "string",
+      "description": "图标颜色",
+      "label": "图标颜色",
+      "title": "图标颜色",
+      "defaultValue": "#6366f1"
+    },
+    "is_active": {
+      "bsonType": "bool",
+      "description": "是否启用",
+      "label": "启用状态",
+      "title": "是否启用",
+      "defaultValue": true
+    },
+    "created_at": {
+      "bsonType": "timestamp",
+      "description": "创建时间",
+      "forceDefaultValue": {
+        "$env": "now"
+      }
+    },
+    "updated_at": {
+      "bsonType": "timestamp",
+      "description": "更新时间",
+      "forceDefaultValue": {
+        "$env": "now"
+      }
+    }
+  }
+}

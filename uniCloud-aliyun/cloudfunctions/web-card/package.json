@@ -1,0 +1,11 @@
+{
+  "name": "web-card",
+  "version": "1.0.0",
+  "description": "网页卡片管理云对象",
+  "main": "index.obj.js",
+  "cloudfunction-config": {
+    "memorySize": 256,
+    "timeout": 60
+  },
+  "dependencies": {}
+}

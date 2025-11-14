@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=393, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>学习资料</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif;
+            background: #F8F8F8;
+            padding-bottom: 56px;
+        }
+        
+        .navbar {
+            background: #4C12A1;
+            padding: 12px 20px 14px;
+            text-align: center;
+        }
+        
+        .navbar-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .category-tabs {
+            background: white;
+            padding: 16px 20px;
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+        }
+        
+        .tab-item {
+            padding: 6px 16px;
+            border-radius: 16px;
+            background: #F5F5F5;
+            color: #666666;
+            font-size: 13px;
+            white-space: nowrap;
+            border: 1px solid transparent;
+        }
+        
+        .tab-item.active {
+            background: rgba(76, 18, 161, 0.12);
+            border-color: #4C12A1;
+            color: #4C12A1;
+            font-weight: 500;
+        }
+        
+        .materials-list {
+            padding: 16px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .material-card {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.10), 0px 4px 6px -1px rgba(0, 0, 0, 0.10);
+            display: flex;
+            gap: 12px;
+        }
+        
+        .material-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+        
+        .material-icon.pdf { background: rgba(252, 76, 2, 0.15); }
+        .material-icon.video { background: rgba(255, 163, 0, 0.15); }
+        .material-icon.doc { background: rgba(45, 204, 211, 0.15); }
+        
+        .material-info {
+            flex: 1;
+        }
+        
+        .material-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 6px;
+        }
+        
+        .material-meta {
+            font-size: 12px;
+            color: #999999;
+            margin-bottom: 8px;
+        }
+        
+        .material-tags {
+            display: flex;
+            gap: 6px;
+        }
+        
+        .material-tag {
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            background: rgba(76, 18, 161, 0.12);
+            color: #4C12A1;
+        }
+        
+        .tabbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            height: 56px;
+            border-top: 1px solid #EEEEEE;
+            z-index: 100;
+        }
+        
+        .tab {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #999999;
+            padding: 6px 0;
+        }
+        
+        .tab.active { color: #4C12A1; }
+        
+        .tab-icon {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 2px;
+            background-size: cover;
+        }
+        
+        .tab-label {
+            font-size: 10px;
+            line-height: 14px;
+        }
+        
+        .icon-workbench { background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3e3485-b7dd2eff-4d2d-4f15-aafe-c0e1f29ea00b.svg'); }
+        .icon-agent { background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3e591f-39b3f62f-e6a0-441a-b6cd-76d0799ee3eb.svg'); }
+        .icon-service { background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3ef511-98603743-f8f6-4b8a-926e-e5b4fb2e8fbc.svg'); }
+        .icon-learning { background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3e3f88-6d16c2e1-e47f-4c9d-b3b8-3dfb86b3ec2c.svg'); }
+        .tab.active .icon-learning { filter: brightness(0) saturate(100%) invert(15%) sepia(73%) saturate(4392%) hue-rotate(270deg) brightness(85%) contrast(101%); }
+        .icon-profile { background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3e82c4-73596e0d-c789-4fa3-a67b-b3e9cbd59883.svg'); }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-title">学习资料</div>
+    </div>
+    
+    <div class="category-tabs">
+        <div class="tab-item active">全部</div>
+        <div class="tab-item">教学资料</div>
+        <div class="tab-item">培训视频</div>
+        <div class="tab-item">政策文件</div>
+        <div class="tab-item">工作手册</div>
+    </div>
+    
+    <div class="materials-list">
+        <div class="material-card">
+            <div class="material-icon pdf">📄</div>
+            <div class="material-info">
+                <div class="material-title">2024年教师培训手册</div>
+                <div class="material-meta">📦 PDF | 2.5 MB | 上传于 2024-10-15</div>
+                <div class="material-tags">
+                    <span class="material-tag">培训</span>
+                    <span class="material-tag">必读</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="material-card">
+            <div class="material-icon video">🎬</div>
+            <div class="material-info">
+                <div class="material-title">感统课程教学视频</div>
+                <div class="material-meta">🎥 MP4 | 156 MB | 上传于 2024-10-20</div>
+                <div class="material-tags">
+                    <span class="material-tag">教学</span>
+                    <span class="material-tag">视频</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="material-card">
+            <div class="material-icon doc">📝</div>
+            <div class="material-info">
+                <div class="material-title">学员评估表模板</div>
+                <div class="material-meta">📋 DOCX | 85 KB | 上传于 2024-10-25</div>
+                <div class="material-tags">
+                    <span class="material-tag">模板</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="material-card">
+            <div class="material-icon pdf">📄</div>
+            <div class="material-info">
+                <div class="material-title">课程大纲与规划</div>
+                <div class="material-meta">📦 PDF | 1.8 MB | 上传于 2024-11-01</div>
+                <div class="material-tags">
+                    <span class="material-tag">教学</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="tabbar">
+        <a href="01-advisor-workbench-v2.html" class="tab">
+            <div class="tab-icon icon-workbench"></div>
+            <div class="tab-label">工作台</div>
+        </a>
+        <a href="02-ai-list-v2.html" class="tab">
+            <div class="tab-icon icon-agent"></div>
+            <div class="tab-label">AI智能体</div>
+        </a>
+        <a href="#" class="tab">
+            <div class="tab-icon icon-service"></div>
+            <div class="tab-label">服务</div>
+        </a>
+        <a href="#" class="tab active">
+            <div class="tab-icon icon-learning"></div>
+            <div class="tab-label">学习中心</div>
+        </a>
+        <a href="#" class="tab">
+            <div class="tab-icon icon-profile"></div>
+            <div class="tab-label">我的</div>
+        </a>
+    </div>
+</body>
+</html>

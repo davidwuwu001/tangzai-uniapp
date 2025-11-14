@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=393, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>汤仔助手 - 工作台</title>
+    <!-- 预加载妙多图标 -->
+    <link rel="preload" as="image" href="https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3eb893-66d1cd6f-aa32-4b2f-852a-b65a7ccaf312.svg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #000000;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            max-width: 393px;
+            margin: 0 auto;
+        }
+        
+        /* 整体容器 - 圆角效果 */
+        .phone-container {
+            width: 393px;
+            height: 852px;
+            background: #FFFFFF;
+            border-radius: 47px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        /* iOS状态栏 */
+        .status-bar {
+            height: 44px;
+            background: #4C12A1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        
+        .status-left {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .status-time {
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+        }
+        
+        .status-right {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .status-icon {
+            font-size: 12px;
+        }
+        
+        /* 内容区域 */
+        .page-content {
+            height: calc(852px - 44px);
+            overflow-y: auto;
+            background: #FFFFFF;
+            padding-bottom: 56px;
+        }
+
+        /* 顶部导航栏 - 纯紫色背景 */
+        .navbar {
+            background: #4C12A1;
+            padding: 12px 20px 14px;
+            color: white;
+        }
+
+        .navbar-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .navbar-time {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 20px;
+        }
+
+        .navbar-actions {
+            display: flex;
+            gap: 8px;
+            padding: 2px 0;
+        }
+
+        .nav-icon {
+            width: 16px;
+            height: 16px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .nav-icon:active {
+            transform: scale(0.9);
+        }
+
+        .nav-icon.bell {
+            background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3eb893-66d1cd6f-aa32-4b2f-852a-b65a7ccaf312.svg');
+        }
+
+        .nav-icon.settings {
+            background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a24b5abdbb9f9-bddf6e6c-a37c-409e-aa2c-35134cd0932b.svg');
+        }
+
+        .navbar-title {
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 28px;
+            padding: 14px 0;
+        }
+
+        /* 内容区域 */
+        .content {
+            padding: 0 16px 16px;
+            background: #FFFFFF;
+        }
+
+        /* 今日待办 */
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #333333;
+            line-height: 24px;
+            margin-bottom: 16px;
+            margin-top: 0;
+            padding-top: 16px;
+        }
+
+        .todo-card {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.10), 0px 4px 6px -1px rgba(0, 0, 0, 0.10);
+            margin-bottom: 16px;
+        }
+
+        .todo-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .todo-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .todo-item:first-child {
+            padding-top: 0;
+        }
+
+        .todo-time {
+            flex-shrink: 0;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 15px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .todo-time.purple {
+            background: #C964CF;
+        }
+
+        .todo-time.orange {
+            background: #FC4C02;
+        }
+
+        .todo-time.cyan {
+            background: #2DCCD3;
+        }
+
+        .todo-content {
+            flex: 1;
+            font-size: 14px;
+            color: #333333;
+            line-height: 20px;
+            margin-top: 4px;
+        }
+
+        .todo-status {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 13px;
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+
+        .todo-status.upcoming {
+            background: #FFF3E0;
+            color: #F57C00;
+        }
+
+        .todo-status.pending {
+            background: #FFEBEE;
+            color: #E53935;
+        }
+
+        .todo-status.completed {
+            background: #E8F5E9;
+            color: #43A047;
+        }
+
+        .status-icon {
+            width: 16px;
+            height: 16px;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .status-icon.clock {
+            background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3e1ee8-b1c5238c-4b6e-4383-b850-f0931859ef42.svg');
+        }
+
+        /* 快捷入口 */
+        .quick-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .quick-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #333;
+            transition: transform 0.2s;
+        }
+
+        .quick-item:active {
+            transform: scale(0.95);
+        }
+
+        .quick-icon-wrapper {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .quick-icon {
+            width: 24px;
+            height: 24px;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .quick-icon-wrapper.ai {
+            background: rgba(252, 76, 2, 0.12);
+        }
+
+        .quick-icon-wrapper.calendar {
+            background: rgba(255, 163, 0, 0.12);
+        }
+
+        .quick-icon-wrapper.checkin {
+            background: rgba(239, 74, 129, 0.12);
+        }
+
+        .quick-icon-wrapper.input {
+            background: rgba(45, 204, 211, 0.12);
+        }
+
+        .quick-icon-wrapper.learning {
+            background: rgba(201, 100, 207, 0.12);
+        }
+
+        .quick-icon-wrapper.all {
+            background: rgba(76, 18, 161, 0.12);
+        }
+
+        .quick-label {
+            font-size: 12px;
+            color: #333;
+            line-height: 16px;
+        }
+
+        /* 最新通知 - 轮播样式 */
+        .notice-carousel {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #FFF9F0, #FFF5E6);
+            margin-bottom: 16px;
+        }
+
+        .notice-slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .notice-slide {
+            min-width: 100%;
+            padding: 16px 20px;
+            cursor: pointer;
+        }
+
+        .notice-slide:active {
+            opacity: 0.8;
+        }
+
+        .notice-slide-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .notice-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .notice-icon.teaching {
+            background: rgba(76, 18, 161, 0.15);
+        }
+
+        .notice-icon.activity {
+            background: rgba(255, 163, 0, 0.15);
+        }
+
+        .notice-icon.tech {
+            background: rgba(45, 204, 211, 0.15);
+        }
+
+        .notice-icon.training {
+            background: rgba(239, 74, 129, 0.15);
+        }
+
+        .notice-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .notice-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .notice-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: #999999;
+        }
+
+        .notice-tag {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 11px;
+            line-height: 14px;
+        }
+
+        .notice-tag.teaching {
+            background: rgba(76, 18, 161, 0.12);
+            color: #4C12A1;
+        }
+
+        .notice-tag.activity {
+            background: rgba(255, 163, 0, 0.12);
+            color: #FFA300;
+        }
+
+        .notice-tag.tech {
+            background: rgba(45, 204, 211, 0.12);
+            color: #2DCCD3;
+        }
+
+        .notice-tag.training {
+            background: rgba(239, 74, 129, 0.12);
+            color: #EF4A81;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            padding: 8px 0;
+        }
+
+        .carousel-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+
+        .carousel-dot.active {
+            width: 16px;
+            border-radius: 3px;
+            background: #FC4C02;
+        }
+
+        /* 底部导航栏 - 5个Tab */
+        .tabbar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 56px;
+            background: white;
+            border-top: 1px solid #EEEEEE;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0;
+            z-index: 100;
+        }
+
+        .tab-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            color: #8e8e93;
+            text-decoration: none;
+            transition: all 0.2s;
+            padding: 8px 0;
+        }
+
+        .tab-item.active {
+            color: #4C12A1;
+        }
+
+        .tab-item:active {
+            transform: scale(0.95);
+        }
+
+        .tab-icon {
+            width: 24px;
+            height: 24px;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .tab-item:nth-child(1) .tab-icon {
+            background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3e3485-a4173978-3f2a-46ec-bac3-ed38447f3d12.svg');
+        }
+
+        .tab-item:nth-child(2) .tab-icon {
+            background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3e591f-9e6f7423-0a89-464e-a0e9-d01806525ed6.svg');
+        }
+
+        .tab-item:nth-child(3) .tab-icon {
+            background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3ef511-ce500ed8-5739-4ddf-bc13-6372b63b39e7.svg');
+        }
+
+        .tab-item:nth-child(4) .tab-icon {
+            background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3e3f88-4c1616f1-e02f-4f65-8dfd-73d464cb132f.svg');
+        }
+
+        .tab-item:nth-child(5) .tab-icon {
+            background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3e82c4-0efdd137-f583-468b-804c-6f5139ece4db.svg');
+        }
+
+        .tab-label {
+            font-size: 10px;
+            line-height: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-container">
+        <!-- iOS状态栏 -->
+        <div class="status-bar">
+            <div class="status-left">
+                <span class="status-time">9:41</span>
+            </div>
+            <div class="status-right">
+                <span class="status-icon">◉◉◉◉</span>
+                <span class="status-icon">📡</span>
+                <span class="status-icon">🔋</span>
+            </div>
+        </div>
+        
+        <div class="page-content">
+            <!-- 顶部导航栏 -->
+            <div class="navbar">
+        <div class="navbar-top">
+            <div class="navbar-time">9:41</div>
+            <div class="navbar-actions">
+                <div class="nav-icon bell"></div>
+                <div class="nav-icon settings"></div>
+            </div>
+        </div>
+        <div class="navbar-title">汤仔助手</div>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="content">
+        <!-- 最新通知轮播 -->
+        <div class="section">
+            <div class="section-title">最新通知</div>
+            <div class="notice-carousel">
+                <div class="notice-slider" id="noticeSlider">
+                    <div class="notice-slide">
+                        <div class="notice-slide-content">
+                            <div class="notice-icon teaching">📝</div>
+                            <div class="notice-text">
+                                <div class="notice-title">关于新版教师评估标准的通知</div>
+                                <div class="notice-meta">
+                                    <span class="notice-tag teaching">教学部</span>
+                                    <span>今天 09:30</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="notice-slide">
+                        <div class="notice-slide-content">
+                            <div class="notice-icon activity">🎉</div>
+                            <div class="notice-text">
+                                <div class="notice-title">周末亲子活动安排</div>
+                                <div class="notice-meta">
+                                    <span class="notice-tag activity">活动组</span>
+                                    <span>昨天 16:45</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="notice-slide">
+                        <div class="notice-slide-content">
+                            <div class="notice-icon tech">🛠</div>
+                            <div class="notice-text">
+                                <div class="notice-title">系统升级公告</div>
+                                <div class="notice-meta">
+                                    <span class="notice-tag tech">技术部</span>
+                                    <span>前天 14:20</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="notice-slide">
+                        <div class="notice-slide-content">
+                            <div class="notice-icon training">🎯</div>
+                            <div class="notice-text">
+                                <div class="notice-title">教师培训计划</div>
+                                <div class="notice-meta">
+                                    <span class="notice-tag training">培训组</span>
+                                    <span>3天前</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="carousel-dots">
+                    <div class="carousel-dot active"></div>
+                    <div class="carousel-dot"></div>
+                    <div class="carousel-dot"></div>
+                    <div class="carousel-dot"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 今日待办 -->
+        <div class="section">
+            <div class="section-title">今日待办</div>
+            <div class="todo-card">
+                <div class="todo-item">
+                    <div class="todo-time purple">14:30</div>
+                    <div class="todo-content">王小明家长咨询</div>
+                    <div class="todo-status upcoming">
+                        <div class="status-icon clock"></div>
+                        即将开始
+                    </div>
+                </div>
+
+                <div class="todo-item">
+                    <div class="todo-time orange">17:00</div>
+                    <div class="todo-content">张丽训练打卡提醒</div>
+                    <div class="todo-status pending">
+                        <div class="status-icon clock"></div>
+                        未完成
+                    </div>
+                </div>
+
+                <div class="todo-item">
+                    <div class="todo-time cyan">10:00</div>
+                    <div class="todo-content">李华能力评估报告</div>
+                    <div class="todo-status completed">
+                        <div class="status-icon clock"></div>
+                        已完成
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 快捷入口 -->
+        <div class="section">
+            <div class="section-title">快捷入口</div>
+            <div class="quick-grid">
+                <a href="02-ai-list.html" class="quick-item">
+                    <div class="quick-icon-wrapper ai">
+                        <div class="quick-icon" style="background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3ef754-660cdc92-be6e-47e6-ba55-2fcbbedb55d3.svg')"></div>
+                    </div>
+                    <div class="quick-label">AI智能体</div>
+                </a>
+
+                <a href="03-consultation-calendar.html" class="quick-item">
+                    <div class="quick-icon-wrapper calendar">
+                        <div class="quick-icon" style="background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3e9b03-b9ca2e11-7c17-43bf-a7c5-381ca24a003b.svg')"></div>
+                    </div>
+                    <div class="quick-label">咨询安排</div>
+                </a>
+
+                <a href="05-checkin.html" class="quick-item">
+                    <div class="quick-icon-wrapper checkin">
+                        <div class="quick-icon" style="background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3e243a-15e48f1a-2e7e-4bcd-91f3-f408e17fc9a4.svg')"></div>
+                    </div>
+                    <div class="quick-label">服务打卡</div>
+                </a>
+
+                <a href="#" class="quick-item">
+                    <div class="quick-icon-wrapper input">
+                        <div class="quick-icon" style="background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3ecfce-c82d2609-3a3d-423a-9901-1ba8c46424e2.svg')"></div>
+                    </div>
+                    <div class="quick-label">信息录入</div>
+                </a>
+
+                <a href="06-learning-materials.html" class="quick-item">
+                    <div class="quick-icon-wrapper learning">
+                        <div class="quick-icon" style="background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3ea131-04a1b31f-b7b3-43df-9360-32cd6a8dd3e9.svg')"></div>
+                    </div>
+                    <div class="quick-label">学习资料</div>
+                </a>
+
+                <a href="#" class="quick-item">
+                    <div class="quick-icon-wrapper all">
+                        <div class="quick-icon" style="background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3e93cc-1f77fdd3-b13d-491d-ae2b-97c1d642c811.svg')"></div>
+                    </div>
+                    <div class="quick-label">全部功能</div>
+                </a>
+            </div>
+        </div>
+
+        </div>
+
+        <!-- 底部导航栏 -->
+        <div class="tabbar">
+            <a href="01-advisor-workbench-v2.html" class="tab-item active">
+                <div class="tab-icon"></div>
+                <div class="tab-label">工作台</div>
+            </a>
+
+            <a href="02-ai-list-v2.html" class="tab-item">
+                <div class="tab-icon"></div>
+                <div class="tab-label">智能体</div>
+            </a>
+
+            <a href="03-consultation-calendar-v2.html" class="tab-item">
+                <div class="tab-icon"></div>
+                <div class="tab-label">我的服务</div>
+            </a>
+
+            <a href="06-learning-materials-v2.html" class="tab-item">
+                <div class="tab-icon"></div>
+                <div class="tab-label">学习中心</div>
+            </a>
+
+            <a href="#" class="tab-item">
+                <div class="tab-icon"></div>
+                <div class="tab-label">我的</div>
+            </a>
+        </div>
+        </div>
+    </div>
+
+    <script>
+        // 通知轮播功能
+        let currentSlide = 0;
+        const slider = document.getElementById('noticeSlider');
+        const slides = document.querySelectorAll('.notice-slide');
+        const dots = document.querySelectorAll('.carousel-dot');
+        const totalSlides = slides.length;
+
+        function goToSlide(index) {
+            currentSlide = index;
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // 更新指示点
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            goToSlide(currentSlide);
+        }
+
+        // 点击指示点切换
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => goToSlide(index));
+        });
+
+        // 自动轮播（3秒一次）
+        let autoPlay = setInterval(nextSlide, 3000);
+
+        // 鼠标悬停时暂停轮播
+        const carousel = document.querySelector('.notice-carousel');
+        carousel.addEventListener('mouseenter', () => clearInterval(autoPlay));
+        carousel.addEventListener('mouseleave', () => {
+            autoPlay = setInterval(nextSlide, 3000);
+        });
+    </script>
+</body>
+</html>

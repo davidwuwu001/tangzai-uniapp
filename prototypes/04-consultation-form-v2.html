@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=393, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>录入咨询记录</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif;
+            background: #F8F8F8;
+            padding-bottom: 56px;
+        }
+        
+        :root {
+            --primary: #4C12A1;
+        }
+        
+        /* 顶部导航栏 */
+        .navbar {
+            background: #4C12A1;
+            padding: 12px 20px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .navbar-back {
+            width: 20px;
+            height: 20px;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>');
+            background-size: cover;
+            cursor: pointer;
+        }
+        
+        .navbar-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+            flex: 1;
+            text-align: center;
+        }
+        
+        /* 表单容器 */
+        .form-container {
+            padding: 16px 20px;
+        }
+        
+        .form-group {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .form-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .form-label .required {
+            color: #EF4A81;
+            margin-left: 4px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #EEEEEE;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333333;
+            outline: none;
+            transition: border 0.3s;
+        }
+        
+        .form-input:focus {
+            border-color: #4C12A1;
+        }
+        
+        .form-textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #EEEEEE;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333333;
+            outline: none;
+            min-height: 100px;
+            resize: vertical;
+            font-family: inherit;
+        }
+        
+        .form-textarea:focus {
+            border-color: #4C12A1;
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #EEEEEE;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333333;
+            outline: none;
+            background: white;
+        }
+        
+        .tag-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag-item {
+            padding: 8px 16px;
+            border-radius: 16px;
+            border: 1px solid #EEEEEE;
+            background: #F5F5F5;
+            color: #666666;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-item.active {
+            background: rgba(76, 18, 161, 0.12);
+            border-color: #4C12A1;
+            color: #4C12A1;
+            font-weight: 500;
+        }
+        
+        /* 提交按钮 */
+        .submit-section {
+            position: fixed;
+            bottom: 56px;
+            left: 0;
+            right: 0;
+            padding: 12px 20px;
+            background: white;
+            border-top: 1px solid #EEEEEE;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: #4C12A1;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        
+        .submit-btn:active {
+            opacity: 0.8;
+        }
+        
+        /* 底部导航栏 */
+        .tabbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            height: 56px;
+            border-top: 1px solid #EEEEEE;
+            z-index: 100;
+        }
+        
+        .tab {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #999999;
+            transition: color 0.3s;
+            padding: 6px 0;
+        }
+        
+        .tab.active {
+            color: #4C12A1;
+        }
+        
+        .tab-icon {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 2px;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        
+        .tab-label {
+            font-size: 10px;
+            line-height: 14px;
+        }
+        
+        .icon-workbench {
+            background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3e3485-b7dd2eff-4d2d-4f15-aafe-c0e1f29ea00b.svg');
+        }
+        
+        .tab.active .icon-workbench {
+            filter: brightness(0) saturate(100%) invert(15%) sepia(73%) saturate(4392%) hue-rotate(270deg) brightness(85%) contrast(101%);
+        }
+        
+        .icon-agent {
+            background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3e591f-39b3f62f-e6a0-441a-b6cd-76d0799ee3eb.svg');
+        }
+        
+        .icon-service {
+            background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3ef511-98603743-f8f6-4b8a-926e-e5b4fb2e8fbc.svg');
+        }
+        
+        .icon-learning {
+            background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3e3f88-6d16c2e1-e47f-4c9d-b3b8-3dfb86b3ec2c.svg');
+        }
+        
+        .icon-profile {
+            background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3e82c4-73596e0d-c789-4fa3-a67b-b3e9cbd59883.svg');
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="navbar">
+        <div class="navbar-back"></div>
+        <div class="navbar-title">录入咨询记录</div>
+        <div style="width: 20px;"></div>
+    </div>
+    
+    <!-- 表单 -->
+    <div class="form-container">
+        <div class="form-group">
+            <div class="form-label">学生姓名<span class="required">*</span></div>
+            <input type="text" class="form-input" placeholder="请输入学生姓名">
+        </div>
+        
+        <div class="form-group">
+            <div class="form-label">家长姓名<span class="required">*</span></div>
+            <input type="text" class="form-input" placeholder="请输入家长姓名">
+        </div>
+        
+        <div class="form-group">
+            <div class="form-label">联系电话<span class="required">*</span></div>
+            <input type="tel" class="form-input" placeholder="请输入联系电话">
+        </div>
+        
+        <div class="form-group">
+            <div class="form-label">咨询类型<span class="required">*</span></div>
+            <div class="tag-group">
+                <div class="tag-item active">学习规划</div>
+                <div class="tag-item">能力测评</div>
+                <div class="tag-item">课程咨询</div>
+                <div class="tag-item">家长沟通</div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="form-label">学生年龄</div>
+            <select class="form-select">
+                <option>请选择年龄段</option>
+                <option>3-6岁</option>
+                <option>7-9岁</option>
+                <option>10-12岁</option>
+                <option>13-15岁</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <div class="form-label">咨询内容<span class="required">*</span></div>
+            <textarea class="form-textarea" placeholder="请详细描述咨询的问题和需求..."></textarea>
+        </div>
+        
+        <div class="form-group">
+            <div class="form-label">跟进建议</div>
+            <textarea class="form-textarea" placeholder="请输入后续的跟进建议和行动计划..."></textarea>
+        </div>
+    </div>
+    
+    <!-- 提交按钮 -->
+    <div class="submit-section">
+        <button class="submit-btn">提交记录</button>
+    </div>
+    
+    <!-- 底部导航栏 -->
+    <div class="tabbar">
+        <a href="01-advisor-workbench-v2.html" class="tab active">
+            <div class="tab-icon icon-workbench"></div>
+            <div class="tab-label">工作台</div>
+        </a>
+        <a href="02-ai-list-v2.html" class="tab">
+            <div class="tab-icon icon-agent"></div>
+            <div class="tab-label">AI智能体</div>
+        </a>
+        <a href="#" class="tab">
+            <div class="tab-icon icon-service"></div>
+            <div class="tab-label">服务</div>
+        </a>
+        <a href="#" class="tab">
+            <div class="tab-icon icon-learning"></div>
+            <div class="tab-label">学习中心</div>
+        </a>
+        <a href="#" class="tab">
+            <div class="tab-icon icon-profile"></div>
+            <div class="tab-label">我的</div>
+        </a>
+    </div>
+</body>
+</html>

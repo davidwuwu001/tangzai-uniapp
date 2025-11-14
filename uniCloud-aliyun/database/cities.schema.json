@@ -1,0 +1,36 @@
+{
+  "bsonType": "object",
+  "description": "城市表",
+  "required": ["name", "code"],
+  "properties": {
+    "_id": {
+      "description": "城市 ID（使用数字 ID）"
+    },
+    "name": {
+      "bsonType": "string",
+      "description": "城市名称",
+      "label": "城市名称",
+      "title": "城市名称"
+    },
+    "code": {
+      "bsonType": "string",
+      "description": "城市代码",
+      "label": "城市代码",
+      "title": "城市代码"
+    },
+    "is_active": {
+      "bsonType": "bool",
+      "description": "是否启用",
+      "label": "启用状态",
+      "title": "是否启用",
+      "defaultValue": true
+    },
+    "created_at": {
+      "bsonType": "timestamp",
+      "description": "创建时间",
+      "forceDefaultValue": {
+        "$env": "now"
+      }
+    }
+  }
+}

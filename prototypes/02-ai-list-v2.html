@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI智能体</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif;
+            background: #F8F8F8;
+            padding-bottom: 56px;
+        }
+        
+        :root {
+            --primary: #4C12A1;
+            --social: #C964CF;
+            --manage: #FC4C02;
+            --thinking: #FFA300;
+            --understanding: #EF4A81;
+            --integration: #2DCCD3;
+        }
+        
+        /* 顶部导航栏 */
+        .navbar {
+            background: #4C12A1;
+            padding: 12px 20px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .navbar-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+            flex: 1;
+            text-align: center;
+        }
+        
+        .navbar-icon {
+            width: 20px;
+            height: 20px;
+            background-size: cover;
+        }
+        
+        .icon-search {
+            background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a24b5abdbb9f9-0de8e43a-33e2-4c51-9e96-a24ce48e5a1c.svg');
+            filter: brightness(0) invert(1);
+        }
+
+        /* 搜索栏 */
+        .search-section {
+            padding: 16px 20px;
+            background: white;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: #F5F5F5;
+            border-radius: 8px;
+            padding: 10px 12px;
+        }
+        
+        .search-icon {
+            font-size: 16px;
+            margin-right: 8px;
+            color: #999;
+        }
+        
+        .search-input {
+            flex: 1;
+            border: none;
+            background: none;
+            font-size: 14px;
+            outline: none;
+            color: #333;
+        }
+        
+        .search-input::placeholder {
+            color: #CCCCCC;
+        }
+        
+        /* 常用智能体 */
+        .favorite-section {
+            padding: 20px 20px 16px;
+            background: white;
+            margin-bottom: 12px;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 16px;
+        }
+        
+        .favorite-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .favorite-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .favorite-item {
+            min-width: 100px;
+            background: white;
+            border-radius: 12px;
+            padding: 16px 12px;
+            text-align: center;
+            box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.10), 0px 4px 6px -1px rgba(0, 0, 0, 0.10);
+            text-decoration: none;
+            color: #333;
+            transition: transform 0.2s;
+        }
+        
+        .favorite-item:active {
+            transform: scale(0.95);
+        }
+        
+        .favorite-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin: 0 auto 10px;
+        }
+        
+        .favorite-icon.teaching {
+            background: rgba(76, 18, 161, 0.15);
+        }
+        
+        .favorite-icon.writing {
+            background: rgba(255, 163, 0, 0.15);
+        }
+        
+        .favorite-icon.english {
+            background: rgba(45, 204, 211, 0.15);
+        }
+        
+        .favorite-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: #333333;
+            white-space: nowrap;
+        }
+        
+        /* 分类标签 */
+        .category-section {
+            padding: 16px 20px;
+            background: white;
+            margin-bottom: 12px;
+        }
+        
+        .tabs-scroll {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .tabs-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .tab-item {
+            padding: 6px 16px;
+            border-radius: 16px;
+            background: #F5F5F5;
+            color: #666666;
+            font-size: 13px;
+            white-space: nowrap;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+        
+        .tab-item.active {
+            background: rgba(76, 18, 161, 0.12);
+            color: #4C12A1;
+            font-weight: 500;
+            border-color: #4C12A1;
+        }
+        
+        /* 智能体网格 */
+        .ai-grid {
+            padding: 0 20px 20px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .ai-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px 16px;
+            text-align: center;
+            box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.10), 0px 4px 6px -1px rgba(0, 0, 0, 0.10);
+            text-decoration: none;
+            color: #333;
+            transition: transform 0.2s;
+        }
+        
+        .ai-card:active {
+            transform: scale(0.98);
+        }
+        
+        .ai-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin: 0 auto 12px;
+        }
+        
+        .ai-icon.teaching {
+            background: rgba(76, 18, 161, 0.15);
+        }
+        
+        .ai-icon.writing {
+            background: rgba(255, 163, 0, 0.15);
+        }
+        
+        .ai-icon.english {
+            background: rgba(45, 204, 211, 0.15);
+        }
+        
+        .ai-icon.physics {
+            background: rgba(252, 76, 2, 0.15);
+        }
+        
+        .ai-icon.coding {
+            background: rgba(239, 74, 129, 0.15);
+        }
+        
+        .ai-icon.math {
+            background: rgba(201, 100, 207, 0.15);
+        }
+        
+        .ai-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 6px;
+        }
+        
+        .ai-desc {
+            font-size: 12px;
+            color: #999999;
+            line-height: 16px;
+        }
+        
+        /* 底部导航栏 */
+        .tabbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            height: 56px;
+            border-top: 1px solid #EEEEEE;
+            z-index: 100;
+        }
+        
+        .tab {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #999999;
+            transition: color 0.3s;
+            padding: 6px 0;
+        }
+        
+        .tab.active {
+            color: #4C12A1;
+        }
+        
+        .tab-icon {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 2px;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        
+        .tab-label {
+            font-size: 10px;
+            line-height: 14px;
+        }
+        
+        /* TabBar图标 */
+        .icon-workbench {
+            background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3e3485-b7dd2eff-4d2d-4f15-aafe-c0e1f29ea00b.svg');
+        }
+        
+        .icon-agent {
+            background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3e591f-39b3f62f-e6a0-441a-b6cd-76d0799ee3eb.svg');
+        }
+        
+        .tab.active .icon-agent {
+            filter: brightness(0) saturate(100%) invert(15%) sepia(73%) saturate(4392%) hue-rotate(270deg) brightness(85%) contrast(101%);
+        }
+        
+        .icon-service {
+            background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3ef511-98603743-f8f6-4b8a-926e-e5b4fb2e8fbc.svg');
+        }
+        
+        .icon-learning {
+            background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3e3f88-6d16c2e1-e47f-4c9d-b3b8-3dfb86b3ec2c.svg');
+        }
+        
+        .icon-profile {
+            background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3e82c4-73596e0d-c789-4fa3-a67b-b3e9cbd59883.svg');
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="navbar">
+        <div style="width: 20px;"></div>
+        <div class="navbar-title">AI智能体</div>
+        <div class="navbar-icon icon-search"></div>
+    </div>
+    
+    <!-- 搜索栏 -->
+    <div class="search-section">
+        <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-input" placeholder="搜索智能体...">
+        </div>
+    </div>
+    
+    <!-- 常用智能体 -->
+    <div class="favorite-section">
+        <div class="section-title">⭐ 常用智能体</div>
+        <div class="favorite-scroll">
+            <a href="#" class="favorite-item">
+                <div class="favorite-icon teaching">👩‍🏫</div>
+                <div class="favorite-name">教学助手</div>
+            </a>
+            <a href="#" class="favorite-item">
+                <div class="favorite-icon writing">✍️</div>
+                <div class="favorite-name">写作助手</div>
+            </a>
+            <a href="#" class="favorite-item">
+                <div class="favorite-icon english">🗣️</div>
+                <div class="favorite-name">英语对话</div>
+            </a>
+            <a href="#" class="favorite-item">
+                <div class="favorite-icon teaching">📚</div>
+                <div class="favorite-name">课程规划</div>
+            </a>
+        </div>
+    </div>
+    
+    <!-- 分类标签 -->
+    <div class="category-section">
+        <div class="tabs-scroll">
+            <a href="#" class="tab-item active">全部</a>
+            <a href="#" class="tab-item">教学</a>
+            <a href="#" class="tab-item">写作</a>
+            <a href="#" class="tab-item">编程</a>
+            <a href="#" class="tab-item">数学</a>
+            <a href="#" class="tab-item">英语</a>
+            <a href="#" class="tab-item">物理</a>
+        </div>
+    </div>
+    
+    <!-- AI智能体网格 -->
+    <div class="ai-grid">
+        <a href="#" class="ai-card">
+            <div class="ai-icon teaching">👩‍🏫</div>
+            <div class="ai-name">教学助手</div>
+            <div class="ai-desc">辅助备课与教学</div>
+        </a>
+        
+        <a href="#" class="ai-card">
+            <div class="ai-icon writing">✍️</div>
+            <div class="ai-name">写作助手</div>
+            <div class="ai-desc">文章润色与指导</div>
+        </a>
+        
+        <a href="#" class="ai-card">
+            <div class="ai-icon english">🗣️</div>
+            <div class="ai-name">英语对话</div>
+            <div class="ai-desc">口语练习伙伴</div>
+        </a>
+        
+        <a href="#" class="ai-card">
+            <div class="ai-icon physics">🔬</div>
+            <div class="ai-name">物理实验</div>
+            <div class="ai-desc">实验设计与分析</div>
+        </a>
+        
+        <a href="#" class="ai-card">
+            <div class="ai-icon coding">💻</div>
+            <div class="ai-name">编程导师</div>
+            <div class="ai-desc">代码学习辅导</div>
+        </a>
+        
+        <a href="#" class="ai-card">
+            <div class="ai-icon math">📐</div>
+            <div class="ai-name">数学解题</div>
+            <div class="ai-desc">解题思路讲解</div>
+        </a>
+        
+        <a href="#" class="ai-card">
+            <div class="ai-icon teaching">📚</div>
+            <div class="ai-name">课程规划</div>
+            <div class="ai-desc">教学计划制定</div>
+        </a>
+        
+        <a href="#" class="ai-card">
+            <div class="ai-icon writing">📝</div>
+            <div class="ai-name">论文助手</div>
+            <div class="ai-desc">学术写作辅导</div>
+        </a>
+    </div>
+    
+    <!-- 底部导航栏 -->
+    <div class="tabbar">
+        <a href="01-advisor-workbench-v2.html" class="tab">
+            <div class="tab-icon icon-workbench"></div>
+            <div class="tab-label">工作台</div>
+        </a>
+        <a href="02-ai-list-v2.html" class="tab active">
+            <div class="tab-icon icon-agent"></div>
+            <div class="tab-label">AI智能体</div>
+        </a>
+        <a href="#" class="tab">
+            <div class="tab-icon icon-service"></div>
+            <div class="tab-label">服务</div>
+        </a>
+        <a href="#" class="tab">
+            <div class="tab-icon icon-learning"></div>
+            <div class="tab-label">学习中心</div>
+        </a>
+        <a href="#" class="tab">
+            <div class="tab-icon icon-profile"></div>
+            <div class="tab-label">我的</div>
+        </a>
+    </div>
+</body>
+</html>

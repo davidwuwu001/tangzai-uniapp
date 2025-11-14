@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=393, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>设置 - 汤仔助手</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #000000;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            max-width: 393px;
+            margin: 0 auto;
+        }
+        
+        .phone-container {
+            width: 393px;
+            height: 852px;
+            background: #F8F8F8;
+            border-radius: 47px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* iOS状态栏 */
+        .status-bar {
+            height: 44px;
+            background: linear-gradient(135deg, #4C12A1, #C964CF);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        
+        .status-time {
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+        }
+        
+        .status-right {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+        }
+
+        /* 导航栏 */
+        .navbar {
+            height: 56px;
+            background: #4C12A1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .nav-back {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.15);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+            color: white;
+        }
+
+        .nav-title {
+            font-size: 18px;
+            font-weight: 600;
+            flex: 1;
+            text-align: center;
+        }
+
+        .nav-placeholder {
+            width: 32px;
+        }
+
+        /* 内容区域 */
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            background: #F8F8F8;
+        }
+
+        /* 设置分组 */
+        .setting-section {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #999999;
+            padding: 0 4px 8px;
+        }
+
+        .setting-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.10), 
+                        0px 4px 6px -1px rgba(0, 0, 0, 0.10);
+        }
+
+        .setting-item {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            border-bottom: 1px solid #F5F5F5;
+            min-height: 56px;
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .setting-item.clickable {
+            cursor: pointer;
+        }
+
+        .setting-item.clickable:active {
+            background: #F8F8F8;
+        }
+
+        .setting-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .setting-icon.purple {
+            background: linear-gradient(135deg, rgba(76, 18, 161, 0.1), rgba(201, 100, 207, 0.1));
+        }
+
+        .setting-icon.blue {
+            background: linear-gradient(135deg, rgba(45, 204, 211, 0.1), rgba(33, 150, 243, 0.1));
+        }
+
+        .setting-icon.orange {
+            background: linear-gradient(135deg, rgba(252, 76, 2, 0.1), rgba(255, 163, 0, 0.1));
+        }
+
+        .setting-icon.green {
+            background: linear-gradient(135deg, rgba(67, 160, 71, 0.1), rgba(56, 142, 60, 0.1));
+        }
+
+        .setting-content {
+            flex: 1;
+        }
+
+        .setting-title {
+            font-size: 15px;
+            font-weight: 500;
+            color: #333333;
+            margin-bottom: 2px;
+        }
+
+        .setting-desc {
+            font-size: 12px;
+            color: #999999;
+        }
+
+        .setting-value {
+            font-size: 14px;
+            color: #666666;
+            margin-right: 8px;
+        }
+
+        .setting-arrow {
+            font-size: 16px;
+            color: #CCCCCC;
+        }
+
+        /* 开关按钮 */
+        .switch {
+            position: relative;
+            width: 48px;
+            height: 28px;
+            background: #E0E0E0;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .switch.active {
+            background: #4C12A1;
+        }
+
+        .switch::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .switch.active::after {
+            transform: translateX(20px);
+        }
+
+        /* 缓存信息卡片 */
+        .cache-info {
+            background: linear-gradient(135deg, rgba(76, 18, 161, 0.05), rgba(201, 100, 207, 0.05));
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .cache-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #4C12A1, #C964CF);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .cache-details {
+            flex: 1;
+        }
+
+        .cache-size {
+            font-size: 20px;
+            font-weight: 700;
+            color: #4C12A1;
+            margin-bottom: 4px;
+        }
+
+        .cache-label {
+            font-size: 13px;
+            color: #666666;
+        }
+
+        .cache-btn {
+            padding: 8px 16px;
+            background: white;
+            border: 1px solid #4C12A1;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #4C12A1;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .cache-btn:active {
+            background: #F5F5F5;
+            transform: scale(0.95);
+        }
+
+        /* 危险操作区域 */
+        .danger-section {
+            margin-top: 40px;
+        }
+
+        .danger-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.10), 
+                        0px 4px 6px -1px rgba(0, 0, 0, 0.10);
+        }
+
+        .danger-item {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .danger-item:active {
+            background: #FFF5F5;
+        }
+
+        .danger-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, rgba(255, 68, 68, 0.1), rgba(239, 83, 80, 0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-right: 12px;
+        }
+
+        .danger-title {
+            flex: 1;
+            font-size: 15px;
+            font-weight: 500;
+            color: #FF4444;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-container">
+        <!-- iOS状态栏 -->
+        <div class="status-bar">
+            <span class="status-time">9:41</span>
+            <div class="status-right">
+                <span>◉◉◉◉</span>
+                <span>📡</span>
+                <span>🔋</span>
+            </div>
+        </div>
+
+        <!-- 导航栏 -->
+        <div class="navbar">
+            <button class="nav-back">←</button>
+            <div class="nav-title">设置</div>
+            <div class="nav-placeholder"></div>
+        </div>
+
+        <!-- 内容区域 -->
+        <div class="content">
+            <!-- 缓存信息 -->
+            <div class="cache-info">
+                <div class="cache-icon">📦</div>
+                <div class="cache-details">
+                    <div class="cache-size">128.5 MB</div>
+                    <div class="cache-label">缓存占用</div>
+                </div>
+                <button class="cache-btn" onclick="clearCache()">清理</button>
+            </div>
+
+            <!-- 账号设置 -->
+            <div class="setting-section">
+                <div class="section-title">账号设置</div>
+                <div class="setting-card">
+                    <div class="setting-item clickable" onclick="alert('修改密码')">
+                        <div class="setting-icon purple">🔐</div>
+                        <div class="setting-content">
+                            <div class="setting-title">修改密码</div>
+                        </div>
+                        <span class="setting-arrow">›</span>
+                    </div>
+                    <div class="setting-item clickable" onclick="alert('绑定手机')">
+                        <div class="setting-icon blue">📱</div>
+                        <div class="setting-content">
+                            <div class="setting-title">绑定手机</div>
+                            <div class="setting-desc">138****8888</div>
+                        </div>
+                        <span class="setting-arrow">›</span>
+                    </div>
+                    <div class="setting-item clickable" onclick="alert('绑定邮箱')">
+                        <div class="setting-icon orange">📧</div>
+                        <div class="setting-content">
+                            <div class="setting-title">绑定邮箱</div>
+                            <div class="setting-desc">未绑定</div>
+                        </div>
+                        <span class="setting-arrow">›</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 消息通知 -->
+            <div class="setting-section">
+                <div class="section-title">消息通知</div>
+                <div class="setting-card">
+                    <div class="setting-item">
+                        <div class="setting-icon purple">🔔</div>
+                        <div class="setting-content">
+                            <div class="setting-title">推送通知</div>
+                            <div class="setting-desc">接收系统消息推送</div>
+                        </div>
+                        <div class="switch active" onclick="toggleSwitch(this)"></div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-icon blue">💬</div>
+                        <div class="setting-content">
+                            <div class="setting-title">咨询提醒</div>
+                            <div class="setting-desc">新咨询提醒通知</div>
+                        </div>
+                        <div class="switch active" onclick="toggleSwitch(this)"></div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-icon orange">📣</div>
+                        <div class="setting-content">
+                            <div class="setting-title">活动通知</div>
+                            <div class="setting-desc">接收活动和优惠信息</div>
+                        </div>
+                        <div class="switch" onclick="toggleSwitch(this)"></div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-icon green">🔊</div>
+                        <div class="setting-content">
+                            <div class="setting-title">声音提示</div>
+                            <div class="setting-desc">通知时播放声音</div>
+                        </div>
+                        <div class="switch active" onclick="toggleSwitch(this)"></div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-icon purple">📳</div>
+                        <div class="setting-content">
+                            <div class="setting-title">震动反馈</div>
+                            <div class="setting-desc">通知时震动提示</div>
+                        </div>
+                        <div class="switch active" onclick="toggleSwitch(this)"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 隐私设置 -->
+            <div class="setting-section">
+                <div class="section-title">隐私设置</div>
+                <div class="setting-card">
+                    <div class="setting-item">
+                        <div class="setting-icon blue">🛡️</div>
+                        <div class="setting-content">
+                            <div class="setting-title">隐私保护</div>
+                            <div class="setting-desc">保护个人信息安全</div>
+                        </div>
+                        <div class="switch active" onclick="toggleSwitch(this)"></div>
+                    </div>
+                    <div class="setting-item clickable" onclick="alert('位置权限')">
+                        <div class="setting-icon orange">📍</div>
+                        <div class="setting-content">
+                            <div class="setting-title">位置权限</div>
+                        </div>
+                        <span class="setting-value">使用期间</span>
+                        <span class="setting-arrow">›</span>
+                    </div>
+                    <div class="setting-item clickable" onclick="alert('相机权限')">
+                        <div class="setting-icon green">📷</div>
+                        <div class="setting-content">
+                            <div class="setting-title">相机权限</div>
+                        </div>
+                        <span class="setting-value">已允许</span>
+                        <span class="setting-arrow">›</span>
+                    </div>
+                    <div class="setting-item clickable" onclick="alert('相册权限')">
+                        <div class="setting-icon purple">🖼️</div>
+                        <div class="setting-content">
+                            <div class="setting-title">相册权限</div>
+                        </div>
+                        <span class="setting-value">已允许</span>
+                        <span class="setting-arrow">›</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 通用设置 -->
+            <div class="setting-section">
+                <div class="section-title">通用设置</div>
+                <div class="setting-card">
+                    <div class="setting-item clickable" onclick="alert('语言设置')">
+                        <div class="setting-icon purple">🌐</div>
+                        <div class="setting-content">
+                            <div class="setting-title">语言</div>
+                        </div>
+                        <span class="setting-value">简体中文</span>
+                        <span class="setting-arrow">›</span>
+                    </div>
+                    <div class="setting-item clickable" onclick="alert('字体大小')">
+                        <div class="setting-icon blue">🔤</div>
+                        <div class="setting-content">
+                            <div class="setting-title">字体大小</div>
+                        </div>
+                        <span class="setting-value">标准</span>
+                        <span class="setting-arrow">›</span>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-icon orange">🌙</div>
+                        <div class="setting-content">
+                            <div class="setting-title">深色模式</div>
+                            <div class="setting-desc">跟随系统设置</div>
+                        </div>
+                        <div class="switch" onclick="toggleSwitch(this)"></div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-icon green">💾</div>
+                        <div class="setting-content">
+                            <div class="setting-title">自动保存</div>
+                            <div class="setting-desc">自动保存编辑内容</div>
+                        </div>
+                        <div class="switch active" onclick="toggleSwitch(this)"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 关于 -->
+            <div class="setting-section">
+                <div class="section-title">关于</div>
+                <div class="setting-card">
+                    <div class="setting-item clickable" onclick="alert('检查更新')">
+                        <div class="setting-icon blue">🔄</div>
+                        <div class="setting-content">
+                            <div class="setting-title">检查更新</div>
+                            <div class="setting-desc">当前版本 v1.0.0</div>
+                        </div>
+                        <span class="setting-arrow">›</span>
+                    </div>
+                    <div class="setting-item clickable" onclick="alert('服务条款')">
+                        <div class="setting-icon purple">📄</div>
+                        <div class="setting-content">
+                            <div class="setting-title">服务条款</div>
+                        </div>
+                        <span class="setting-arrow">›</span>
+                    </div>
+                    <div class="setting-item clickable" onclick="alert('隐私政策')">
+                        <div class="setting-icon orange">🔒</div>
+                        <div class="setting-content">
+                            <div class="setting-title">隐私政策</div>
+                        </div>
+                        <span class="setting-arrow">›</span>
+                    </div>
+                    <div class="setting-item clickable" onclick="alert('关于我们')">
+                        <div class="setting-icon green">ℹ️</div>
+                        <div class="setting-content">
+                            <div class="setting-title">关于我们</div>
+                        </div>
+                        <span class="setting-arrow">›</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 危险操作 -->
+            <div class="danger-section">
+                <div class="section-title">危险操作</div>
+                <div class="danger-card">
+                    <div class="danger-item" onclick="confirmLogout()">
+                        <div class="danger-icon">🚪</div>
+                        <div class="danger-title">退出登录</div>
+                        <span class="setting-arrow">›</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 底部空白 -->
+            <div style="height: 40px;"></div>
+        </div>
+    </div>
+
+    <script>
+        // 切换开关
+        function toggleSwitch(element) {
+            element.classList.toggle('active');
+        }
+
+        // 清理缓存
+        function clearCache() {
+            if (confirm('确定要清理缓存吗?\n清理后需要重新加载数据')) {
+                // 模拟清理动画
+                const cacheSize = document.querySelector('.cache-size');
+                let size = 128.5;
+                const interval = setInterval(() => {
+                    size -= 10;
+                    if (size <= 0) {
+                        size = 0;
+                        clearInterval(interval);
+                        alert('缓存清理完成!');
+                        setTimeout(() => {
+                            cacheSize.textContent = '0 MB';
+                        }, 100);
+                    } else {
+                        cacheSize.textContent = size.toFixed(1) + ' MB';
+                    }
+                }, 100);
+            }
+        }
+
+        // 退出登录确认
+        function confirmLogout() {
+            if (confirm('确定要退出登录吗?')) {
+                alert('已退出登录');
+            }
+        }
+    </script>
+</body>
+</html>

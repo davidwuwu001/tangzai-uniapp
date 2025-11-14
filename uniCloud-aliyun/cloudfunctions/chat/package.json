@@ -1,0 +1,11 @@
+{
+  "name": "chat",
+  "version": "1.0.0",
+  "description": "聊天对话管理云对象",
+  "main": "index.obj.js",
+  "cloudfunction-config": {
+    "memorySize": 512,
+    "timeout": 120
+  },
+  "dependencies": {}
+}

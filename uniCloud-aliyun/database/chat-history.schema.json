@@ -1,0 +1,47 @@
+{
+  "bsonType": "object",
+  "description": "对话历史表",
+  "required": ["user_id", "agent_id", "messages"],
+  "properties": {
+    "_id": {
+      "description": "对话记录 ID"
+    },
+    "user_id": {
+      "bsonType": "string",
+      "description": "用户 ID",
+      "label": "用户",
+      "title": "用户ID"
+    },
+    "agent_id": {
+      "bsonType": "string",
+      "description": "智能体 ID",
+      "label": "智能体",
+      "title": "智能体ID"
+    },
+    "messages": {
+      "bsonType": "array",
+      "description": "对话消息列表",
+      "label": "消息列表",
+      "title": "对话消息"
+    },
+    "response": {
+      "bsonType": "string",
+      "description": "AI 回复内容",
+      "label": "回复",
+      "title": "AI回复"
+    },
+    "usage": {
+      "bsonType": "object",
+      "description": "Token 使用情况",
+      "label": "用量",
+      "title": "Token用量"
+    },
+    "created_at": {
+      "bsonType": "timestamp",
+      "description": "创建时间",
+      "forceDefaultValue": {
+        "$env": "now"
+      }
+    }
+  }
+}

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>汤仔助手 - 原型图预览</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #1d1d1f;
+            color: white;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* 左侧导航栏 */
+        .sidebar {
+            width: 280px;
+            background: #2d2d2f;
+            border-right: 1px solid #3d3d3f;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 24px 20px;
+            border-bottom: 1px solid #3d3d3f;
+        }
+
+        .sidebar-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            background: linear-gradient(135deg, #4C12A1, #C964CF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sidebar-subtitle {
+            font-size: 13px;
+            color: #8e8e93;
+        }
+
+        /* 原型列表 */
+        .prototype-nav {
+            flex: 1;
+            padding: 16px 0;
+        }
+
+        .nav-section {
+            margin-bottom: 24px;
+        }
+
+        .nav-section-title {
+            padding: 8px 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #8e8e93;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-item.active {
+            background: rgba(76, 18, 161, 0.15);
+            border-left-color: #4C12A1;
+        }
+
+        .nav-item-icon {
+            font-size: 20px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .nav-item-info {
+            flex: 1;
+        }
+
+        .nav-item-name {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .nav-item-desc {
+            font-size: 11px;
+            color: #8e8e93;
+        }
+
+        .nav-item-badge {
+            width: 6px;
+            height: 6px;
+            background: #4C12A1;
+            border-radius: 50%;
+        }
+
+        /* 右侧预览区域 */
+        .preview-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #1d1d1f;
+        }
+
+        .preview-header {
+            padding: 20px 32px;
+            border-bottom: 1px solid #3d3d3f;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .preview-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .preview-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #4C12A1, #C964CF);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .preview-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .preview-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-secondary {
+            background: #3d3d3f;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #4d4d4f;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4C12A1, #C964CF);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        /* 预览框架 */
+        .preview-frame-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 32px;
+            overflow: hidden;
+        }
+
+        .phone-mockup {
+            width: 375px;
+            height: 812px;
+            background: white;
+            border-radius: 40px;
+            box-shadow: 
+                0 0 0 12px #1d1d1f,
+                0 0 0 14px #3d3d3f,
+                0 20px 60px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 30px;
+            background: #1d1d1f;
+            border-radius: 0 0 20px 20px;
+            z-index: 10;
+        }
+
+        .preview-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: white;
+        }
+
+        /* 底部状态栏 */
+        .status-bar {
+            padding: 12px 32px;
+            border-top: 1px solid #3d3d3f;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #8e8e93;
+        }
+
+        .status-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            background: #30d158;
+            border-radius: 50%;
+        }
+
+        /* 响应式 */
+        @media (max-width: 1024px) {
+            .phone-mockup {
+                width: 320px;
+                height: 693px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                max-width: 280px;
+                position: absolute;
+                left: -280px;
+                z-index: 100;
+                transition: left 0.3s;
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            .phone-mockup {
+                border-radius: 20px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            }
+        }
+
+        /* 滚动条样式 */
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #4d4d4f;
+            border-radius: 3px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: #5d5d5f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 左侧导航栏 -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-title">汤仔助手</div>
+                <div class="sidebar-subtitle">原型图预览 · 7/7 完成</div>
+            </div>
+
+            <div class="prototype-nav">
+                <!-- 顾问端 -->
+                <div class="nav-section">
+                    <div class="nav-section-title">👨‍💼 顾问端原型</div>
+                    
+                    <div class="nav-item active" data-page="01-advisor-workbench-v2.html">
+                        <div class="nav-item-icon">🏠</div>
+                        <div class="nav-item-info">
+                            <div class="nav-item-name">工作台</div>
+                            <div class="nav-item-desc">轮播通知 · 快捷入口 · 待办</div>
+                        </div>
+                        <div class="nav-item-badge"></div>
+                    </div>
+
+                    <div class="nav-item" data-page="02-ai-list-v2.html">
+                        <div class="nav-item-icon">🤖</div>
+                        <div class="nav-item-info">
+                            <div class="nav-item-name">AI智能体</div>
+                            <div class="nav-item-desc">搜索 · 分类 · 网格展示</div>
+                        </div>
+                        <div class="nav-item-badge"></div>
+                    </div>
+
+                    <div class="nav-item" data-page="03-consultation-calendar-v2.html">
+                        <div class="nav-item-icon">📅</div>
+                        <div class="nav-item-info">
+                            <div class="nav-item-name">咨询日历</div>
+                            <div class="nav-item-desc">月历 · 统计 · 咨询列表</div>
+                        </div>
+                        <div class="nav-item-badge"></div>
+                    </div>
+
+                    <div class="nav-item" data-page="04-consultation-form-v2.html">
+                        <div class="nav-item-icon">📝</div>
+                        <div class="nav-item-info">
+                            <div class="nav-item-name">咨询表单</div>
+                            <div class="nav-item-desc">表单填写 · 类型选择</div>
+                        </div>
+                        <div class="nav-item-badge"></div>
+                    </div>
+
+                    <div class="nav-item" data-page="05-checkin-v2.html">
+                        <div class="nav-item-icon">✅</div>
+                        <div class="nav-item-info">
+                            <div class="nav-item-name">签到打卡</div>
+                            <div class="nav-item-desc">签到统计 · 历史记录</div>
+                        </div>
+                        <div class="nav-item-badge"></div>
+                    </div>
+
+                    <div class="nav-item" data-page="06-learning-materials-v2.html">
+                        <div class="nav-item-icon">📚</div>
+                        <div class="nav-item-info">
+                            <div class="nav-item-name">学习资料</div>
+                            <div class="nav-item-desc">分类 · 文档 · 视频</div>
+                        </div>
+                        <div class="nav-item-badge"></div>
+                    </div>
+                </div>
+
+                <!-- 部门负责人端 -->
+                <div class="nav-section">
+                    <div class="nav-section-title">👔 部门负责人</div>
+                    
+                    <div class="nav-item" data-page="07-department-management-v2.html">
+                        <div class="nav-item-icon">🏢</div>
+                        <div class="nav-item-info">
+                            <div class="nav-item-name">部门管理</div>
+                            <div class="nav-item-desc">团队 · 统计 · 任务</div>
+                        </div>
+                        <div class="nav-item-badge"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧预览区域 -->
+        <div class="preview-area">
+            <div class="preview-header">
+                <div class="preview-info">
+                    <div class="preview-number">01</div>
+                    <div>
+                        <div class="preview-title" id="current-title">工作台</div>
+                    </div>
+                </div>
+                <div class="preview-actions">
+                    <button class="btn btn-secondary" onclick="window.open('index.html', '_blank')">
+                        📋 查看索引
+                    </button>
+                    <button class="btn btn-primary" id="open-new-tab">
+                        🔗 新窗口打开
+                    </button>
+                </div>
+            </div>
+
+            <div class="preview-frame-container">
+                <div class="phone-mockup">
+                    <div class="phone-notch"></div>
+                    <iframe 
+                        id="preview-iframe" 
+                        class="preview-iframe" 
+                        src="01-advisor-workbench-v2.html"
+                    ></iframe>
+                </div>
+            </div>
+
+            <div class="status-bar">
+                <div class="status-left">
+                    <div class="status-indicator">
+                        <div class="status-dot"></div>
+                        <span>预览模式</span>
+                    </div>
+                    <span>iPhone 12 Pro (375 × 812)</span>
+                </div>
+                <div>
+                    <span id="current-page">01-advisor-workbench.html</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 页面数据
+        const pages = {
+            '01-advisor-workbench-v2.html': { title: '工作台', number: '01' },
+            '02-ai-list-v2.html': { title: 'AI智能体', number: '02' },
+            '03-consultation-calendar-v2.html': { title: '咨询日历', number: '03' },
+            '04-consultation-form-v2.html': { title: '咨询表单', number: '04' },
+            '05-checkin-v2.html': { title: '签到打卡', number: '05' },
+            '06-learning-materials-v2.html': { title: '学习资料', number: '06' },
+            '07-department-management-v2.html': { title: '部门管理', number: '07' }
+        };
+
+        let currentPage = '01-advisor-workbench-v2.html';
+
+        // 导航项点击事件
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const page = this.getAttribute('data-page');
+                if (page) {
+                    loadPage(page);
+                    
+                    // 更新选中状态
+                    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // 加载页面
+        function loadPage(page) {
+            currentPage = page;
+            const iframe = document.getElementById('preview-iframe');
+            const pageInfo = pages[page];
+            
+            // 更新iframe
+            iframe.src = page;
+            
+            // 更新标题
+            document.getElementById('current-title').textContent = pageInfo.title;
+            document.querySelector('.preview-number').textContent = pageInfo.number;
+            
+            // 更新底部状态
+            document.getElementById('current-page').textContent = page;
+        }
+
+        // 新窗口打开
+        document.getElementById('open-new-tab').addEventListener('click', function() {
+            window.open(currentPage, '_blank');
+        });
+
+        // 键盘快捷键
+        document.addEventListener('keydown', function(e) {
+            const pages = Array.from(document.querySelectorAll('.nav-item[data-page]'));
+            const currentIndex = pages.findIndex(item => item.classList.contains('active'));
+            
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                const nextIndex = (currentIndex + 1) % pages.length;
+                pages[nextIndex].click();
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                const prevIndex = (currentIndex - 1 + pages.length) % pages.length;
+                pages[prevIndex].click();
+            }
+        });
+
+        // 提示用户可以使用键盘
+        console.log('💡 提示：使用 ↑↓ 方向键可以快速切换原型页面');
+    </script>
+</body>
+</html>

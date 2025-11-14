@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=393, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>部门管理</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif;
+            background: #F8F8F8;
+            padding-bottom: 56px;
+        }
+        
+        .navbar {
+            background: #4C12A1;
+            padding: 12px 20px 14px;
+            text-align: center;
+        }
+        
+        .navbar-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .stats-cards {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.10), 0px 4px 6px -1px rgba(0, 0, 0, 0.10);
+        }
+        
+        .stat-card .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+        
+        .stat-card .icon.team { background: rgba(76, 18, 161, 0.15); }
+        .stat-card .icon.task { background: rgba(255, 163, 0, 0.15); }
+        .stat-card .icon.report { background: rgba(45, 204, 211, 0.15); }
+        .stat-card .icon.notice { background: rgba(252, 76, 2, 0.15); }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 4px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #999999;
+        }
+        
+        .section {
+            padding: 0 20px 20px;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 16px;
+        }
+        
+        .team-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .team-card {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.10), 0px 4px 6px -1px rgba(0, 0, 0, 0.10);
+        }
+        
+        .team-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .team-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333333;
+        }
+        
+        .team-count {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            background: rgba(76, 18, 161, 0.12);
+            color: #4C12A1;
+        }
+        
+        .team-members {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .member-tag {
+            padding: 6px 12px;
+            border-radius: 16px;
+            background: #F5F5F5;
+            color: #666666;
+            font-size: 12px;
+        }
+        
+        .tabbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            height: 56px;
+            border-top: 1px solid #EEEEEE;
+            z-index: 100;
+        }
+        
+        .tab {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #999999;
+            padding: 6px 0;
+        }
+        
+        .tab.active { color: #4C12A1; }
+        
+        .tab-icon {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 2px;
+            background-size: cover;
+        }
+        
+        .tab-label {
+            font-size: 10px;
+            line-height: 14px;
+        }
+        
+        .icon-workbench { background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3e3485-b7dd2eff-4d2d-4f15-aafe-c0e1f29ea00b.svg'); }
+        .icon-agent { background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3e591f-39b3f62f-e6a0-441a-b6cd-76d0799ee3eb.svg'); }
+        .icon-service { background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3ef511-98603743-f8f6-4b8a-926e-e5b4fb2e8fbc.svg'); }
+        .icon-learning { background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3e3f88-6d16c2e1-e47f-4c9d-b3b8-3dfb86b3ec2c.svg'); }
+        .icon-profile { background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3e82c4-73596e0d-c789-4fa3-a67b-b3e9cbd59883.svg'); }
+        .tab.active .icon-profile { filter: brightness(0) saturate(100%) invert(15%) sepia(73%) saturate(4392%) hue-rotate(270deg) brightness(85%) contrast(101%); }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-title">部门管理</div>
+    </div>
+    
+    <div class="stats-cards">
+        <div class="stat-card">
+            <div class="icon team">👥</div>
+            <div class="stat-value">24</div>
+            <div class="stat-label">团队成员</div>
+        </div>
+        <div class="stat-card">
+            <div class="icon task">📋</div>
+            <div class="stat-value">8</div>
+            <div class="stat-label">待办任务</div>
+        </div>
+        <div class="stat-card">
+            <div class="icon report">📊</div>
+            <div class="stat-value">15</div>
+            <div class="stat-label">本月报告</div>
+        </div>
+        <div class="stat-card">
+            <div class="icon notice">🔔</div>
+            <div class="stat-value">3</div>
+            <div class="stat-label">待审批</div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <div class="section-title">团队列表</div>
+        <div class="team-list">
+            <div class="team-card">
+                <div class="team-header">
+                    <div class="team-name">教学组</div>
+                    <div class="team-count">8人</div>
+                </div>
+                <div class="team-members">
+                    <span class="member-tag">张老师</span>
+                    <span class="member-tag">李老师</span>
+                    <span class="member-tag">王老师</span>
+                    <span class="member-tag">+5</span>
+                </div>
+            </div>
+            
+            <div class="team-card">
+                <div class="team-header">
+                    <div class="team-name">咨询组</div>
+                    <div class="team-count">6人</div>
+                </div>
+                <div class="team-members">
+                    <span class="member-tag">陈顾问</span>
+                    <span class="member-tag">刘顾问</span>
+                    <span class="member-tag">+4</span>
+                </div>
+            </div>
+            
+            <div class="team-card">
+                <div class="team-header">
+                    <div class="team-name">运营组</div>
+                    <div class="team-count">10人</div>
+                </div>
+                <div class="team-members">
+                    <span class="member-tag">赵主管</span>
+                    <span class="member-tag">孙经理</span>
+                    <span class="member-tag">+8</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="tabbar">
+        <a href="01-advisor-workbench-v2.html" class="tab">
+            <div class="tab-icon icon-workbench"></div>
+            <div class="tab-label">工作台</div>
+        </a>
+        <a href="02-ai-list-v2.html" class="tab">
+            <div class="tab-icon icon-agent"></div>
+            <div class="tab-label">AI智能体</div>
+        </a>
+        <a href="#" class="tab">
+            <div class="tab-icon icon-service"></div>
+            <div class="tab-label">服务</div>
+        </a>
+        <a href="#" class="tab">
+            <div class="tab-icon icon-learning"></div>
+            <div class="tab-label">学习中心</div>
+        </a>
+        <a href="#" class="tab active">
+            <div class="tab-icon icon-profile"></div>
+            <div class="tab-label">我的</div>
+        </a>
+    </div>
+</body>
+</html>

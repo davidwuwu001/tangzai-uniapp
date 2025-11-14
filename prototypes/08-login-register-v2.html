@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=393, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>汤仔助手 - 登录</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #000000;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            max-width: 393px;
+            margin: 0 auto;
+        }
+        
+        /* 整体容器 - 圆角效果 */
+        .phone-container {
+            width: 393px;
+            height: 852px;
+            background: #FFFFFF;
+            border-radius: 47px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        /* iOS状态栏 */
+        .status-bar {
+            height: 44px;
+            background: linear-gradient(135deg, #4C12A1, #C964CF);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        
+        .status-left {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .status-time {
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+        }
+        
+        .status-right {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .status-icon {
+            font-size: 12px;
+        }
+        
+        /* 内容区域 */
+        .page-content {
+            height: calc(852px - 44px);
+            overflow-y: auto;
+            background: linear-gradient(135deg, #4C12A1 0%, #C964CF 100%);
+            position: relative;
+        }
+
+        /* Logo区域 */
+        .logo-section {
+            padding: 60px 40px 40px;
+            text-align: center;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+        
+        .logo img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+        }
+
+        .app-name {
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .app-slogan {
+            font-size: 15px;
+            color: rgba(255,255,255,0.9);
+            font-weight: 500;
+        }
+
+        /* 表单卡片 */
+        .form-card {
+            background: white;
+            border-radius: 24px 24px 0 0;
+            padding: 40px 28px 28px;
+            min-height: calc(100vh - 300px);
+        }
+
+        /* Tab切换 */
+        .tab-group {
+            display: flex;
+            gap: 32px;
+            margin-bottom: 32px;
+            border-bottom: 2px solid #F5F5F5;
+        }
+
+        .tab-item {
+            font-size: 18px;
+            font-weight: 600;
+            color: #999999;
+            padding-bottom: 12px;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .tab-item.active {
+            color: #4C12A1;
+        }
+
+        .tab-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #4C12A1;
+        }
+
+        /* 表单内容 */
+        .form-content {
+            display: none;
+        }
+
+        .form-content.active {
+            display: block;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: #999999;
+        }
+
+        .form-input {
+            width: 100%;
+            height: 52px;
+            padding: 0 16px 0 50px;
+            border: 1px solid #EEEEEE;
+            border-radius: 12px;
+            font-size: 15px;
+            color: #333333;
+            outline: none;
+            transition: border 0.3s;
+            background: #F8F8F8;
+        }
+
+        .form-input:focus {
+            border-color: #4C12A1;
+            background: white;
+        }
+
+        .form-input::placeholder {
+            color: #CCCCCC;
+        }
+
+        /* 验证码输入 */
+        .code-input-group {
+            display: flex;
+            gap: 12px;
+        }
+
+        .code-input-group .form-input {
+            flex: 1;
+        }
+
+        .send-code-btn {
+            flex-shrink: 0;
+            height: 52px;
+            padding: 0 20px;
+            background: rgba(76, 18, 161, 0.12);
+            color: #4C12A1;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .send-code-btn:active {
+            opacity: 0.8;
+        }
+
+        .send-code-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* 记住密码 */
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            font-size: 14px;
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #666666;
+        }
+
+        .checkbox {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .forgot-link {
+            color: #4C12A1;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* 登录按钮 */
+        .submit-btn {
+            width: 100%;
+            height: 52px;
+            background: linear-gradient(135deg, #4C12A1, #C964CF);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .submit-btn:active {
+            opacity: 0.9;
+        }
+
+        /* 第三方登录 */
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 28px 0;
+            color: #999999;
+            font-size: 13px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #EEEEEE;
+        }
+
+        .divider-text {
+            padding: 0 16px;
+        }
+
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .social-btn {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: 1px solid #EEEEEE;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .social-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* 注册提示 */
+        .register-hint {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 14px;
+            color: #666666;
+        }
+
+        .register-link {
+            color: #4C12A1;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        /* 协议提示 */
+        .agreement {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #999999;
+            line-height: 18px;
+        }
+
+        .agreement a {
+            color: #4C12A1;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-container">
+        <!-- iOS状态栏 -->
+        <div class="status-bar">
+            <div class="status-left">
+                <span class="status-time">9:41</span>
+            </div>
+            <div class="status-right">
+                <span class="status-icon">◉◉◉◉</span>
+                <span class="status-icon">📡</span>
+                <span class="status-icon">🔋</span>
+            </div>
+        </div>
+        
+        <div class="page-content">
+            <!-- Logo区域 -->
+            <div class="logo-section">
+                <div class="logo">
+                    <img src="../../tangzai-zhushou-1105/public/icon-192x192.png" alt="汤仔助手">
+                </div>
+                <div class="app-name">汤仔助手</div>
+                <div class="app-slogan">专业教育服务平台</div>
+            </div>
+
+            <!-- 表单卡片 -->
+            <div class="form-card">
+                <!-- Tab切换 -->
+                <div class="tab-group">
+                    <div class="tab-item active" onclick="switchTab('login')">密码登录</div>
+                    <div class="tab-item" onclick="switchTab('sms')">验证码登录</div>
+                </div>
+
+                <!-- 密码登录表单 -->
+                <div class="form-content active" id="login-form">
+                    <div class="input-group">
+                        <label class="input-label">手机号</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">📱</span>
+                            <input type="tel" class="form-input" placeholder="请输入手机号" maxlength="11">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">密码</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">🔒</span>
+                            <input type="password" class="form-input" placeholder="请输入密码">
+                        </div>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" class="checkbox">
+                            <span>记住密码</span>
+                        </label>
+                        <a href="#" class="forgot-link">忘记密码?</a>
+                    </div>
+
+                    <button class="submit-btn">登录</button>
+
+                    <div class="agreement">
+                        登录即表示同意 <a href="#">《用户协议》</a> 和 <a href="#">《隐私政策》</a>
+                    </div>
+                </div>
+
+                <!-- 验证码登录表单 -->
+                <div class="form-content" id="sms-form">
+                    <div class="input-group">
+                        <label class="input-label">手机号</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">📱</span>
+                            <input type="tel" class="form-input" placeholder="请输入手机号" maxlength="11">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">验证码</label>
+                        <div class="code-input-group">
+                            <div class="input-wrapper" style="flex: 1;">
+                                <span class="input-icon">🔐</span>
+                                <input type="text" class="form-input" placeholder="请输入验证码" maxlength="6">
+                            </div>
+                            <button class="send-code-btn" id="sendCodeBtn" onclick="sendCode()">获取验证码</button>
+                        </div>
+                    </div>
+
+                    <button class="submit-btn" style="margin-top: 28px;">登录</button>
+
+                    <div class="agreement">
+                        登录即表示同意 <a href="#">《用户协议》</a> 和 <a href="#">《隐私政策》</a>
+                    </div>
+                </div>
+
+                <!-- 第三方登录 -->
+                <div class="divider">
+                    <div class="divider-text">其他登录方式</div>
+                </div>
+
+                <div class="social-login">
+                    <div class="social-btn">🍎</div>
+                    <div class="social-btn">💬</div>
+                </div>
+
+                <div class="register-hint">
+                    还没有账号? <a href="#" class="register-link">立即注册</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab切换
+        function switchTab(type) {
+            const tabs = document.querySelectorAll('.tab-item');
+            const forms = document.querySelectorAll('.form-content');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            forms.forEach(form => form.classList.remove('active'));
+            
+            if (type === 'login') {
+                tabs[0].classList.add('active');
+                document.getElementById('login-form').classList.add('active');
+            } else {
+                tabs[1].classList.add('active');
+                document.getElementById('sms-form').classList.add('active');
+            }
+        }
+
+        // 发送验证码
+        let countdown = 60;
+        let timer = null;
+
+        function sendCode() {
+            const btn = document.getElementById('sendCodeBtn');
+            
+            if (timer) return;
+            
+            btn.disabled = true;
+            btn.textContent = `${countdown}秒后重试`;
+            
+            timer = setInterval(() => {
+                countdown--;
+                btn.textContent = `${countdown}秒后重试`;
+                
+                if (countdown <= 0) {
+                    clearInterval(timer);
+                    timer = null;
+                    countdown = 60;
+                    btn.disabled = false;
+                    btn.textContent = '获取验证码';
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

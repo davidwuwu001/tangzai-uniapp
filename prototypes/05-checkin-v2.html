@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=393, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>签到打卡</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif;
+            background: #F8F8F8;
+            padding-bottom: 56px;
+        }
+        
+        .navbar {
+            background: #4C12A1;
+            padding: 12px 20px 14px;
+            text-align: center;
+        }
+        
+        .navbar-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .checkin-hero {
+            background: linear-gradient(135deg, #4C12A1, #C964CF);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+        }
+        
+        .checkin-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 20px;
+        }
+        
+        .checkin-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .checkin-time {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .checkin-btn {
+            width: 200px;
+            padding: 14px;
+            background: white;
+            color: #4C12A1;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 24px;
+            margin: 24px auto 0;
+            display: block;
+            cursor: pointer;
+        }
+        
+        .stats-grid {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.10), 0px 4px 6px -1px rgba(0, 0, 0, 0.10);
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #4C12A1;
+            margin-bottom: 6px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #666666;
+        }
+        
+        .history-section {
+            padding: 0 20px 20px;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 16px;
+        }
+        
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .history-item {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.10), 0px 4px 6px -1px rgba(0, 0, 0, 0.10);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .history-date {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 4px;
+        }
+        
+        .history-time {
+            font-size: 12px;
+            color: #999999;
+        }
+        
+        .history-badge {
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            background: rgba(45, 204, 211, 0.15);
+            color: #2DCCD3;
+        }
+        
+        .tabbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            height: 56px;
+            border-top: 1px solid #EEEEEE;
+            z-index: 100;
+        }
+        
+        .tab {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #999999;
+            padding: 6px 0;
+        }
+        
+        .tab.active { color: #4C12A1; }
+        
+        .tab-icon {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 2px;
+            background-size: cover;
+        }
+        
+        .tab-label {
+            font-size: 10px;
+            line-height: 14px;
+        }
+        
+        .icon-workbench { background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3e3485-b7dd2eff-4d2d-4f15-aafe-c0e1f29ea00b.svg'); }
+        .tab.active .icon-workbench { filter: brightness(0) saturate(100%) invert(15%) sepia(73%) saturate(4392%) hue-rotate(270deg) brightness(85%) contrast(101%); }
+        .icon-agent { background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3e591f-39b3f62f-e6a0-441a-b6cd-76d0799ee3eb.svg'); }
+        .icon-service { background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3ef511-98603743-f8f6-4b8a-926e-e5b4fb2e8fbc.svg'); }
+        .icon-learning { background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3e3f88-6d16c2e1-e47f-4c9d-b3b8-3dfb86b3ec2c.svg'); }
+        .icon-profile { background-image: url('https://miaoduo.fbcontent.cn/private/resource/image/19a7c633e3e82c4-73596e0d-c789-4fa3-a67b-b3e9cbd59883.svg'); }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-title">签到打卡</div>
+    </div>
+    
+    <div class="checkin-hero">
+        <div class="checkin-icon">📍</div>
+        <div class="checkin-title">今日已签到</div>
+        <div class="checkin-time">09:02 AM</div>
+        <button class="checkin-btn">签到打卡</button>
+    </div>
+    
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-value">15</div>
+            <div class="stat-label">本月签到</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">7</div>
+            <div class="stat-label">连续签到</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">98%</div>
+            <div class="stat-label">出勤率</div>
+        </div>
+    </div>
+    
+    <div class="history-section">
+        <div class="section-title">签到记录</div>
+        <div class="history-list">
+            <div class="history-item">
+                <div>
+                    <div class="history-date">2024年11月13日</div>
+                    <div class="history-time">⏰ 09:02</div>
+                </div>
+                <div class="history-badge">准时</div>
+            </div>
+            <div class="history-item">
+                <div>
+                    <div class="history-date">2024年11月12日</div>
+                    <div class="history-time">⏰ 08:58</div>
+                </div>
+                <div class="history-badge">准时</div>
+            </div>
+            <div class="history-item">
+                <div>
+                    <div class="history-date">2024年11月11日</div>
+                    <div class="history-time">⏰ 09:05</div>
+                </div>
+                <div class="history-badge">准时</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="tabbar">
+        <a href="01-advisor-workbench-v2.html" class="tab active">
+            <div class="tab-icon icon-workbench"></div>
+            <div class="tab-label">工作台</div>
+        </a>
+        <a href="02-ai-list-v2.html" class="tab">
+            <div class="tab-icon icon-agent"></div>
+            <div class="tab-label">AI智能体</div>
+        </a>
+        <a href="#" class="tab">
+            <div class="tab-icon icon-service"></div>
+            <div class="tab-label">服务</div>
+        </a>
+        <a href="#" class="tab">
+            <div class="tab-icon icon-learning"></div>
+            <div class="tab-label">学习中心</div>
+        </a>
+        <a href="#" class="tab">
+            <div class="tab-icon icon-profile"></div>
+            <div class="tab-label">我的</div>
+        </a>
+    </div>
+</body>
+</html>

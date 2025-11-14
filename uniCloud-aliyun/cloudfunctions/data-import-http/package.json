@@ -1,0 +1,18 @@
+{
+  "name": "data-import-http",
+  "version": "1.0.0",
+  "description": "HTTP数据导入云函数",
+  "main": "index.js",
+  "cloudfunction-config": {
+    "memorySize": 512,
+    "timeout": 300,
+    "triggers": [{
+      "name": "http-trigger",
+      "type": "http",
+      "config": {
+        "path": "/import",
+        "method": ["POST"]
+      }
+    }]
+  }
+}
