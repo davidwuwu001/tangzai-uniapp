@@ -2,6 +2,12 @@
   "bsonType": "object",
   "description": "城市表",
   "required": ["name", "code"],
+  "permission": {
+    "read": true,
+    "create": false,
+    "update": false,
+    "delete": false
+  },
   "properties": {
     "_id": {
       "description": "城市 ID（使用数字 ID）"

@@ -1,8 +1,6 @@
 /**
- * 认证相关API
+ * 认证相关API - 使用 uniCloud 云对象
  */
-import request from '@/utils/request'
-import { API_ENDPOINTS } from '@/utils/config'
 
 /**
  * 用户登录
@@ -10,8 +8,9 @@ import { API_ENDPOINTS } from '@/utils/config'
  * @param {string} password - 密码
  */
 export function login(identifier, password) {
-  return request.post(API_ENDPOINTS.LOGIN, {
-    identifier,
+  const userObj = uniCloud.importObject('user')
+  return userObj.login({
+    mobile: identifier,
     password
   })
 }
@@ -21,29 +20,24 @@ export function login(identifier, password) {
  * @param {Object} data - 注册数据
  */
 export function register(data) {
-  return request.post(API_ENDPOINTS.REGISTER, data)
+  const userObj = uniCloud.importObject('user')
+  return userObj.register(data)
 }
 
 /**
  * 用户登出
  */
 export function logout() {
-  return request.post(API_ENDPOINTS.LOGOUT)
-}
-
-/**
- * 重置密码
- * @param {Object} data - 重置密码数据
- */
-export function resetPassword(data) {
-  return request.post(API_ENDPOINTS.RESET_PASSWORD, data)
+  const userObj = uniCloud.importObject('user')
+  return userObj.logout()
 }
 
 /**
  * 获取用户信息
  */
 export function getUserInfo() {
-  return request.get(API_ENDPOINTS.USER_INFO)
+  const userObj = uniCloud.importObject('user')
+  return userObj.getUserInfo()
 }
 
 /**
@@ -51,13 +45,19 @@ export function getUserInfo() {
  * @param {Object} data - 用户信息
  */
 export function updateUser(data) {
-  return request.put(API_ENDPOINTS.UPDATE_USER, data)
+  const userObj = uniCloud.importObject('user')
+  return userObj.updateUserInfo(data)
 }
 
 /**
- * 上传头像
- * @param {string} filePath - 文件路径
+ * 修改密码
+ * @param {string} oldPassword - 旧密码
+ * @param {string} newPassword - 新密码
  */
-export function uploadAvatar(filePath) {
-  return request.upload(API_ENDPOINTS.UPLOAD_AVATAR, filePath)
+export function changePassword(oldPassword, newPassword) {
+  const userObj = uniCloud.importObject('user')
+  return userObj.changePassword({
+    oldPassword,
+    newPassword
+  })
 }

@@ -1,0 +1,12 @@
+{
+  "name": "tangzai-uniapp",
+  "version": "1.0.0",
+  "description": "糖仔助手 uniapp 项目",
+  "scripts": {
+    "dev": "uni",
+    "build": "uni build"
+  },
+  "dependencies": {
+    "marked": "^9.1.6"
+  }
+}

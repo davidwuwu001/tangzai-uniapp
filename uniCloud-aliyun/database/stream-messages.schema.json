@@ -1,0 +1,48 @@
+{
+  "bsonType": "object",
+  "description": "流式消息分块表",
+  "required": ["session_id", "content"],
+  "properties": {
+    "_id": {
+      "description": "消息块 ID"
+    },
+    "session_id": {
+      "bsonType": "string",
+      "description": "会话 ID",
+      "label": "会话ID"
+    },
+    "user_id": {
+      "bsonType": "string",
+      "description": "用户 ID",
+      "label": "用户ID"
+    },
+    "agent_id": {
+      "bsonType": "string",
+      "description": "智能体 ID",
+      "label": "智能体ID"
+    },
+    "content": {
+      "bsonType": "string",
+      "description": "消息内容片段",
+      "label": "内容"
+    },
+    "chunk_index": {
+      "bsonType": "int",
+      "description": "分块序号",
+      "label": "序号"
+    },
+    "is_done": {
+      "bsonType": "bool",
+      "description": "是否完成",
+      "label": "完成状态",
+      "defaultValue": false
+    },
+    "created_at": {
+      "bsonType": "timestamp",
+      "description": "创建时间",
+      "forceDefaultValue": {
+        "$env": "now"
+      }
+    }
+  }
+}

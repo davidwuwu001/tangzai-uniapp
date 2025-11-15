@@ -1,12 +1,25 @@
 async function getCurrentUser(token) {
   if (!token) throw new Error('未登录或登录已过期');
-  const uniID = uniCloud.uniID();
-  const res = await uniID.checkToken(token);
-  if (res.code) throw new Error('token已过期');
+  
   const db = uniCloud.database();
-  const userRes = await db.collection('uni-id-users').doc(res.uid).field({ _id: true, username: true, city_name: true, department_name: true, is_admin: true }).get();
-  if (!userRes.data || userRes.data.length === 0) throw new Error('用户不存在');
-  return userRes.data[0];
+  // 使用自定义 token 查询用户
+  const userRes = await db.collection('uni-id-users')
+    .where({ token: token })
+    .field({ _id: true, username: true, city_name: true, department_name: true, is_admin: true, token_expired: true })
+    .get();
+  
+  if (!userRes.data || userRes.data.length === 0) {
+    throw new Error('未登录或登录已过期');
+  }
+  
+  const user = userRes.data[0];
+  
+  // 检查 token 是否过期
+  if (user.token_expired && user.token_expired < Date.now()) {
+    throw new Error('token已过期');
+  }
+  
+  return user;
 }
 
 module.exports = {
@@ -73,6 +86,79 @@ module.exports = {
       };
     } catch (error) {
       console.error('Web-card list error:', error);
+      return { code: 500, message: error.message };
+    }
+  },
+
+  // 管理端专用：网页卡片列表
+  async adminList(params = {}) {
+    try {
+      const {
+        page = 1,
+        page_size = 20,
+        navigation_tab,
+        search_keyword,
+        city_name,
+        department,
+        is_active
+      } = params;
+
+      const user = await getCurrentUser(this.getUniIdToken());
+      if (!user) {
+        return { code: 401, message: '未登录或登录已过期' };
+      }
+      if (!user.is_admin) {
+        return { code: 403, message: '无管理权限' };
+      }
+
+      const db = uniCloud.database();
+      const dbCmd = db.command;
+      const collection = db.collection('web-cards');
+
+      let where = {};
+      if (typeof is_active === 'boolean') {
+        where.is_active = is_active;
+      }
+      if (navigation_tab && navigation_tab !== 'all') {
+        where.navigation_tab = navigation_tab;
+      }
+      if (city_name) {
+        where.cities = dbCmd.in(['all', city_name]);
+      }
+      if (department) {
+        where.departments = dbCmd.in(['all', department]);
+      }
+      if (search_keyword) {
+        const reg = new RegExp(search_keyword, 'i');
+        where._id = dbCmd.or([
+          { title: reg },
+          { description: reg }
+        ]);
+      }
+
+      const skip = (page - 1) * page_size;
+      const result = await collection
+        .where(where)
+        .orderBy('sort_order', 'desc')
+        .orderBy('created_at', 'desc')
+        .skip(skip)
+        .limit(page_size)
+        .get();
+
+      const countResult = await collection.where(where).count();
+
+      return {
+        code: 0,
+        message: 'success',
+        data: {
+          list: result.data,
+          total: countResult.total,
+          page,
+          page_size
+        }
+      };
+    } catch (error) {
+      console.error('Web-card adminList error:', error);
       return { code: 500, message: error.message };
     }
   },

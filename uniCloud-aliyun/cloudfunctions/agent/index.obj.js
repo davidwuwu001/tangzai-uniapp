@@ -1,13 +1,26 @@
 // 获取当前登录用户信息
 async function getCurrentUser(token) {
   if (!token) throw new Error('未登录或登录已过期');
-  const uniID = uniCloud.uniID();
-  const res = await uniID.checkToken(token);
-  if (res.code) throw new Error('token已过期');
+  
   const db = uniCloud.database();
-  const userRes = await db.collection('uni-id-users').doc(res.uid).field({ _id: true, username: true, city_name: true, department_name: true, is_admin: true }).get();
-  if (!userRes.data || userRes.data.length === 0) throw new Error('用户不存在');
-  return userRes.data[0];
+  // 使用自定义 token 查询用户
+  const userRes = await db.collection('uni-id-users')
+    .where({ token: token })
+    .field({ _id: true, username: true, city_name: true, department_name: true, is_admin: true, token_expired: true })
+    .get();
+  
+  if (!userRes.data || userRes.data.length === 0) {
+    throw new Error('未登录或登录已过期');
+  }
+  
+  const user = userRes.data[0];
+  
+  // 检查 token 是否过期
+  if (user.token_expired && user.token_expired < Date.now()) {
+    throw new Error('token已过期');
+  }
+  
+  return user;
 }
 
 module.exports = {
@@ -24,10 +37,19 @@ module.exports = {
       if (!user) {
         return { code: 401, message: '未登录或登录已过期' };
       }
+      
+      console.log('当前用户:', user.username, 'city_name:', user.city_name, 'is_admin:', user.is_admin);
 
       const db = uniCloud.database();
       const dbCmd = db.command;
       const agentCollection = db.collection('agents');
+      
+      // 先查询所有激活的智能体
+      const allActiveAgents = await agentCollection.where({ is_active: true }).get();
+      console.log('数据库中激活的智能体数量:', allActiveAgents.data.length);
+      if (allActiveAgents.data.length > 0) {
+        console.log('第一个智能体:', allActiveAgents.data[0].name, 'cities:', allActiveAgents.data[0].cities);
+      }
       
       // 构建查询条件
       let where = { is_active: true };
@@ -46,12 +68,9 @@ module.exports = {
       }
       
       // 权限过滤：非管理员只能看到自己城市/部门的智能体
-      if (!user.is_admin) {
-        where._id = dbCmd.or([
-          { cities: dbCmd.in(['all', user.city_name]) },
-          { departments: dbCmd.in(['all', user.department_name]) }
-        ]);
-      }
+      // 暂时禁用权限过滤，测试数据加载
+      console.log('用户信息 - city_name:', user.city_name, 'department_name:', user.department_name, 'is_admin:', user.is_admin);
+      console.log('查询条件（无权限过滤）:', JSON.stringify(where));
 
       // 分页查询
       const skip = (page - 1) * page_size;
@@ -65,6 +84,11 @@ module.exports = {
       // 获取总数
       const countResult = await agentCollection.where(where).count();
       
+      console.log('查询结果数量:', result.data.length);
+      if (result.data.length > 0) {
+        console.log('第一个结果:', JSON.stringify(result.data[0]));
+      }
+      
       return {
         code: 0,
         message: 'success',
@@ -77,6 +101,88 @@ module.exports = {
       };
     } catch (error) {
       console.error('Agent list error:', error);
+      return { 
+        code: 500, 
+        message: error.message,
+        data: {
+          list: [],
+          total: 0,
+          page: 1,
+          page_size: 10
+        }
+      };
+    }
+  },
+
+  // 管理端专用：带更多筛选项的列表
+  async adminList(params = {}) {
+    try {
+      const {
+        page = 1,
+        page_size = 20,
+        navigation_tab,
+        search_keyword,
+        city_name,
+        department,
+        is_active
+      } = params;
+
+      const user = await getCurrentUser(this.getUniIdToken());
+      if (!user) {
+        return { code: 401, message: '未登录或登录已过期' };
+      }
+      if (!user.is_admin) {
+        return { code: 403, message: '无管理权限' };
+      }
+
+      const db = uniCloud.database();
+      const dbCmd = db.command;
+      const agentCollection = db.collection('agents');
+
+      let where = {};
+
+      if (typeof is_active === 'boolean') {
+        where.is_active = is_active;
+      }
+      if (navigation_tab && navigation_tab !== 'all') {
+        where.navigation_tab = navigation_tab;
+      }
+      if (city_name) {
+        where.cities = dbCmd.in(['all', city_name]);
+      }
+      if (department) {
+        where.departments = dbCmd.in(['all', department]);
+      }
+      if (search_keyword) {
+        const reg = new RegExp(search_keyword, 'i');
+        where._id = dbCmd.or([
+          { name: reg },
+          { description: reg }
+        ]);
+      }
+
+      const skip = (page - 1) * page_size;
+      const result = await agentCollection
+        .where(where)
+        .orderBy('created_at', 'desc')
+        .skip(skip)
+        .limit(page_size)
+        .get();
+
+      const countResult = await agentCollection.where(where).count();
+
+      return {
+        code: 0,
+        message: 'success',
+        data: {
+          list: result.data,
+          total: countResult.total,
+          page,
+          page_size
+        }
+      };
+    } catch (error) {
+      console.error('Agent adminList error:', error);
       return { code: 500, message: error.message };
     }
   },

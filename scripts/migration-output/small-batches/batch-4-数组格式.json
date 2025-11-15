@@ -1,0 +1,152 @@
+[
+  {
+    "username": "陈燚君",
+    "mobile": "13842098753",
+    "nickname": "陈燚君",
+    "department": "伙伴",
+    "password": "$2a$10$dPSVc6Gcpr.QVjKUSvzik.pHY68k.VR0lGeTMn2F4NnGzdoStkEv2",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 213
+  },
+  {
+    "username": "董瑞龙",
+    "mobile": "15104627496",
+    "nickname": "董瑞龙",
+    "department": "伙伴",
+    "password": "$2a$10$fZVEp8F1DtLsqZx8v5bp0.sNNVk6CgVxt0T468D31wDn0Mjh7lg9C",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 213
+  },
+  {
+    "username": "关嘉伟",
+    "mobile": "15542275912",
+    "nickname": "关嘉伟",
+    "department": "伙伴",
+    "password": "$2a$10$VF6UxJB3kh3GARyo96GSaOOzqe7YkH4qC/plEr7WqeDN/nL0X9vVG",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 213
+  },
+  {
+    "username": "刘永",
+    "mobile": "18341481920",
+    "nickname": "刘永",
+    "department": "伙伴",
+    "password": "$2a$10$aGMb6Rw3A3do5Ho0.1a.IeinMQW5n44ILhN7C6pkJo5x3GMs9ESZy",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 213
+  },
+  {
+    "username": "刘罡",
+    "mobile": "18268883307",
+    "nickname": "刘罡",
+    "department": "伙伴",
+    "password": "$2a$10$cr3rwi/3GuWJas6CCYz5UOqnU0780sPvnALGuActWvmmrhuwxS9lG",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "栾迎丽",
+    "mobile": "13050247172",
+    "nickname": "栾迎丽",
+    "department": "伙伴",
+    "password": "$2a$10$ab5oX.ibuQ5LgvBCg83BeefL2192b9Bpfek.CdN3Awy2K.s8sgkeS",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 213
+  },
+  {
+    "username": "蒋嫚嫚",
+    "mobile": "15104627495",
+    "nickname": "蒋嫚嫚",
+    "department": "伙伴",
+    "password": "$2a$10$bNEPegWxcgtbazWXLPNN3Oq.818sXKklWYu7HYve4QPNN2tRzjcci",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 213
+  },
+  {
+    "username": "赵远泽",
+    "mobile": "17860638316",
+    "nickname": "赵远泽",
+    "department": "伙伴",
+    "password": "$2a$10$O/pv1k9QLuHwX.pb3ziXM.6PfZbr3a5mE9lljqZbqe7T1GsvRLMsy",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 212
+  },
+  {
+    "username": "欧阳丽",
+    "mobile": "15215610757",
+    "nickname": "欧阳丽",
+    "department": "伙伴",
+    "password": "$2a$10$ChHU6S7OZl8vFM70d9MnnuOKX/5kE0HFzrspp8vJlvHr/qb5X76iy",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "杨鹏",
+    "mobile": "13610837004",
+    "nickname": "杨鹏",
+    "department": "伙伴",
+    "password": "$2a$10$fRqM4S30bdvjo2kN4OnVwO1ymGxEExvp1B1g7agwHWpxeqhfrAqvq",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 213
+  }
+]

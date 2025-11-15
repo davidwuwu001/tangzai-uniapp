@@ -1,0 +1,30 @@
+{
+  "passwordSecret": "tangzai-uniapp-secret-key-2025",
+  "tokenSecret": "tangzai-uniapp-token-secret-2025",
+  "tokenExpiresIn": 7200,
+  "tokenExpiresThreshold": 600,
+  "passwordErrorLimit": 6,
+  "bindTokenToDevice": false,
+  "passwordErrorRetryTime": 3600,
+  "app": {
+    "oauth": {
+      "weixin": {
+        "appid": "",
+        "appsecret": ""
+      }
+    }
+  },
+  "service": {
+    "sms": {
+      "name": "",
+      "code": "",
+      "smsKey": "",
+      "smsSecret": ""
+    },
+    "univerify": {
+      "appid": "",
+      "apiKey": "",
+      "apiSecret": ""
+    }
+  }
+}

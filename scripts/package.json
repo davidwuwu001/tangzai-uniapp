@@ -1,12 +1,9 @@
 {
-  "name": "tangzai-migration-scripts",
+  "name": "migration-scripts",
   "version": "1.0.0",
-  "description": "数据迁移脚本",
-  "main": "export-mysql-data.js",
+  "description": "MySQL到MongoDB数据迁移脚本",
   "scripts": {
-    "export": "node export-mysql-data.js",
-    "auto-import": "node auto-import.js",
-    "simple-import": "node simple-import.js"
+    "migrate": "node migrate-users-from-mysql.js"
   },
   "dependencies": {
     "mysql2": "^3.6.5"

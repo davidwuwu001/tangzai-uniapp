@@ -1,46 +1,74 @@
 <template>
   <view class="service-page">
-    <!-- 顶部标签切换 -->
-    <view class="tabs">
-      <view 
-        v-for="tab in tabs" 
-        :key="tab.value" 
-        class="tab-item"
-        :class="{ active: activeTab === tab.value }"
-        @click="switchTab(tab.value)"
-      >
-        <text>{{ tab.label }}</text>
+    <!-- 顶部导航栏 -->
+    <view class="navbar">
+      <text class="navbar-title">咨询日历</text>
+    </view>
+    
+    <!-- 月份选择器 -->
+    <view class="month-selector">
+      <view class="month-arrow" @click="changeMonth(-1)">◀</view>
+      <text class="current-month">{{ currentMonthText }}</text>
+      <view class="month-arrow" @click="changeMonth(1)">▶</view>
+    </view>
+    
+    <!-- 统计卡片 -->
+    <view class="stats-bar">
+      <view class="stat-item">
+        <text class="stat-value">{{ monthStats.totalConsultations }}</text>
+        <text class="stat-label">本月咨询</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{ monthStats.todayScheduled }}</text>
+        <text class="stat-label">今日安排</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{ monthStats.pending }}</text>
+        <text class="stat-label">待处理</text>
       </view>
     </view>
-
-    <!-- 卡片列表 -->
-    <view class="card-list">
-      <!-- 加载中 -->
-      <view v-if="loading" class="loading-wrapper">
-        <text class="loading-text">加载中...</text>
+    
+    <!-- 日历 -->
+    <view class="calendar-container">
+      <view class="calendar-weekdays">
+        <text class="weekday" v-for="day in weekdays" :key="day">{{ day }}</text>
       </view>
-
-      <!-- 空状态 -->
-      <view v-else-if="currentCards.length === 0" class="empty-wrapper">
-        <text class="empty-icon">📭</text>
-        <text class="empty-text">暂无服务</text>
-      </view>
-
-      <!-- 卡片 -->
-      <view v-else class="cards">
+      <view class="calendar-days">
         <view 
-          v-for="card in currentCards" 
-          :key="card.id" 
-          class="card-item"
-          @click="handleCardClick(card)"
+          v-for="(day, index) in calendarDays" 
+          :key="index"
+          class="calendar-day"
+          :class="getDayClass(day)"
+          @click="selectDay(day)"
         >
-          <view class="card-icon">{{ card.icon || '🔗' }}</view>
-          <view class="card-content">
-            <view class="card-title">{{ card.title }}</view>
-            <view class="card-desc">{{ card.description }}</view>
-            <view v-if="card.department" class="card-tag">{{ card.department }}</view>
+          <text v-if="day.date" class="day-number">{{ day.day }}</text>
+          <text v-if="day.recordCount" class="record-count">{{ day.recordCount }}</text>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 今日咨询 -->
+    <view class="today-section">
+      <text class="section-title">今日咨询</text>
+      <view class="consultation-list">
+        <view 
+          v-for="consultation in todayConsultations"
+          :key="consultation.id"
+          class="consultation-card"
+          @click="viewConsultation(consultation)"
+        >
+          <view class="consultation-header">
+            <view>
+              <text class="consultation-name">{{ consultation.clientName }}</text>
+              <text class="consultation-time">⏰ {{ consultation.startTime }} - {{ consultation.endTime }}</text>
+            </view>
+            <view class="consultation-status" :class="consultation.status">
+              {{ consultation.statusText }}
+            </view>
           </view>
-          <view class="card-arrow">›</view>
+          <text class="consultation-info">
+            📍 咨询类型: {{ consultation.type }} | 顾问: {{ consultation.advisor }}
+          </text>
         </view>
       </view>
     </view>
@@ -48,191 +76,99 @@
 </template>
 
 <script>
-import { getWebCards, getFeishuCards } from '@/api/cards'
-import { cachedRequest } from '@/utils/cache'
+import serviceData from '@/mock/service.js';
+
 export default {
   data() {
     return {
-      activeTab: 'web', // 当前选中的标签
-      loading: false,
-      tabs: [
-        { label: '网页服务', value: 'web' },
-        { label: '飞书数据', value: 'feishu' }
-      ],
-      webCards: [], // 网页服务卡片
-      feishuCards: [], // 飞书数据卡片
-      useRealAPI: true,
-      page: { web: 1, feishu: 1 },
-      pageSize: 10,
-      hasMore: { web: true, feishu: true },
-      filters: { city: '', department: '' }
-    }
+      currentYear: 2024,
+      currentMonth: 11,
+      weekdays: ['日', '一', '二', '三', '四', '五', '六'],
+      monthStats: {
+        totalConsultations: 0,
+        todayScheduled: 0,
+        pending: 0
+      },
+      calendarRecords: {},
+      todayConsultations: []
+    };
   },
   
   computed: {
-    // 当前显示的卡片
-    currentCards() {
-      return this.activeTab === 'web' ? this.webCards : this.feishuCards
+    currentMonthText() {
+      return `${this.currentYear}年${this.currentMonth}月`;
+    },
+    calendarDays() {
+      const days = [];
+      const firstDay = new Date(this.currentYear, this.currentMonth - 1, 1).getDay();
+      const daysInMonth = new Date(this.currentYear, this.currentMonth, 0).getDate();
+      
+      // 添加空白占位
+      for (let i = 0; i < firstDay; i++) {
+        days.push({ date: null });
+      }
+      
+      // 添加当月日期
+      for (let day = 1; day <= daysInMonth; day++) {
+        const dateStr = `${this.currentYear}-${String(this.currentMonth).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        days.push({
+          date: dateStr,
+          day,
+          recordCount: this.calendarRecords[dateStr] || 0
+        });
+      }
+      
+      return days;
     }
   },
   
   onLoad() {
-    this.initFilters()
-    this.loadCards(true)
-  },
-  
-  onPullDownRefresh() {
-    this.refreshCards()
-  },
-  onReachBottom() {
-    this.loadMore()
+    this.loadData();
   },
   
   methods: {
-    /**
-     * 初始化权限过滤
-     */
-    initFilters() {
-      try {
-        const userStr = uni.getStorageSync('user_info')
-        if (userStr) {
-          const user = JSON.parse(userStr)
-          this.filters.city = user.city || ''
-          this.filters.department = user.department || ''
-        }
-      } catch (e) {}
+    loadData() {
+      this.monthStats = serviceData.monthStats;
+      this.calendarRecords = serviceData.calendarRecords;
+      this.todayConsultations = serviceData.todayConsultations;
     },
-    // 切换标签
-    switchTab(value) {
-      this.activeTab = value
-      console.log('切换到:', value)
-      // 标签切换时如无数据则加载
-      if ((value === 'web' && this.webCards.length === 0) || (value === 'feishu' && this.feishuCards.length === 0)) {
-        this.loadCards()
+    
+    changeMonth(delta) {
+      this.currentMonth += delta;
+      if (this.currentMonth > 12) {
+        this.currentMonth = 1;
+        this.currentYear++;
+      } else if (this.currentMonth < 1) {
+        this.currentMonth = 12;
+        this.currentYear--;
       }
     },
     
-    /**
-     * 加载当前标签的卡片（支持分页）
-     * @param {Boolean} reset 是否重置分页
-     */
-    async loadCards(reset = false) {
-      this.loading = true
-      try {
-        if (reset) {
-          this.page = { web: 1, feishu: 1 }
-          this.hasMore = { web: true, feishu: true }
-          this.webCards = []
-          this.feishuCards = []
-        }
-
-        if (this.useRealAPI) {
-          const isWeb = this.activeTab === 'web'
-          const key = isWeb ? 'web_cards_page_1' : 'feishu_cards_page_1'
-          const params = {
-            page: this.page[isWeb ? 'web' : 'feishu'],
-            pageSize: this.pageSize,
-            city: this.filters.city,
-            department: this.filters.department
-          }
-          let resp
-          if (params.page === 1) {
-            resp = await cachedRequest(key, () => (isWeb ? getWebCards(params) : getFeishuCards(params)), false)
-          } else {
-            resp = isWeb ? await getWebCards(params) : await getFeishuCards(params)
-          }
-          const list = (resp && resp.data) ? resp.data : (Array.isArray(resp) ? resp : [])
-          if (Array.isArray(list)) {
-            if (isWeb) {
-              this.webCards = this.webCards.concat(list)
-              this.hasMore.web = list.length >= this.pageSize
-              if (this.hasMore.web) this.page.web += 1
-            } else {
-              this.feishuCards = this.feishuCards.concat(list)
-              this.hasMore.feishu = list.length >= this.pageSize
-              if (this.hasMore.feishu) this.page.feishu += 1
-            }
-          }
-          console.log('服务卡片加载成功')
-        } else {
-          await this.simulateDelay(1000)
-          // 保留原模拟数据作为兜底
-          const mockWeb = [
-            { id: 1, title: '教务系统', description: '查看课表、成绩、考试安排', icon: '📚', department: '教务处' },
-            { id: 2, title: '图书馆', description: '图书检索、借阅记录查询', icon: '📖', department: '图书馆' },
-            { id: 3, title: '校园卡服务', description: '余额查询、消费记录、挂失', icon: '💳', department: '后勤处' }
-          ]
-          const mockFeishu = [
-            { id: 101, title: '教学计划', description: '本学期教学计划和课程安排', icon: '📋', department: '教务处' },
-            { id: 102, title: '考勤统计', description: '学生出勤情况统计', icon: '📊', department: '教务处' },
-            { id: 103, title: '通知公告', description: '学校最新通知和公告', icon: '📢', department: '办公室' }
-          ]
-          this.webCards = reset ? mockWeb : this.webCards.concat(mockWeb)
-          this.feishuCards = reset ? mockFeishu : this.feishuCards.concat(mockFeishu)
-          this.hasMore = { web: false, feishu: false }
-        }
-      } catch (error) {
-        console.error('加载失败:', error)
-        uni.showToast({
-          title: '加载失败',
-          icon: 'none'
-        })
-      } finally {
-        this.loading = false
-      }
+    getDayClass(day) {
+      if (!day.date) return 'empty';
+      
+      const today = new Date();
+      const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+      
+      const classes = [];
+      if (day.date === todayStr) classes.push('today');
+      if (day.recordCount > 0) classes.push('has-records');
+      
+      return classes.join(' ');
     },
     
-    /**
-     * 刷新当前标签数据
-     */
-    async refreshCards() {
-      try {
-        await this.loadCards(true)
-        uni.showToast({
-          title: '刷新成功',
-          icon: 'success'
-        })
-      } finally {
-        uni.stopPullDownRefresh()
-      }
+    selectDay(day) {
+      if (!day.date) return;
+      console.log('选中日期:', day.date);
+      // TODO: 显示该日的咨询列表
     },
     
-    /**
-     * 加载更多（上拉）
-     */
-    async loadMore() {
-      const isWeb = this.activeTab === 'web'
-      if (!(isWeb ? this.hasMore.web : this.hasMore.feishu)) return
-      await this.loadCards(false)
-    },
-    
-    /**
-     * 卡片点击事件
-     * @param {Object} card 卡片对象
-     */
-    handleCardClick(card) {
-      console.log('点击卡片:', card)
-      if (this.activeTab === 'web') {
-        // TODO: Day 9 打开网页
-        uni.showToast({
-          title: `即将打开 ${card.title}`,
-          icon: 'none'
-        })
-      } else {
-        // TODO: Day 10 显示飞书数据详情
-        uni.showToast({
-          title: `查看 ${card.title}`,
-          icon: 'none'
-        })
-      }
-    },
-    
-    /**
-     * 开发用延迟
-     * @param {Number} ms 毫秒
-     */
-    simulateDelay(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms))
+    viewConsultation(consultation) {
+      console.log('查看咨询:', consultation);
+      uni.showToast({
+        title: `查看 ${consultation.clientName} 的咨询`,
+        icon: 'none'
+      });
     }
   }
 }
@@ -241,135 +177,242 @@ export default {
 <style scoped>
 .service-page {
   min-height: 100vh;
-  background: #f5f5f5;
+  background-color: #F8F8F8;
   padding-bottom: 100rpx;
 }
 
-/* 标签切换 */
-.tabs {
-  display: flex;
-  background: #fff;
-  padding: 20rpx 30rpx;
-  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.05);
-}
-
-.tab-item {
-  flex: 1;
+/* 导航栏 */
+.navbar {
+  background-color: #4C12A1;
+  padding: 24rpx 40rpx 28rpx;
   text-align: center;
-  padding: 20rpx 0;
-  font-size: 28rpx;
-  color: #666;
-  position: relative;
-  transition: all 0.3s;
 }
 
-.tab-item.active {
-  color: #667eea;
-  font-weight: 600;
+.navbar-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #FFFFFF;
 }
 
-.tab-item.active::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60rpx;
-  height: 4rpx;
-  background: #667eea;
-  border-radius: 2rpx;
-}
-
-/* 卡片列表 */
-.card-list {
-  padding: 20rpx 30rpx;
-}
-
-.loading-wrapper {
+/* 月份选择器 */
+.month-selector {
+  background-color: #FFFFFF;
+  padding: 32rpx 40rpx;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  padding: 100rpx 0;
 }
 
-.loading-text {
-  color: #999;
-  font-size: 28rpx;
-}
-
-.empty-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 100rpx 0;
-}
-
-.empty-icon {
-  font-size: 120rpx;
-  margin-bottom: 30rpx;
-}
-
-.empty-text {
-  color: #999;
-  font-size: 28rpx;
-}
-
-.cards {
-  display: flex;
-  flex-direction: column;
-  gap: 20rpx;
-}
-
-.card-item {
-  display: flex;
-  align-items: center;
-  background: #fff;
+.month-arrow {
+  width: 64rpx;
+  height: 64rpx;
   border-radius: 16rpx;
-  padding: 30rpx;
-  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.05);
-  transition: all 0.3s;
+  background-color: #F5F5F5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  color: #666666;
+  transition: all 0.2s;
 }
 
-.card-item:active {
-  transform: scale(0.98);
-  opacity: 0.8;
+.month-arrow:active {
+  background-color: #E5E5E5;
+  transform: scale(0.95);
 }
 
-.card-icon {
-  font-size: 60rpx;
-  margin-right: 20rpx;
-}
-
-.card-content {
-  flex: 1;
-}
-
-.card-title {
+.current-month {
   font-size: 32rpx;
   font-weight: 600;
-  color: #333;
-  margin-bottom: 10rpx;
+  color: #333333;
 }
 
-.card-desc {
+/* 统计卡片 */
+.stats-bar {
+  background-color: #FFFFFF;
+  padding: 32rpx 40rpx;
+  display: flex;
+  gap: 24rpx;
+  margin-bottom: 24rpx;
+}
+
+.stat-item {
+  flex: 1;
+  background-color: rgba(76, 18, 161, 0.08);
+  padding: 32rpx 24rpx;
+  border-radius: 24rpx;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-value {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #4C12A1;
+  margin-bottom: 8rpx;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #666666;
+}
+
+/* 日历 */
+.calendar-container {
+  background-color: #FFFFFF;
+  padding: 32rpx 40rpx 40rpx;
+  margin-bottom: 24rpx;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 16rpx;
+  margin-bottom: 24rpx;
+}
+
+.weekday {
+  text-align: center;
+  font-size: 24rpx;
+  color: #999999;
+  font-weight: 500;
+  padding: 16rpx 0;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 16rpx;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  border-radius: 16rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  position: relative;
+  transition: all 0.2s;
+  background-color: #FAFAFA;
+  color: #333333;
+}
+
+.calendar-day:active {
+  transform: scale(0.95);
+}
+
+.calendar-day.empty {
+  pointer-events: none;
+  background-color: transparent;
+}
+
+.calendar-day.today {
+  background-color: #4C12A1;
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+.calendar-day.has-records {
+  background-color: rgba(239, 74, 129, 0.12);
+  border: 4rpx solid #EF4A81;
+}
+
+.calendar-day.has-records .day-number {
+  font-weight: 600;
+  color: #EF4A81;
+}
+
+.record-count {
+  position: absolute;
+  bottom: 8rpx;
+  font-size: 20rpx;
+  background-color: #EF4A81;
+  color: #FFFFFF;
+  padding: 2rpx 12rpx;
+  border-radius: 16rpx;
+  font-weight: 600;
+}
+
+/* 今日咨询 */
+.today-section {
+  padding: 40rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 32rpx;
+}
+
+.consultation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.consultation-card {
+  background-color: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  box-shadow: 0px 4rpx 8rpx -4rpx rgba(0, 0, 0, 0.10), 0px 8rpx 12rpx -2rpx rgba(0, 0, 0, 0.10);
+  transition: transform 0.2s;
+}
+
+.consultation-card:active {
+  transform: scale(0.98);
+}
+
+.consultation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24rpx;
+}
+
+.consultation-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 8rpx;
+  display: block;
+}
+
+.consultation-time {
   font-size: 26rpx;
-  color: #999;
+  color: #666666;
+  display: block;
+}
+
+.consultation-status {
+  padding: 8rpx 20rpx;
+  border-radius: 24rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+.consultation-status.pending {
+  background-color: rgba(255, 163, 0, 0.15);
+  color: #FFA300;
+}
+
+.consultation-status.completed {
+  background-color: rgba(45, 204, 211, 0.15);
+  color: #2DCCD3;
+}
+
+.consultation-status.ongoing {
+  background-color: rgba(76, 18, 161, 0.15);
+  color: #4C12A1;
+}
+
+.consultation-info {
+  font-size: 26rpx;
+  color: #999999;
   line-height: 1.5;
-  margin-bottom: 10rpx;
-}
-
-.card-tag {
-  display: inline-block;
-  font-size: 22rpx;
-  color: #667eea;
-  background: #f0f2ff;
-  padding: 4rpx 12rpx;
-  border-radius: 4rpx;
-}
-
-.card-arrow {
-  font-size: 50rpx;
-  color: #ddd;
-  font-weight: 300;
 }
 </style>

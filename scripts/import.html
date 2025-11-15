@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>批量导入用户数据</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #667eea;
+    }
+    button {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 10px 5px;
+    }
+    button:hover {
+      background: #5568d3;
+    }
+    button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    .log {
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 5px;
+      max-height: 400px;
+      overflow-y: auto;
+      font-family: monospace;
+      font-size: 13px;
+    }
+    .log-item {
+      margin: 5px 0;
+      padding: 3px 0;
+    }
+    .success { color: #52c41a; }
+    .error { color: #f5222d; }
+    .info { color: #666; }
+    .progress {
+      background: #e0e0e0;
+      border-radius: 10px;
+      height: 30px;
+      margin: 20px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .progress-bar {
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      height: 100%;
+      width: 0%;
+      transition: width 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📦 批量导入用户数据</h1>
+    
+    <div>
+      <p><strong>数据文件：</strong> migration-output/users-data-final.json</p>
+      <p><strong>总数：</strong> <span id="totalCount">-</span> 条</p>
+    </div>
+    
+    <div class="progress">
+      <div class="progress-bar" id="progressBar">0%</div>
+    </div>
+    
+    <div>
+      <button id="loadBtn" onclick="loadData()">1. 加载数据</button>
+      <button id="importBtn" onclick="startImport()" disabled>2. 开始导入</button>
+      <button id="checkBtn" onclick="checkExisting()">查看当前数量</button>
+    </div>
+    
+    <div class="log" id="log"></div>
+  </div>
+
+  <script>
+    let usersData = [];
+    
+    function addLog(message, type = 'info') {
+      const log = document.getElementById('log');
+      const time = new Date().toLocaleTimeString();
+      const item = document.createElement('div');
+      item.className = `log-item ${type}`;
+      item.textContent = `[${time}] ${message}`;
+      log.appendChild(item);
+      log.scrollTop = log.scrollHeight;
+    }
+    
+    function updateProgress(current, total) {
+      const percent = Math.round((current / total) * 100);
+      const progressBar = document.getElementById('progressBar');
+      progressBar.style.width = percent + '%';
+      progressBar.textContent = `${current}/${total} (${percent}%)`;
+    }
+    
+    async function loadData() {
+      addLog('正在加载数据...', 'info');
+      try {
+        const response = await fetch('./migration-output/users-data-final.json');
+        usersData = await response.json();
+        
+        document.getElementById('totalCount').textContent = usersData.length;
+        document.getElementById('importBtn').disabled = false;
+        
+        addLog(`✅ 加载成功：${usersData.length} 条记录`, 'success');
+      } catch (e) {
+        addLog(`❌ 加载失败：${e.message}`, 'error');
+      }
+    }
+    
+    async function checkExisting() {
+      addLog('查询当前数据...', 'info');
+      try {
+        const importUsersObj = uniCloud.importObject('import-users');
+        const result = await importUsersObj.checkExisting();
+        
+        if (result.success) {
+          addLog(`✅ 当前数据库有 ${result.total} 条用户记录`, 'success');
+        } else {
+          addLog(`❌ 查询失败：${result.message}`, 'error');
+        }
+      } catch (e) {
+        addLog(`❌ 查询失败：${e.message}`, 'error');
+      }
+    }
+    
+    async function startImport() {
+      if (usersData.length === 0) {
+        addLog('❌ 请先加载数据', 'error');
+        return;
+      }
+      
+      const confirm = window.confirm(`确定要导入 ${usersData.length} 条用户数据吗？`);
+      if (!confirm) return;
+      
+      document.getElementById('importBtn').disabled = true;
+      document.getElementById('loadBtn').disabled = true;
+      
+      addLog(`开始导入 ${usersData.length} 条数据...`, 'info');
+      updateProgress(0, usersData.length);
+      
+      try {
+        const importUsersObj = uniCloud.importObject('import-users');
+        
+        // 使用去重导入
+        const result = await importUsersObj.importWithDedupe(usersData);
+        
+        updateProgress(result.imported || 0, usersData.length);
+        
+        if (result.success) {
+          addLog(`✅ ${result.message}`, 'success');
+          addLog(`总数：${result.total}，已存在：${result.existing}，新导入：${result.imported}`, 'info');
+        } else {
+          addLog(`❌ ${result.message}`, 'error');
+        }
+        
+        // 查看最终结果
+        await checkExisting();
+        
+      } catch (e) {
+        addLog(`❌ 导入失败：${e.message}`, 'error');
+      } finally {
+        document.getElementById('importBtn').disabled = false;
+        document.getElementById('loadBtn').disabled = false;
+      }
+    }
+    
+    // 页面加载完成
+    window.onload = () => {
+      addLog('页面加载完成', 'info');
+      addLog('请先点击"1. 加载数据"按钮', 'info');
+    };
+  </script>
+  
+  <!-- 引入 uniCloud SDK -->
+  <script src="https://unpkg.com/@dcloudio/uni-cloud-router@latest/dist/index.js"></script>
+</body>
+</html>

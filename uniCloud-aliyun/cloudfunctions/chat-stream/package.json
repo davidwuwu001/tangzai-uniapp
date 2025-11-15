@@ -1,0 +1,10 @@
+{
+  "name": "chat-stream",
+  "version": "1.0.0",
+  "description": "流式聊天云函数",
+  "main": "index.js",
+  "cloudfunction-config": {
+    "timeout": 600,
+    "memorySize": 512
+  }
+}

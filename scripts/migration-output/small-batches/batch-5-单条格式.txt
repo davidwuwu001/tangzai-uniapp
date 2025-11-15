@@ -1,0 +1,176 @@
+批次 5 - 共 10 条记录
+请在 uniCloud 控制台 → 云数据库 → uni-id-users → 点击"添加记录"
+每次复制一条JSON，粘贴到表单，点击保存
+
+════════════════════════════════════════════════════════════
+
+--- 第 41 条 (李朋原) ---
+{
+  "username": "李朋原",
+  "mobile": "19558106422",
+  "nickname": "李朋原",
+  "department": "伙伴",
+  "password": "$2a$10$X3uCBlWmFF3rQpKWwRfk3uMNTb9hUU1Ntt6Ihvo5iIPxhuscqXmMe",
+  "mobile_confirmed": 0,
+  "is_admin": false,
+  "role": [
+    "user"
+  ],
+  "permission": [],
+  "token": [],
+  "city": 215
+}
+
+--- 第 42 条 (马莲) ---
+{
+  "username": "马莲",
+  "mobile": "15600727712",
+  "nickname": "马莲",
+  "department": "伙伴",
+  "password": "$2a$10$NAbNLJQWxNU.77QjF/eVSuiQP.2aQpvWhMV/7GKOohw/p1mNrzrta",
+  "mobile_confirmed": 0,
+  "is_admin": false,
+  "role": [
+    "user"
+  ],
+  "permission": [],
+  "token": [],
+  "city": 215
+}
+
+--- 第 43 条 (卢园) ---
+{
+  "username": "卢园",
+  "mobile": "18868191275",
+  "nickname": "卢园",
+  "department": "伙伴",
+  "password": "$2a$10$/aoi1Ni//cn7eX.7UWcpreDemK1jVeYxxOrsvnIon04JXG6TLy7Ui",
+  "mobile_confirmed": 0,
+  "is_admin": false,
+  "role": [
+    "user"
+  ],
+  "permission": [],
+  "token": [],
+  "city": 215
+}
+
+--- 第 44 条 (林树松) ---
+{
+  "username": "林树松",
+  "mobile": "15103691937",
+  "nickname": "林树松",
+  "department": "伙伴",
+  "password": "$2a$10$8mBG5PfppPpTaoDiEQxw5enblSvZUqwzccIeQaRgInIwW.I4mfFHC",
+  "mobile_confirmed": 0,
+  "is_admin": false,
+  "role": [
+    "user"
+  ],
+  "permission": [],
+  "token": [],
+  "city": 215
+}
+
+--- 第 45 条 (包生艳) ---
+{
+  "username": "包生艳",
+  "mobile": "18250742556",
+  "nickname": "包生艳",
+  "department": "伙伴",
+  "password": "$2a$10$Jb8IQXRpMHi.YCYtfn4FbucvynMuyC/fsd5XAPzCvogpqcw66aLLW",
+  "mobile_confirmed": 0,
+  "is_admin": false,
+  "role": [
+    "user"
+  ],
+  "permission": [],
+  "token": [],
+  "city": 215
+}
+
+--- 第 46 条 (刘国庆) ---
+{
+  "username": "刘国庆",
+  "mobile": "13136116001",
+  "nickname": "刘国庆",
+  "department": "伙伴",
+  "password": "$2a$10$ceV1RDCjQI3KPd8F2E1fmeMCgcLZgtior4ho6nW2gvrIiT/wMxO.C",
+  "mobile_confirmed": 0,
+  "is_admin": false,
+  "role": [
+    "user"
+  ],
+  "permission": [],
+  "token": [],
+  "city": 215
+}
+
+--- 第 47 条 (王延云) ---
+{
+  "username": "王延云",
+  "mobile": "15968850040",
+  "nickname": "王延云",
+  "department": "伙伴",
+  "password": "$2a$10$De9gZNZrz36dYWGETUC3j.EXBy1Cu62oGhqiBFPLcwQnFmvbLAdfe",
+  "mobile_confirmed": 0,
+  "is_admin": false,
+  "role": [
+    "user"
+  ],
+  "permission": [],
+  "token": [],
+  "city": 215
+}
+
+--- 第 48 条 (魏娟娟) ---
+{
+  "username": "魏娟娟",
+  "mobile": "15285187371",
+  "nickname": "魏娟娟",
+  "department": "伙伴",
+  "password": "$2a$10$qg1qET3THFA1OzoBLF39le9Z1jCyUamEd5L3V9Sl1uAfL10QJ2Mie",
+  "mobile_confirmed": 0,
+  "is_admin": false,
+  "role": [
+    "user"
+  ],
+  "permission": [],
+  "token": [],
+  "city": 215
+}
+
+--- 第 49 条 (王茹琦) ---
+{
+  "username": "王茹琦",
+  "mobile": "15601812737",
+  "nickname": "王茹琦",
+  "department": "伙伴",
+  "password": "$2a$10$v/VATO2iUD7qLqNC/LLaGunPNNFlvmDMJSjRfL6Ik9VK3Y9bX5TH.",
+  "mobile_confirmed": 0,
+  "is_admin": false,
+  "role": [
+    "user"
+  ],
+  "permission": [],
+  "token": [],
+  "city": 215
+}
+
+--- 第 50 条 (王玉丹) ---
+{
+  "username": "王玉丹",
+  "mobile": "13777448457",
+  "nickname": "王玉丹",
+  "department": "伙伴",
+  "password": "$2a$10$ztd/KI9Zjf7ryiMFhOywNOkHyuKwqy/Fund4SOCUAchhHUTnnzLDG",
+  "mobile_confirmed": 0,
+  "is_admin": false,
+  "role": [
+    "user"
+  ],
+  "permission": [],
+  "token": [],
+  "city": 215
+}
+

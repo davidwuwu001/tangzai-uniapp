@@ -1,382 +1,615 @@
 <template>
-  <view class="teaching-page">
-    <!-- 顶部搜索栏 -->
-    <view class="search-bar">
-      <view class="search-input">
-        <text class="icon">🔍</text>
-        <input 
-          type="text" 
-          placeholder="搜索教研助手..." 
-          v-model="searchKeyword"
-          @confirm="handleSearch"
-        />
-      </view>
-    </view>
-
-    <!-- 卡片列表 -->
-    <view class="card-list">
-      <!-- 加载中 -->
-      <view v-if="loading" class="loading-wrapper">
-        <text class="loading-text">加载中...</text>
-      </view>
-
-      <!-- 空状态 -->
-      <view v-else-if="cards.length === 0" class="empty-wrapper">
-        <text class="empty-icon">📭</text>
-        <text class="empty-text">暂无教研助手</text>
-      </view>
-
-      <!-- 卡片列表 -->
-      <view v-else class="cards">
-        <view 
-          v-for="card in filteredCards" 
-          :key="card.id" 
-          class="card-item"
-          @click="handleCardClick(card)"
-        >
-          <view class="card-icon">{{ card.icon || '🤖' }}</view>
-          <view class="card-content">
-            <view class="card-title">{{ card.title }}</view>
-            <view class="card-desc">{{ card.description }}</view>
-          </view>
-          <view class="card-arrow">›</view>
+  <view class="agent-list-page">
+    <!-- 导航栏 -->
+    <view class="navbar">
+      <view class="navbar-content">
+        <text class="navbar-title">智能体</text>
+        <view class="navbar-actions">
+          <text class="navbar-icon">🔍</text>
         </view>
       </view>
     </view>
 
-    <!-- 下拉刷新提示 -->
-    <view v-if="refreshing" class="refresh-hint">
-      <text>刷新中...</text>
+    <!-- 搜索栏 -->
+    <view class="search-bar">
+      <view class="search-input-wrapper">
+        <text class="search-icon">🔍</text>
+        <input 
+          class="search-input" 
+          placeholder="搜索智能体" 
+          placeholder-style="color: #999999"
+          v-model="searchKeyword"
+        />
+      </view>
+    </view>
+
+    <!-- 常用智能体 -->
+    <view class="favorite-section">
+      <view class="section-header">
+        <text class="section-title">⭐ 常用智能体</text>
+      </view>
+      <scroll-view class="favorite-scroll" scroll-x show-scrollbar="false">
+        <view 
+          v-for="agent in favoriteAgents" 
+          :key="agent.id" 
+          class="favorite-card"
+          @click="openAgent(agent)"
+        >
+          <view class="favorite-icon-wrapper" :style="{ backgroundColor: agent.iconBg }">
+            <text class="favorite-icon">{{ agent.icon }}</text>
+          </view>
+          <text class="favorite-name">{{ agent.name }}</text>
+        </view>
+      </scroll-view>
+    </view>
+
+    <!-- 分类标签 -->
+    <view class="category-section">
+      <scroll-view class="category-scroll" scroll-x show-scrollbar="false">
+        <view 
+          v-for="(category, index) in categories" 
+          :key="index"
+          class="category-tab"
+          :class="{ active: activeCategory === category }"
+          @click="selectCategory(category)"
+        >
+          <text class="category-text">{{ category }}</text>
+        </view>
+      </scroll-view>
+    </view>
+
+    <!-- 临时：修复数据按钮 -->
+    <view style="padding: 20rpx; text-align: center;" v-if="allAgents.length === 0">
+      <button @click="fixAllData" style="background: #F44336; color: white; border-radius: 10rpx; margin-right: 20rpx; font-size: 28rpx;">全面修复数据库</button>
+      <button @click="initTestData" style="background: #4C12A1; color: white; border-radius: 10rpx; font-size: 28rpx;">初始化测试数据</button>
+    </view>
+    
+    <!-- 智能体列表 -->
+    <view class="agent-grid">
+      <view 
+        v-for="agent in filteredAgents" 
+        :key="agent.id" 
+        class="agent-card"
+        @click="openAgent(agent)"
+      >
+        <view class="agent-icon-wrapper" :style="{ backgroundColor: agent.iconBg }">
+          <text class="agent-icon">{{ agent.icon }}</text>
+        </view>
+        <view class="agent-info">
+          <text class="agent-name">{{ agent.name }}</text>
+          <text class="agent-desc">{{ agent.description }}</text>
+        </view>
+      </view>
     </view>
   </view>
 </template>
 
 <script>
-import { getAgents } from '@/api/cards'
-import { cachedRequest } from '@/utils/cache'
-
 export default {
   data() {
     return {
-      searchKeyword: '', // 搜索关键词
-      loading: false, // 加载状态
-      refreshing: false, // 刷新状态
-      cards: [], // 卡片数据
-      useRealAPI: true, // 是否使用真实API
-      page: 1, // 当前页码
-      pageSize: 10, // 每页数量
-      hasMore: true, // 是否有更多
-      filters: { city: '', department: '' } // 权限过滤参数
-    }
+      searchKeyword: '',
+      favoriteAgents: [],
+      allAgents: [],
+      categories: ['全部', '教学设计', '学生管理', '教研分析', '家校沟通', '课程设计', '心理辅导'],
+      activeCategory: '全部',
+      loading: false
+    };
   },
-  
   computed: {
-    // 过滤后的卡片列表
-    filteredCards() {
-      if (!this.searchKeyword) {
-        return this.cards
+    filteredAgents() {
+      let agents = this.allAgents;
+      
+      // 按分类过滤
+      if (this.activeCategory !== '全部') {
+        agents = agents.filter(agent => {
+          // 匹配 navigation_tab 或 description
+          return agent.navigation_tab === this.activeCategory || 
+                 (agent.description && agent.description.includes(this.activeCategory));
+        });
       }
-      const keyword = this.searchKeyword.toLowerCase()
-      return this.cards.filter(card => 
-        card.title.toLowerCase().includes(keyword) || 
-        card.description.toLowerCase().includes(keyword)
-      )
+      
+      // 按搜索关键词过滤
+      if (this.searchKeyword) {
+        const keyword = this.searchKeyword.toLowerCase();
+        agents = agents.filter(agent => 
+          (agent.name && agent.name.toLowerCase().includes(keyword)) || 
+          (agent.description && agent.description.toLowerCase().includes(keyword))
+        );
+      }
+      
+      return agents;
     }
   },
-  
   onLoad() {
-    // 页面加载时获取数据
-    this.initFilters()
-    this.loadCards(true)
+    this.loadData();
   },
-  
-  // 下拉刷新
-  onPullDownRefresh() {
-    this.refreshCards()
-  },
-  
   methods: {
-    /**
-     * 初始化权限过滤参数
-     */
-    initFilters() {
-      try {
-        const userStr = uni.getStorageSync('user_info')
-        if (userStr) {
-          const user = JSON.parse(userStr)
-          this.filters.city = user.city || ''
-          this.filters.department = user.department || ''
+    getMockData() {
+      // 模拟智能体数据
+      return [
+        {
+          _id: 'mock1',
+          name: '教学设计助手',
+          description: '帮助老师设计课程大纲、教学活动和评估方案',
+          icon: '📚',
+          icon_bg: '#FF6B6B',
+          navigation_tab: '教学设计'
+        },
+        {
+          _id: 'mock2',
+          name: '作业批改助手',
+          description: '快速批改学生作业，提供详细反馈和改进建议',
+          icon: '✍️',
+          icon_bg: '#4ECDC4',
+          navigation_tab: '学生管理'
+        },
+        {
+          _id: 'mock3',
+          name: '试卷生成器',
+          description: '根据知识点和难度自动生成试卷，节省命题时间',
+          icon: '📋',
+          icon_bg: '#95E1D3',
+          navigation_tab: '教学设计'
+        },
+        {
+          _id: 'mock4',
+          name: '家长沟通助手',
+          description: '起草家长通知、学生情况报告，增强家校联系',
+          icon: '📧',
+          icon_bg: '#FFD93D',
+          navigation_tab: '家校沟通'
+        },
+        {
+          _id: 'mock5',
+          name: '成绩分析师',
+          description: '分析班级成绩数据，生成可视化报告和改进建议',
+          icon: '📊',
+          icon_bg: '#6C5CE7',
+          navigation_tab: '教研分析'
+        },
+        {
+          _id: 'mock6',
+          name: '课堂活动策划',
+          description: '提供创意课堂活动方案，提高学生参与度',
+          icon: '🎭',
+          icon_bg: '#A29BFE',
+          navigation_tab: '课程设计'
+        },
+        {
+          _id: 'mock7',
+          name: '学生心理辅导',
+          description: '提供心理健康建议和情绪管理策略',
+          icon: '💚',
+          icon_bg: '#74B9FF',
+          navigation_tab: '心理辅导'
+        },
+        {
+          _id: 'mock8',
+          name: '教案生成器',
+          description: '基于课程标准快速生成教案，支持多种模板',
+          icon: '📖',
+          icon_bg: '#FD79A8',
+          navigation_tab: '教学设计'
         }
-      } catch (e) {}
+      ];
     },
-    
-    /**
-     * 加载卡片数据（支持分页）
-     * @param {Boolean} reset 是否重置分页
-     */
-    async loadCards(reset = false) {
-      this.loading = true
+    async loadData() {
       try {
-        if (reset) {
-          this.page = 1
-          this.hasMore = true
-          this.cards = []
-        }
-
-        if (this.useRealAPI) {
-          // 首页使用缓存，其余页直接请求
-          let resp
-          const params = {
-            page: this.page,
-            pageSize: this.pageSize,
-            search: this.searchKeyword || '',
-            city: this.filters.city,
-            department: this.filters.department
+        this.loading = true;
+        
+        // 调用云函数获取智能体数据
+        const agent = uniCloud.importObject('agent');
+        const res = await agent.list({
+          page: 1,
+          page_size: 100
+        });
+        
+        console.log('云函数响应:', res);
+        console.log('res.data.list类型:', Array.isArray(res.data.list));
+        console.log('res.data.list内容:', res.data.list);
+        
+        if (res.code === 0) {
+          let rawList = res.data.list || [];
+          console.log('rawList长度:', rawList.length);
+          
+          // 如果数据为空，使用模拟数据
+          if (rawList.length === 0) {
+            console.log('使用模拟数据');
+            rawList = this.getMockData();
           }
-          if (this.page === 1) {
-            resp = await cachedRequest(
-              'agents_list_page_1',
-              () => getAgents(params),
-              false
-            )
-          } else {
-            resp = await getAgents(params)
+          
+          // 检查是否有嵌套的data结构
+          if (rawList.length > 0 && rawList[0].data && Array.isArray(rawList[0].data)) {
+            console.log('检测到嵌套data结构，展开数据');
+            // 展开所有嵌套的data数组
+            const expandedList = [];
+            rawList.forEach(item => {
+              if (item.data && Array.isArray(item.data)) {
+                expandedList.push(...item.data);
+              } else {
+                expandedList.push(item);
+              }
+            });
+            rawList = expandedList;
+            console.log('展开后的数据数量:', rawList.length);
           }
-
-          const list = (resp && resp.data) ? resp.data : (Array.isArray(resp) ? resp : [])
-          if (Array.isArray(list)) {
-            this.cards = this.cards.concat(list)
-            // 是否还有更多（后端可返回 total 或根据返回条目判断）
-            this.hasMore = list.length >= this.pageSize
-            if (this.hasMore) {
-              this.page += 1
-            }
-          }
-          console.log('从后端加载卡片数据:', this.cards)
+          
+          // 处理数据，添加默认值
+          this.allAgents = rawList.map(agent => {
+            console.log('处理agent:', agent.name || agent._id);
+            return {
+              ...agent,
+              id: agent._id || agent.id,
+              name: agent.name || '未命名智能体',
+              description: agent.description || '',
+              icon: agent.icon || '🤖',
+              iconBg: agent.icon_bg || agent.iconBg || '#4C12A1'
+            };
+          });
+          
+          // 模拟常用智能体（取前5个）
+          this.favoriteAgents = this.allAgents.slice(0, 5);
+          
+          console.log('加载智能体成功:', this.allAgents.length, '个');
+          console.log('第一个智能体:', this.allAgents[0]);
         } else {
-          // 使用模拟数据
-          await this.simulateDelay(1000)
-          const mock = [
-            {
-              id: 1,
-              title: '数学教学助手',
-              description: '帮助解答数学问题，提供教学方案',
-              icon: '📐'
-            },
-            {
-              id: 2,
-              title: '语文作文助手',
-              description: '作文批改、写作指导、素材推荐',
-              icon: '✍️'
-            },
-            {
-              id: 3,
-              title: '英语口语助手',
-              description: '英语对话练习、发音纠正',
-              icon: '🗣️'
-            },
-            {
-              id: 4,
-              title: '物理实验助手',
-              description: '物理实验指导、原理讲解',
-              icon: '🔬'
-            }
-          ]
-          this.cards = reset ? mock : this.cards.concat(mock)
-          this.hasMore = false
-          console.log('模拟数据加载成功:', this.cards)
+          console.error('加载失败:', res.message);
+          uni.showToast({
+            title: res.message || '加载失败',
+            icon: 'none'
+          });
         }
       } catch (error) {
-        console.error('加载卡片失败:', error)
+        console.error('加载智能体失败:', error);
         uni.showToast({
           title: '加载失败',
           icon: 'none'
-        })
+        });
       } finally {
-        this.loading = false
+        this.loading = false;
       }
     },
-    
-    /**
-     * 刷新卡片数据（重置分页并忽略缓存）
-     */
-    async refreshCards() {
-      this.refreshing = true
+    selectCategory(category) {
+      this.activeCategory = category;
+    },
+    openAgent(agent) {
+      console.log('打开智能体:', agent.name);
+      // 跳转到AI对话页面
+      uni.navigateTo({
+        url: `/pages/chat/chat?agentId=${agent.id || agent._id}&agentName=${encodeURIComponent(agent.name)}&agentDesc=${encodeURIComponent(agent.description)}&agentIcon=${encodeURIComponent(agent.icon)}&agentType=${agent.type || 'teaching'}`
+      });
+    },
+    async fixAllData() {
       try {
-        await this.loadCards(true)
-        uni.showToast({
-          title: '刷新成功',
-          icon: 'success'
-        })
+        uni.showModal({
+          title: '确认修复',
+          content: '将修复 agents、feishu-cards、web-cards 表的嵌套数据结构，是否继续？',
+          success: async (res) => {
+            if (res.confirm) {
+              uni.showLoading({ title: '修复中...' });
+              
+              try {
+                const fixObj = uniCloud.importObject('fix-all-data');
+                const result = await fixObj.fix();
+                
+                uni.hideLoading();
+                
+                if (result.code === 0) {
+                  const msg = `agents: 修复${result.data.agents.fixed}个\nfeishu-cards: 修复${result.data['feishu-cards'].fixed}个\nweb-cards: 修复${result.data['web-cards'].fixed}个`;
+                  uni.showModal({
+                    title: '修复完成',
+                    content: msg,
+                    showCancel: false,
+                    success: () => {
+                      setTimeout(() => {
+                        this.loadData();
+                      }, 500);
+                    }
+                  });
+                } else {
+                  uni.showToast({
+                    title: result.message || '修复失败',
+                    icon: 'none'
+                  });
+                }
+              } catch (error) {
+                uni.hideLoading();
+                console.error('修复失败:', error);
+                uni.showToast({
+                  title: '修复失败',
+                  icon: 'none'
+                });
+              }
+            }
+          }
+        });
       } catch (error) {
-        console.error('刷新失败:', error)
-      } finally {
-        this.refreshing = false
-        uni.stopPullDownRefresh()
+        console.error('修复失败:', error);
       }
     },
-    
-    /**
-     * 处理搜索（重置分页并重新加载）
-     */
-    handleSearch() {
-      console.log('搜索关键词:', this.searchKeyword)
-      this.loadCards(true)
+    async fixAgents() {
+      try {
+        uni.showLoading({ title: '修复中...' });
+        
+        const fixObj = uniCloud.importObject('fix-agents');
+        const res = await fixObj.fix();
+        
+        uni.hideLoading();
+        
+        if (res.code === 0) {
+          uni.showToast({
+            title: res.message,
+            icon: 'success',
+            duration: 2000
+          });
+          // 重新加载数据
+          setTimeout(() => {
+            this.loadData();
+          }, 1000);
+        } else {
+          uni.showToast({
+            title: res.message || '修复失败',
+            icon: 'none'
+          });
+        }
+      } catch (error) {
+        uni.hideLoading();
+        console.error('修复失败:', error);
+        uni.showToast({
+          title: '修复失败',
+          icon: 'none'
+        });
+      }
     },
-    
-    /**
-     * 卡片点击事件
-     * @param {Object} card 卡片对象
-     */
-    handleCardClick(card) {
-      console.log('点击卡片:', card)
-      // TODO: Day 8 跳转到AI对话页面
-      uni.showToast({
-        title: `点击了 ${card.title}`,
-        icon: 'none'
-      })
-    },
-    
-    /**
-     * 开发用延迟
-     * @param {Number} ms 毫秒
-     */
-    simulateDelay(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms))
+    async initTestData() {
+      try {
+        uni.showLoading({ title: '初始化中...' });
+        
+        const testInit = uniCloud.importObject('test-init-agents');
+        const res = await testInit.init();
+        
+        uni.hideLoading();
+        
+        if (res.code === 0) {
+          uni.showToast({
+            title: res.message,
+            icon: 'success'
+          });
+          // 重新加载数据
+          setTimeout(() => {
+            this.loadData();
+          }, 1000);
+        } else {
+          uni.showToast({
+            title: res.message || '初始化失败',
+            icon: 'none'
+          });
+        }
+      } catch (error) {
+        uni.hideLoading();
+        console.error('初始化失败:', error);
+        uni.showToast({
+          title: '初始化失败',
+          icon: 'none'
+        });
+      }
     }
   }
-}
+};
 </script>
 
 <style scoped>
-.teaching-page {
+.agent-list-page {
   min-height: 100vh;
-  background: #f5f5f5;
+  background-color: #F8F8F8;
   padding-bottom: 100rpx;
+}
+
+/* 导航栏 */
+.navbar {
+  background-color: #4C12A1;
+  padding: 24rpx 40rpx 28rpx;
+}
+
+.navbar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+
+.navbar-actions {
+  display: flex;
+  gap: 24rpx;
+}
+
+.navbar-icon {
+  font-size: 44rpx;
 }
 
 /* 搜索栏 */
 .search-bar {
-  background: #fff;
-  padding: 20rpx 30rpx;
-  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.05);
+  background-color: #FFFFFF;
+  padding: 24rpx 32rpx;
+}
+
+.search-input-wrapper {
+  display: flex;
+  align-items: center;
+  background-color: #F5F5F5;
+  border-radius: 40rpx;
+  padding: 16rpx 28rpx;
+  gap: 16rpx;
+}
+
+.search-icon {
+  font-size: 32rpx;
+  flex-shrink: 0;
 }
 
 .search-input {
-  display: flex;
-  align-items: center;
-  background: #f5f5f5;
-  border-radius: 50rpx;
-  padding: 20rpx 30rpx;
-}
-
-.search-input .icon {
-  font-size: 32rpx;
-  margin-right: 15rpx;
-}
-
-.search-input input {
   flex: 1;
   font-size: 28rpx;
+  color: #333333;
+  background-color: transparent;
+  border: none;
 }
 
-/* 卡片列表 */
-.card-list {
-  padding: 20rpx 30rpx;
+/* 常用智能体 */
+.favorite-section {
+  background-color: #FFFFFF;
+  margin-top: 16rpx;
+  padding: 32rpx 0;
 }
 
-/* 加载中 */
-.loading-wrapper {
+.section-header {
+  padding: 0 32rpx 24rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.favorite-scroll {
+  white-space: nowrap;
+  padding: 0 32rpx;
+}
+
+.favorite-card {
+  display: inline-block;
+  margin-right: 32rpx;
+  text-align: center;
+  width: 140rpx;
+}
+
+.favorite-icon-wrapper {
+  width: 112rpx;
+  height: 112rpx;
+  border-radius: 50%;
   display: flex;
+  align-items: center;
   justify-content: center;
-  align-items: center;
-  padding: 100rpx 0;
+  margin: 0 auto 16rpx;
 }
 
-.loading-text {
-  color: #999;
+.favorite-icon {
+  font-size: 56rpx;
+}
+
+.favorite-name {
+  font-size: 24rpx;
+  color: #666666;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 分类标签 */
+.category-section {
+  background-color: #FFFFFF;
+  padding: 24rpx 0;
+  border-top: 1rpx solid #F0F0F0;
+}
+
+.category-scroll {
+  white-space: nowrap;
+  padding: 0 32rpx;
+}
+
+.category-tab {
+  display: inline-block;
+  padding: 12rpx 28rpx;
+  margin-right: 16rpx;
+  border-radius: 40rpx;
   font-size: 28rpx;
-}
-
-/* 空状态 */
-.empty-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 100rpx 0;
-}
-
-.empty-icon {
-  font-size: 120rpx;
-  margin-bottom: 30rpx;
-}
-
-.empty-text {
-  color: #999;
-  font-size: 28rpx;
-}
-
-/* 卡片 */
-.cards {
-  display: flex;
-  flex-direction: column;
-  gap: 20rpx;
-}
-
-.card-item {
-  display: flex;
-  align-items: center;
-  background: #fff;
-  border-radius: 16rpx;
-  padding: 30rpx;
-  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.05);
+  color: #666666;
+  background-color: #F5F5F5;
   transition: all 0.3s;
 }
 
-.card-item:active {
+.category-tab.active {
+  background-color: #4C12A1;
+  color: #FFFFFF;
+  font-weight: 500;
+}
+
+.category-text {
+  white-space: nowrap;
+}
+
+/* 智能体列表 */
+.agent-grid {
+  padding: 24rpx 32rpx 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24rpx;
+}
+
+.agent-card {
+  background-color: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 32rpx 24rpx;
+  box-shadow: 0px 4rpx 8rpx -4rpx rgba(0, 0, 0, 0.10), 
+              0px 8rpx 12rpx -2rpx rgba(0, 0, 0, 0.10);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.agent-card:active {
   transform: scale(0.98);
-  opacity: 0.8;
 }
 
-.card-icon {
-  font-size: 60rpx;
-  margin-right: 20rpx;
+.agent-icon-wrapper {
+  width: 112rpx;
+  height: 112rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20rpx;
 }
 
-.card-content {
-  flex: 1;
+.agent-icon {
+  font-size: 56rpx;
 }
 
-.card-title {
-  font-size: 32rpx;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 10rpx;
+.agent-info {
+  width: 100%;
+  text-align: center;
 }
 
-.card-desc {
-  font-size: 26rpx;
-  color: #999;
+.agent-name {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333333;
+  display: block;
+  margin-bottom: 12rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.agent-desc {
+  font-size: 24rpx;
+  color: #999999;
   line-height: 1.5;
-}
-
-.card-arrow {
-  font-size: 50rpx;
-  color: #ddd;
-  font-weight: 300;
-}
-
-/* 刷新提示 */
-.refresh-hint {
-  position: fixed;
-  top: 100rpx;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.7);
-  color: #fff;
-  padding: 20rpx 40rpx;
-  border-radius: 50rpx;
-  font-size: 26rpx;
-  z-index: 999;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
 }
 </style>

@@ -32,6 +32,18 @@
       "enum": ["openai", "volcengine", "custom"],
       "defaultValue": "openai"
     },
+    "volc_service_id": {
+      "bsonType": "string",
+      "description": "火山引擎知识库服务 ID",
+      "label": "服务ID",
+      "title": "火山引擎服务ID"
+    },
+    "volc_endpoint_id": {
+      "bsonType": "string",
+      "description": "火山引擎 Endpoint ID（可选）",
+      "label": "Endpoint ID",
+      "title": "火山引擎 Endpoint ID"
+    },
     "created_at": {
       "bsonType": "timestamp",
       "description": "创建时间",

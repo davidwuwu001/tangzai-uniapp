@@ -1,0 +1,61 @@
+
+==============================================
+  MongoDB 数据导入说明
+==============================================
+
+数据文件: D:\Project\tangzai-zhushou-uniapp\tangzai-uniapp\scripts\migration-output\users-data.json
+
+方式一：通过 uniCloud Web 控制台导入
+1. 登录 uniCloud 控制台: https://unicloud.dcloud.net.cn
+2. 选择您的服务空间
+3. 进入「云数据库」→「uni-id-users」表
+4. 点击「导入」按钮
+5. 上传 users-data.json 文件
+6. 选择「插入新记录」模式
+7. 点击「开始导入」
+
+方式二：通过云函数导入
+1. 使用以下云函数代码批量导入：
+
+// uniCloud-aliyun/cloudfunctions/import-users/index.js
+const db = uniCloud.database();
+const usersData = require('./users-data.json');
+
+exports.main = async (event, context) => {
+  const dbCmd = db.command;
+  const collection = db.collection('uni-id-users');
+  
+  // 分批导入，每批50条
+  const batchSize = 50;
+  const batches = [];
+  
+  for (let i = 0; i < usersData.length; i += batchSize) {
+    batches.push(usersData.slice(i, i + batchSize));
+  }
+  
+  let successCount = 0;
+  let errorCount = 0;
+  
+  for (const batch of batches) {
+    try {
+      const res = await collection.add(batch);
+      successCount += res.inserted || batch.length;
+    } catch (e) {
+      console.error('批次导入失败:', e);
+      errorCount += batch.length;
+    }
+  }
+  
+  return {
+    success: true,
+    message: `导入完成：成功 ${successCount} 条，失败 ${errorCount} 条`,
+    total: usersData.length,
+    successCount,
+    errorCount
+  };
+};
+
+2. 将 users-data.json 复制到云函数目录
+3. 上传并运行云函数
+
+==============================================

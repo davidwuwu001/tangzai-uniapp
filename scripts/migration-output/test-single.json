@@ -1,0 +1,8 @@
+[
+  {
+    "username": "测试用户001",
+    "mobile": "13800138000",
+    "nickname": "测试用户",
+    "password": "$2a$10$test.password.hash.example"
+  }
+]

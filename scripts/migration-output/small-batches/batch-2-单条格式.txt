@@ -1,0 +1,174 @@
+批次 2 - 共 10 条记录
+请在 uniCloud 控制台 → 云数据库 → uni-id-users → 点击"添加记录"
+每次复制一条JSON，粘贴到表单，点击保存
+
+════════════════════════════════════════════════════════════
+
+--- 第 11 条 (白小意) ---
+{
+  "username": "白小意",
+  "mobile": "18758306620",
+  "nickname": "白小意",
+  "department": "伙伴",
+  "password": "$2a$10$bRDAjbAl4iiNPCZGGj1kq.vbZ3quhMZC8/HEAuagVL1Dej6mSyy1i",
+  "mobile_confirmed": 0,
+  "is_admin": false,
+  "role": [
+    "user"
+  ],
+  "permission": [],
+  "token": [],
+  "city": 218
+}
+
+--- 第 12 条 (王以信) ---
+{
+  "username": "王以信",
+  "mobile": "18060740272",
+  "nickname": "王以信",
+  "department": "伙伴",
+  "password": "$2a$10$LXrv0XRIgqQuirvTeOD7N.bMVVgi30rQ90fMAtFhTcyT5Bhpgq/Wy",
+  "mobile_confirmed": 0,
+  "is_admin": false,
+  "role": [
+    "user"
+  ],
+  "permission": [],
+  "token": [],
+  "city": 218
+}
+
+--- 第 13 条 (admin) ---
+{
+  "username": "admin",
+  "nickname": "admin",
+  "department": "伙伴",
+  "password": "$2a$10$JeoLBpnYcg09UMTcccfe6uGIDnYT/o.JdfMSn2OS9Th49Q5nYWVca",
+  "mobile_confirmed": 0,
+  "is_admin": false,
+  "role": [
+    "user"
+  ],
+  "permission": [],
+  "token": []
+}
+
+--- 第 14 条 (迦美) ---
+{
+  "username": "迦美",
+  "mobile": "15870619380",
+  "nickname": "迦美",
+  "department": "伙伴",
+  "password": "$2a$10$5EJVNt46Z1ASgv63fjwrKeuNmv4R72Vs.31xq3dyn5IKfibnE.RGC",
+  "mobile_confirmed": 0,
+  "is_admin": false,
+  "role": [
+    "user"
+  ],
+  "permission": [],
+  "token": [],
+  "city": 218
+}
+
+--- 第 15 条 (lisa) ---
+{
+  "username": "lisa",
+  "mobile": "18210443249",
+  "nickname": "lisa",
+  "department": "伙伴",
+  "password": "$2a$10$x0ThhCkZ4QxV.HJSyUM2TOc2DqnDouERLDc0.XpmXy3y5V7HMnhb2",
+  "mobile_confirmed": 0,
+  "is_admin": false,
+  "role": [
+    "user"
+  ],
+  "permission": [],
+  "token": [],
+  "city": 218
+}
+
+--- 第 16 条 (test) ---
+{
+  "username": "test",
+  "mobile": "18240413898",
+  "nickname": "test",
+  "department": "伙伴",
+  "password": "$2a$10$E84du4V1iTmQg2/AcUOEXubZ2UolAa8h2g/ewHIST74NPlqyhlY3e",
+  "mobile_confirmed": 0,
+  "is_admin": false,
+  "role": [
+    "user"
+  ],
+  "permission": [],
+  "token": [],
+  "city": 218
+}
+
+--- 第 17 条 (陶纵驰) ---
+{
+  "username": "陶纵驰",
+  "mobile": "15694140140",
+  "nickname": "陶纵驰",
+  "department": "伙伴",
+  "password": "$2a$10$osRw6MkBVm2CnuVMgO0jqutH7Y.UNqaT/EbPO74ahb5rUPFAyjOvq",
+  "mobile_confirmed": 0,
+  "is_admin": false,
+  "role": [
+    "user"
+  ],
+  "permission": [],
+  "token": [],
+  "city": 213
+}
+
+--- 第 18 条 (侯玉洁) ---
+{
+  "username": "侯玉洁",
+  "mobile": "18364144118",
+  "nickname": "侯玉洁",
+  "department": "伙伴",
+  "password": "$2a$10$9tqZ4DuCmjxZvWlhZdX4ge/ik2vxmUnytPJQP5axURMcVJ0K/yRAq",
+  "mobile_confirmed": 0,
+  "is_admin": false,
+  "role": [
+    "user"
+  ],
+  "permission": [],
+  "token": [],
+  "city": 212
+}
+
+--- 第 19 条 (test济南) ---
+{
+  "username": "test济南",
+  "mobile": "17748506840",
+  "nickname": "test济南",
+  "department": "伙伴",
+  "password": "$2a$10$xzgowl0znNBLSLWWGIBrAeDp4AOHdUsHD4fTjklIfMLPg4ZWggk2K",
+  "mobile_confirmed": 0,
+  "is_admin": false,
+  "role": [
+    "user"
+  ],
+  "permission": [],
+  "token": [],
+  "city": 212
+}
+
+--- 第 20 条 (test 北京) ---
+{
+  "username": "test 北京",
+  "mobile": "17717098201",
+  "nickname": "test 北京",
+  "department": "伙伴",
+  "password": "$2a$10$9iv0KNcLREhP9lEgHHIb9OtXV0H4FgSGcH7n.qcfXUwDIdTeuZF6W",
+  "mobile_confirmed": 0,
+  "is_admin": false,
+  "role": [
+    "user"
+  ],
+  "permission": [],
+  "token": [],
+  "city": 211
+}
+

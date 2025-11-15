@@ -3,7 +3,7 @@
     <!-- Logo区域 -->
     <view class="logo-section">
       <view class="logo">
-        <text class="logo-emoji">🤖</text>
+        <image class="logo-image" src="/static/icon-512x512.png" mode="aspectFit" />
       </view>
       <view class="app-name">汤仔助手</view>
       <view class="app-slogan">专业教育服务平台</view>
@@ -194,7 +194,7 @@ export default {
       if (token && userInfo) {
         console.log('检测到已登录，自动跳转首页')
         uni.switchTab({
-          url: '/pages/teaching/teaching'
+          url: '/pages/workbench/workbench'
         })
       }
     },
@@ -225,18 +225,31 @@ export default {
       try {
         console.log('开始登录，账号:', this.identifier)
         const res = await loginAPI(this.identifier, this.password)
-        console.log('登录成功，响应数据:', res)
+        console.log('登录响应数据:', res)
+        
+        // 检查登录是否成功
+        if (res.code !== 0) {
+          uni.showToast({
+            title: res.message || '登录失败',
+            icon: 'none'
+          })
+          return
+        }
         
         // 保存token
-        if (res.token) {
-          uni.setStorageSync('auth_token', res.token)
-          console.log('Token已保存')
+        if (res.data && res.data.token) {
+          // 使用 uniCloud 标准的 token 存储key
+          uni.setStorageSync('uni_id_token', res.data.token)
+          uni.setStorageSync('uni_id_token_expired', res.data.tokenExpired)
+          // 也保存一份到 auth_token 以兼容
+          uni.setStorageSync('auth_token', res.data.token)
+          console.log('Token已保存:', res.data.token)
         }
         
         // 保存用户信息
-        if (res.user) {
-          uni.setStorageSync('user_info', JSON.stringify(res.user))
-          console.log('用户信息已保存:', res.user)
+        if (res.data && res.data.userInfo) {
+          uni.setStorageSync('user_info', JSON.stringify(res.data.userInfo))
+          console.log('用户信息已保存:', res.data.userInfo)
         }
         
         // 如果记住密码，保存到本地
@@ -258,7 +271,7 @@ export default {
         // 跳转到首页
         setTimeout(() => {
           uni.switchTab({
-            url: '/pages/teaching/teaching'
+            url: '/pages/workbench/workbench'
           })
         }, 1500)
         

@@ -1,288 +1,335 @@
 <template>
   <view class="mine-page">
-    <!-- 用户信息卡片 -->
-    <view class="user-card">
-      <view class="user-avatar">
-        <image v-if="userInfo.avatar" :src="userInfo.avatar" mode="aspectFill"></image>
-        <text v-else class="avatar-placeholder">👤</text>
-      </view>
+    <!-- 头部用户信息区 -->
+    <view class="profile-header">
       <view class="user-info">
-        <view class="user-name">{{ userInfo.name || '未登录' }}</view>
-        <view class="user-role">{{ userInfo.role || '点击登录' }}</view>
-      </view>
-      <view class="user-arrow">›</view>
-    </view>
-
-    <!-- 功能列表 -->
-    <view class="menu-section">
-      <view class="section-title">常用功能</view>
-      <view class="menu-list">
-        <view 
-          v-for="item in menuItems" 
-          :key="item.id" 
-          class="menu-item"
-          @click="handleMenuClick(item)"
-        >
-          <view class="menu-icon">{{ item.icon }}</view>
-          <view class="menu-label">{{ item.label }}</view>
-          <view class="menu-arrow">›</view>
+        <view class="avatar-container">
+          <view class="user-avatar">
+            <text>{{ userInfo.avatar }}</text>
+          </view>
+          <view class="avatar-badge">✓</view>
+        </view>
+        <view class="user-details">
+          <text class="user-name">{{ userInfo.name }}</text>
+          <text class="user-role">{{ userInfo.role }}</text>
+          <view class="user-department">
+            <text>📍 {{ userInfo.city }} · {{ userInfo.department }}</text>
+          </view>
         </view>
       </view>
     </view>
-
-    <!-- 设置列表 -->
-    <view class="menu-section">
-      <view class="section-title">设置</view>
-      <view class="menu-list">
-        <view 
-          v-for="item in settingItems" 
-          :key="item.id" 
-          class="menu-item"
-          @click="handleSettingClick(item)"
-        >
-          <view class="menu-icon">{{ item.icon }}</view>
-          <view class="menu-label">{{ item.label }}</view>
-          <view class="menu-arrow">›</view>
-        </view>
+    
+    <!-- 统计卡片 -->
+    <view class="stats-card">
+      <view class="stat-item">
+        <text class="stat-value">{{ stats.consultations }}</text>
+        <text class="stat-label">咨询次数</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{ stats.students }}</text>
+        <text class="stat-label">服务学员</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{ stats.materials }}</text>
+        <text class="stat-label">学习资料</text>
       </view>
     </view>
-
-    <!-- 退出登录按钮 -->
-    <view class="logout-section">
+    
+    <!-- 菜单内容 -->
+    <view class="content">
+      <view 
+        v-for="(section, sectionIndex) in menuSections" 
+        :key="sectionIndex" 
+        class="menu-section"
+      >
+        <text class="section-title">{{ section.title }}</text>
+        <view class="menu-card">
+          <view 
+            v-for="(item, itemIndex) in section.items" 
+            :key="itemIndex"
+            class="menu-item"
+            @click="handleMenuClick(item)"
+          >
+            <view class="menu-icon" :class="item.iconClass">
+              <text>{{ item.icon }}</text>
+            </view>
+            <view class="menu-content">
+              <text class="menu-title">{{ item.title }}</text>
+              <text class="menu-desc">{{ item.desc }}</text>
+            </view>
+            <text v-if="item.badge" class="menu-badge">{{ item.badge }}</text>
+            <text class="menu-arrow">›</text>
+          </view>
+        </view>
+      </view>
+      
+      <!-- 退出按钮 -->
       <button class="logout-btn" @click="handleLogout">退出登录</button>
-    </view>
-
-    <!-- 版本信息 -->
-    <view class="version-info">
-      <text>汤仔助手 v1.0.0</text>
     </view>
   </view>
 </template>
 
 <script>
-import { logout as logoutAPI } from '@/api/auth'
+import profileData from '@/mock/profile.js';
 
 export default {
   data() {
     return {
-      userInfo: {}, // 用户信息
-      menuItems: [
-        { id: 1, label: '我的收藏', icon: '⭐' },
-        { id: 2, label: '历史记录', icon: '🕒' },
-        { id: 3, label: '预约记录', icon: '📅' },
-        { id: 4, label: '帮助中心', icon: '❓' }
-      ],
-      settingItems: [
-        { id: 5, label: '账号设置', icon: '⚙️' },
-        { id: 6, label: '通知设置', icon: '🔔' },
-        { id: 7, label: '隐私设置', icon: '🔒' },
-        { id: 8, label: '关于我们', icon: 'ℹ️' }
-      ]
-    }
+      userInfo: {},
+      stats: {},
+      menuSections: []
+    };
   },
   
   onLoad() {
-    this.loadUserInfo()
-  },
-  
-  onShow() {
-    // 每次显示页面时刷新用户信息
-    this.loadUserInfo()
+    this.loadData();
+    this.mergeUserFromStorage();
+    this.injectAdminEntry();
   },
   
   methods: {
-    // 加载用户信息
-    loadUserInfo() {
+    loadData() {
+      this.userInfo = profileData.userInfo;
+      this.stats = profileData.stats;
+      this.menuSections = profileData.menuSections;
+    },
+    // 合并登录后真实用户信息（如有）
+    mergeUserFromStorage() {
       try {
-        const userInfoStr = uni.getStorageSync('user_info')
-        if (userInfoStr) {
-          this.userInfo = JSON.parse(userInfoStr)
-          console.log('用户信息:', this.userInfo)
-        } else {
-          console.log('未找到用户信息')
-          this.userInfo = {}
-        }
-      } catch (error) {
-        console.error('加载用户信息失败:', error)
-        this.userInfo = {}
+        const stored = uni.getStorageSync('user_info');
+        if (!stored) return;
+        const parsed = typeof stored === 'string' ? JSON.parse(stored) : stored;
+        this.userInfo = {
+          ...this.userInfo,
+          name: parsed.username || this.userInfo.name,
+          city: parsed.city_name || this.userInfo.city,
+          department: parsed.department || this.userInfo.department,
+          role: parsed.is_admin ? '系统管理员' : this.userInfo.role
+        };
+        this._isAdmin = !!parsed.is_admin;
+      } catch (e) {
+        console.error('解析存储的用户信息失败:', e);
       }
     },
+    // 为管理员注入“管理面板”入口
+    injectAdminEntry() {
+      if (!this._isAdmin) return;
+      const adminSectionTitle = '管理';
+      const adminItemTitle = '管理面板';
+      const adminPath = '/pages-admin/admin-index/admin-index';
+      
+      // 检查是否已存在管理入口，避免重复添加
+      const exists = this.menuSections.some(section =>
+        section.items && section.items.some(item => item.title === adminItemTitle)
+      );
+      if (exists) return;
+      
+      this.menuSections.unshift({
+        title: adminSectionTitle,
+        items: [
+          {
+            icon: '🛠',
+            iconClass: 'purple',
+            title: adminItemTitle,
+            desc: '进入后台管理面板',
+            path: adminPath
+          }
+        ]
+      });
+    },
     
-    // 点击菜单项
     handleMenuClick(item) {
-      console.log('点击菜单:', item.label)
-      
-      switch(item.id) {
-        case 1: // 我的收藏
-          uni.showToast({ title: '我的收藏（开发中）', icon: 'none' })
-          break
-        case 2: // 历史记录
-          uni.showToast({ title: '历史记录（开发中）', icon: 'none' })
-          break
-        case 3: // 预约记录
-          uni.showToast({ title: '预约记录（开发中）', icon: 'none' })
-          break
-        case 4: // 帮助中心
-          uni.showToast({ title: '帮助中心（开发中）', icon: 'none' })
-          break
+      console.log('点击菜单:', item.title);
+      if (item.path) {
+        uni.navigateTo({
+          url: item.path
+        });
+      } else {
+        uni.showToast({
+          title: `${item.title}（开发中）`,
+          icon: 'none'
+        });
       }
     },
     
-    // 点击设置项
-    handleSettingClick(item) {
-      console.log('点击设置:', item.label)
-      
-      switch(item.id) {
-        case 5: // 账号设置
-          uni.showToast({ title: '账号设置（开发中）', icon: 'none' })
-          break
-        case 6: // 通知设置
-          uni.showToast({ title: '通知设置（开发中）', icon: 'none' })
-          break
-        case 7: // 隐私设置
-          uni.showToast({ title: '隐私设置（开发中）', icon: 'none' })
-          break
-        case 8: // 关于我们
-          this.showAbout()
-          break
-      }
-    },
-    
-    // 显示关于我们
-    showAbout() {
-      uni.showModal({
-        title: '关于汤仔助手',
-        content: '汤仔助手是一款智能教研服务平台\n\n版本: v1.0.0\n开发者: 汤仔团队',
-        showCancel: false,
-        confirmText: '知道了'
-      })
-    },
-    
-    // 退出登录
     handleLogout() {
       uni.showModal({
         title: '提示',
         content: '确定要退出登录吗？',
-        success: async (res) => {
+        success: (res) => {
           if (res.confirm) {
-            try {
-              // 调用退出登录API
-              // await logoutAPI()
-              
-              // 清除本地存储
-              uni.removeStorageSync('auth_token')
-              uni.removeStorageSync('user_info')
-              
-              console.log('已退出登录')
-              
-              // 显示提示
-              uni.showToast({
-                title: '已退出登录',
-                icon: 'success'
-              })
-              
-              // 跳转到登录页
-              setTimeout(() => {
-                uni.reLaunch({
-                  url: '/pages/login/login'
-                })
-              }, 1500)
-              
-            } catch (error) {
-              console.error('退出登录失败:', error)
-              uni.showToast({
-                title: '退出失败',
-                icon: 'none'
-              })
-            }
+            uni.removeStorageSync('auth_token');
+            uni.removeStorageSync('user_info');
+            
+            uni.showToast({
+              title: '已退出登录',
+              icon: 'success'
+            });
+            
+            setTimeout(() => {
+              uni.reLaunch({
+                url: '/pages/login/login'
+              });
+            }, 1500);
           }
         }
-      })
+      });
     }
   }
-}
+};
 </script>
 
 <style scoped>
 .mine-page {
   min-height: 100vh;
-  background: #f5f5f5;
-  padding-bottom: 100rpx;
+  background-color: #F8F8F8;
 }
 
-/* 用户信息卡片 */
-.user-card {
-  display: flex;
-  align-items: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 60rpx 30rpx;
-  margin-bottom: 20rpx;
-}
-
-.user-avatar {
-  width: 120rpx;
-  height: 120rpx;
-  border-radius: 60rpx;
-  background: rgba(255, 255, 255, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 30rpx;
-  overflow: hidden;
-}
-
-.user-avatar image {
-  width: 100%;
-  height: 100%;
-}
-
-.avatar-placeholder {
-  font-size: 60rpx;
+/* 头部用户信息区 */
+.profile-header {
+  background: linear-gradient(135deg, #4C12A1, #C964CF);
+  padding: 48rpx 40rpx 80rpx;
 }
 
 .user-info {
+  display: flex;
+  align-items: center;
+  gap: 32rpx;
+}
+
+.avatar-container {
+  position: relative;
+}
+
+.user-avatar {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  border: 6rpx solid rgba(255, 255, 255, 0.3);
+  background: linear-gradient(135deg, #FC4C02, #FFA300);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 64rpx;
+  color: #FFFFFF;
+}
+
+.avatar-badge {
+  position: absolute;
+  bottom: 4rpx;
+  right: 4rpx;
+  width: 48rpx;
+  height: 48rpx;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.2);
+}
+
+.user-details {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
 }
 
 .user-name {
-  font-size: 36rpx;
-  font-weight: 600;
-  color: #fff;
-  margin-bottom: 10rpx;
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #FFFFFF;
 }
 
 .user-role {
-  font-size: 26rpx;
-  color: rgba(255, 255, 255, 0.8);
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.9);
 }
 
-.user-arrow {
-  font-size: 50rpx;
-  color: rgba(255, 255, 255, 0.6);
-  font-weight: 300;
+.user-department {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.75);
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
 }
 
-/* 菜单区域 */
+/* 统计卡片 */
+.stats-card {
+  background-color: #FFFFFF;
+  border-radius: 32rpx;
+  padding: 40rpx;
+  margin: -40rpx 32rpx 0;
+  box-shadow: 0px 8rpx 24rpx rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+  z-index: 1;
+}
+
+.stat-item {
+  text-align: center;
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2rpx;
+  height: 64rpx;
+  background-color: #EEEEEE;
+}
+
+.stat-value {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #4C12A1;
+  margin-bottom: 8rpx;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+/* 内容区域 */
+.content {
+  padding: 40rpx 32rpx;
+}
+
+/* 菜单分组 */
 .menu-section {
-  margin-bottom: 20rpx;
+  margin-bottom: 32rpx;
 }
 
 .section-title {
   font-size: 28rpx;
-  color: #999;
-  padding: 20rpx 30rpx 10rpx;
+  font-weight: 600;
+  color: #999999;
+  padding: 0 8rpx 16rpx;
 }
 
-.menu-list {
-  background: #fff;
+.menu-card {
+  background-color: #FFFFFF;
+  border-radius: 24rpx;
+  overflow: hidden;
+  box-shadow: 0px 4rpx 8rpx -4rpx rgba(0, 0, 0, 0.10), 0px 8rpx 12rpx -2rpx rgba(0, 0, 0, 0.10);
 }
 
 .menu-item {
   display: flex;
   align-items: center;
-  padding: 30rpx;
-  border-bottom: 1rpx solid #f0f0f0;
-  transition: all 0.3s;
+  padding: 32rpx;
+  border-bottom: 2rpx solid #F5F5F5;
+  transition: background-color 0.2s;
 }
 
 .menu-item:last-child {
@@ -290,53 +337,90 @@ export default {
 }
 
 .menu-item:active {
-  background: #f8f8f8;
+  background-color: #F8F8F8;
 }
 
 .menu-icon {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 40rpx;
-  margin-right: 20rpx;
-  width: 50rpx;
-  text-align: center;
+  margin-right: 24rpx;
+  flex-shrink: 0;
 }
 
-.menu-label {
+.menu-icon.purple {
+  background: linear-gradient(135deg, rgba(76, 18, 161, 0.1), rgba(201, 100, 207, 0.1));
+}
+
+.menu-icon.orange {
+  background: linear-gradient(135deg, rgba(252, 76, 2, 0.1), rgba(255, 163, 0, 0.1));
+}
+
+.menu-icon.blue {
+  background: linear-gradient(135deg, rgba(45, 204, 211, 0.1), rgba(33, 150, 243, 0.1));
+}
+
+.menu-icon.pink {
+  background: linear-gradient(135deg, rgba(239, 74, 129, 0.1), rgba(233, 30, 99, 0.1));
+}
+
+.menu-icon.green {
+  background: linear-gradient(135deg, rgba(67, 160, 71, 0.1), rgba(56, 142, 60, 0.1));
+}
+
+.menu-content {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.menu-title {
   font-size: 30rpx;
-  color: #333;
+  font-weight: 500;
+  color: #333333;
+}
+
+.menu-desc {
+  font-size: 24rpx;
+  color: #999999;
 }
 
 .menu-arrow {
-  font-size: 40rpx;
-  color: #ddd;
-  font-weight: 300;
-}
-
-/* 退出登录 */
-.logout-section {
-  padding: 30rpx;
-}
-
-.logout-btn {
-  width: 100%;
-  background: #fff;
-  color: #ff4d4f;
-  border: none;
-  border-radius: 12rpx;
   font-size: 32rpx;
-  padding: 28rpx 0;
-  box-shadow: 0 4rpx 12rpx rgba(255, 77, 79, 0.1);
+  color: #CCCCCC;
+  flex-shrink: 0;
+}
+
+.menu-badge {
+  background-color: #FF4444;
+  color: #FFFFFF;
+  font-size: 22rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+  margin-left: 16rpx;
+}
+
+/* 退出按钮 */
+.logout-btn {
+  margin-top: 40rpx;
+  padding: 32rpx;
+  background-color: #FFFFFF;
+  border: none;
+  border-radius: 24rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #FF4444;
+  box-shadow: 0px 4rpx 8rpx -4rpx rgba(0, 0, 0, 0.10), 0px 8rpx 12rpx -2rpx rgba(0, 0, 0, 0.10);
+  transition: all 0.2s;
 }
 
 .logout-btn:active {
+  transform: scale(0.98);
   opacity: 0.8;
-}
-
-/* 版本信息 */
-.version-info {
-  text-align: center;
-  padding: 30rpx 0;
-  color: #999;
-  font-size: 24rpx;
 }
 </style>

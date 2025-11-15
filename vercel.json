@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "env": {
+    "DATABASE_URL": "mysql://xhs-haushu:7788Gg7788@124.223.62.233:3306/xhs-haushu",
+    "JWT_SECRET": "your-super-secret-jwt-key-here-make-it-long-and-random-vercel-production",
+    "INVITATION_CODE": "1212",
+    "ADMIN_PASSWORD": "d",
+    "VOLC_API_KEY": "6cd1bea6-f188-462b-8803-4a2b52eee1db",
+    "VOLC_SERVICE_ID": "kb-service-5ca2152dc52e50a7"
+  },
+  "functions": {
+    "app/api/**/*.ts": {
+      "maxDuration": 30
+    }
+  },
+  "build": {
+    "env": {
+      "NODE_ENV": "production"
+    }
+  },
+  "installCommand": "npm install --legacy-peer-deps",
+  "buildCommand": "npm run build"
+}

@@ -1,0 +1,47 @@
+[
+  {
+    "username": "庄鹏程",
+    "mobile": "15869635296",
+    "nickname": "庄鹏程",
+    "department": "伙伴",
+    "password": "$2a$10$3hyFnw36Oh547Ypvh.m6BeNlhfRE6mGxKsmyOXYBsVKjXxqa4.MOW",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 211
+  },
+  {
+    "username": "钟米年",
+    "mobile": "15906686657",
+    "nickname": "钟米年",
+    "department": "伙伴",
+    "password": "$2a$10$/27sQpB4Vo.HS2ho.Avp5.PdXjhz0xPplPI6dgUmxoO3qk/WWXupG",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "罗金链",
+    "mobile": "19881418060",
+    "nickname": "罗金链",
+    "department": "伙伴",
+    "password": "$2a$10$AwE/.PSXT3K/MHibaD84w.8VkWvYf9FPYnOfJszFxu0xPR08bTb3e",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  }
+]

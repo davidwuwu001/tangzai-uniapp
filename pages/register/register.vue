@@ -61,14 +61,15 @@
         <text class="input-label">城市 <text class="required">*</text></text>
         <view class="input-wrapper">
           <text class="input-icon">📍</text>
-          <picker 
-            mode="selector" 
-            :range="cities" 
+          <picker
+            mode="selector"
+            :range="cities"
             range-key="name"
             @change="onCityChange"
           >
             <view class="form-input picker-input">
-              {{ formData.cityName || '请选择城市' }}
+              <text v-if="formData.cityName">{{ formData.cityName }}</text>
+              <text v-else>请选择城市</text>
             </view>
           </picker>
         </view>
@@ -170,23 +171,51 @@ export default {
     // 获取城市列表
     async fetchCities() {
       try {
-        const db = uniCloud.database()
-        const res = await db.collection('cities').get()
-        this.cities = res.data || []
+        console.log('开始获取城市列表...')
+        const userObj = uniCloud.importObject('user')
+        console.log('userObj 创建成功')
+        const res = await userObj.getCities()
+        console.log('获取城市列表响应:', res)
+        
+        if (res.code === 0) {
+          // 检查是否是嵌套的data结构
+          let citiesData = res.data || []
+          if (citiesData.length > 0 && citiesData[0].data) {
+            // 如果第一个元素有data字段,说明这是查询结果对象
+            citiesData = citiesData[0].data || []
+          }
+          this.cities = citiesData
+          console.log('城市数据设置成功, 总数:', this.cities.length)
+          console.log('城市列表:', this.cities)
+          this.$forceUpdate() // 强制刷新视图
+        } else {
+          throw new Error(res.message)
+        }
       } catch (error) {
         console.error('获取城市列表失败:', error)
         uni.showToast({
-          title: '获取城市列表失败',
-          icon: 'none'
+          title: '获取城市列表失败: ' + error.message,
+          icon: 'none',
+          duration: 3000
         })
       }
     },
 
-    // 城市选择变化
+    // 城市选择变化 (picker)
     onCityChange(e) {
       const index = e.detail.value
       this.formData.city = this.cities[index]._id
       this.formData.cityName = this.cities[index].name
+    },
+
+    // 城市选择变化 (select)
+    onCitySelectChange(e) {
+      const cityId = this.formData.city
+      const city = this.cities.find(c => c._id === cityId)
+      if (city) {
+        this.formData.cityName = city.name
+        console.log('选择城市:', city.name)
+      }
     },
 
     // 切换密码显示

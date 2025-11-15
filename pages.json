@@ -1,7 +1,19 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
+			"path": "pages/workbench/workbench",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
 			"path": "pages/login/login",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/register/register",
 			"style": {
 				"navigationStyle": "custom"
 			}
@@ -19,9 +31,39 @@
 			}
 		},
 		{
+			"path": "pages/learning/learning",
+			"style": {
+				"navigationBarTitleText": "学习中心"
+			}
+		},
+		{
 			"path": "pages/mine/mine",
 			"style": {
 				"navigationBarTitleText": "我的"
+			}
+		},
+		{
+			"path": "pages/chat/chat",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/chat/history",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/feishu/list",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/feishu/detail",
+			"style": {
+				"navigationStyle": "custom"
 			}
 		},
 		{
@@ -29,6 +71,83 @@
 			"style": {
 				"navigationBarTitleText": "uni-app"
 			}
+		},
+		{
+			"path": "pages/fix-db/fix-db",
+			"style": {
+				"navigationBarTitleText": "\u6570\u636e\u5e93\u4fee\u590d",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/import-data/import-data",
+			"style": {
+				"navigationBarTitleText": "数据导入",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/debug/db-init",
+			"style": {
+				"navigationBarTitleText": "模型配置",
+				"enablePullDownRefresh": false
+			}
+		}
+	],
+	"subPackages": [
+		{
+			"root": "pages-admin",
+			"pages": [
+				{
+					"path": "admin-index/admin-index",
+					"style": {
+						"navigationBarTitleText": "管理面板"
+					}
+				},
+				{
+					"path": "cities/cities",
+					"style": {
+						"navigationBarTitleText": "城市管理"
+					}
+				},
+				{
+					"path": "departments/departments",
+					"style": {
+						"navigationBarTitleText": "部门管理"
+					}
+				},
+				{
+					"path": "users/users",
+					"style": {
+						"navigationBarTitleText": "用户管理"
+					}
+				},
+				{
+					"path": "agents/agents",
+					"style": {
+						"navigationBarTitleText": "智能体管理"
+					}
+				},
+				{
+					"path": "web-cards/web-cards",
+					"style": {
+						"navigationBarTitleText": "网页卡片管理"
+					}
+				},
+				{
+					"path": "feishu-cards/feishu-cards",
+					"style": {
+						"navigationBarTitleText": "飞书卡片管理"
+					}
+				},
+				{
+					"path": "models/models",
+					"style": {
+						"navigationBarTitleText": "模型管理"
+					}
+				}
+			]
 		}
 	],
 	"globalStyle": {
@@ -38,18 +157,26 @@
 		"backgroundColor": "#F8F8F8"
 	},
 	"tabBar": {
-		"color": "#666666",
-		"selectedColor": "#667eea",
+		"color": "#8e8e93",
+		"selectedColor": "#4C12A1",
 		"borderStyle": "white",
 		"backgroundColor": "#ffffff",
 		"list": [
 			{
+				"pagePath": "pages/workbench/workbench",
+				"text": "工作台"
+			},
+			{
 				"pagePath": "pages/teaching/teaching",
-				"text": "教研"
+				"text": "智能体"
 			},
 			{
 				"pagePath": "pages/service/service",
 				"text": "服务"
+			},
+			{
+				"pagePath": "pages/learning/learning",
+				"text": "学习中心"
 			},
 			{
 				"pagePath": "pages/mine/mine",

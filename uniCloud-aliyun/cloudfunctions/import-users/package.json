@@ -1,0 +1,10 @@
+{
+  "name": "import-users",
+  "version": "1.0.0",
+  "description": "批量导入用户数据到MongoDB",
+  "main": "index.obj.js",
+  "cloudfunction-config": {
+    "memorySize": 512,
+    "timeout": 60
+  }
+}

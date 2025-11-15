@@ -1,0 +1,23 @@
+// 批次 5 (20 条)
+db.getCollection("uni-id-users").insertMany([
+  {"username":"于广磊","mobile":"18953101896","nickname":"于广磊","password":"$2a$10$hA7bEKn5ZZaFZfHiz/iPi.q9XE8p7bSthLCDVvQgQCdy5REa5EVba"},
+  {"username":"任晶晶","mobile":"19857170820","nickname":"任晶晶","password":"$2a$10$mhsAVA0JcBKDMRNSGqvcTe45DIpAi7Nh/9KALv4tzVKqR0U3NO2CK"},
+  {"username":"杨发惠","mobile":"13186837888","nickname":"杨发惠","password":"$2a$10$kEGzXrgQjQVXhJ0tppQygOCa3piEz818tpgWQEkoUeJgG49.RSYRu"},
+  {"username":"周明霞","mobile":"15651359316","nickname":"周明霞","password":"$2a$10$yIhuFICEInt2ft8nay1lweFBABS7dLBHmBg8KBq9s5rw4Ava07PFC"},
+  {"username":"项家鹏","mobile":"18267855808","nickname":"项家鹏","password":"$2a$10$5dzPQHuzPNnQm4RdiVtHvuDtomiapdFm0Qc0.DmgSybKQoO5pqlT2"},
+  {"username":"黄志华","mobile":"13475408773","nickname":"黄志华","password":"$2a$10$GTLCI4wNOfrdwtxrOQlNJO9GD9aMlPubLzYdQ8ECw2yn2Njbp.CkC"},
+  {"username":"刘小容","mobile":"18667332610","nickname":"刘小容","password":"$2a$10$kOfNoIadWz9gImF1dryGLOPaJmHUGY2m.2sO2dLkhh/SSMxZiafw2"},
+  {"username":"叶林建","mobile":"17377628374","nickname":"叶林建","password":"$2a$10$HPJH.RHWoIgAOWwHDZraO.VXg1TZeRiFiy2AOBWSCZHp4Z6Dlx1Ve"},
+  {"username":"潘燕芳","mobile":"17801220347","nickname":"潘燕芳","password":"$2a$10$gpE0m5YvWFEBZX9cP4Sf8ORtCYL.LN.ktcBgo2uFveIRphbrGocDG"},
+  {"username":"柯倩","mobile":"18862104518","nickname":"柯倩","password":"$2a$10$FJvMdKpOW75oQ7u5cJb1Se1tyd31CW52bNhOgROW.KzxTSdaFZDhW"},
+  {"username":"刘丽春","mobile":"18277194323","nickname":"刘丽春","password":"$2a$10$5ft73vj.pTL.kLWPUqN4rejQCroZhFDV6PT1FG1R6eddr9fcx/9yK"},
+  {"username":"李金蕾","mobile":"15256976861","nickname":"李金蕾","password":"$2a$10$OIFFZ.O1ADeHkXWQOlNri.v35ezojfI1olha1jC9YE9loMENYYi7a"},
+  {"username":"邝洋洋","mobile":"17602204205","nickname":"邝洋洋","password":"$2a$10$zwWVlkZZB5aFPD.6gxJ3SOyl4iGUTeAP3DsYDt7QR0dQI0.U5koym"},
+  {"username":"肖萍","mobile":"13488945962","nickname":"肖萍","password":"$2a$10$oGSSUjpz1P8ABxAcZfu/E.FjO6X0Weyzqk/Z.qpmrItgQ3uxEK9XC"},
+  {"username":"杨东城","mobile":"15824423497","nickname":"杨东城","password":"$2a$10$h24yIGRT/ZvYbZR30BhmBecJY8EkqW01TKOTXOBXjcPgk5nvQklty"},
+  {"username":"徐卫","mobile":"13588176481","nickname":"徐卫","password":"$2a$10$MCp43wdd4bvRrS7koaGfA.62gjPqmzfm0ReVrnpK0OaQWPfV0LGRu"},
+  {"username":"陈宇","mobile":"15993679966","nickname":"陈宇","password":"$2a$10$Fo6qz11oG6IDtFcmR5xqluzJ.hYZnlWGgMInVTByvUcsYYOefexHi"},
+  {"username":"荀俐伽","mobile":"18367136572","nickname":"荀俐伽","password":"$2a$10$KMW4epqqiTs5EUif49Pr0uTKTsn0zi2TnslcNOg008EXbahvmqCwa"},
+  {"username":"裴晓姗","mobile":"13051077207","nickname":"裴晓姗","password":"$2a$10$5B9D3OYYej8gizhVGqN0fu25MMAuUmt/3Lr4UwyjduNlqc/VlPNU6"},
+  {"username":"杨贺淳","mobile":"17852156672","nickname":"杨贺淳","password":"$2a$10$Ed42Ty7LHtMnTZnkLkkqyeynF3amWiHhNwdwPVsyIUcuWMPOEa8ty"}
+]);

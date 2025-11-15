@@ -1,0 +1,2263 @@
+[
+  {
+    "username": "吴世健",
+    "mobile": "18240413895",
+    "email": "779695947@qq.com",
+    "nickname": "吴世健",
+    "avatar": "D",
+    "avatar_color": "purple-pink",
+    "department": "教研部",
+    "password": "$2a$10$5UE5qW.7qleLb5a88JcqjuI22jsVFReqO6BVDGMd00t9MOq5mcYKS",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 218
+  },
+  {
+    "username": "朱艳娜",
+    "mobile": "17717098204",
+    "email": "test@example.com",
+    "nickname": "朱艳娜",
+    "avatar": "/avatars/avatar1.png",
+    "avatar_color": "blue-purple",
+    "department": "顾客部",
+    "password": "$2a$10$ze.RCSOk2K.SosdvWk5ek.p1eFD9tus0PVp.4qGq6tG6AdaocMY5O",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 210
+  },
+  {
+    "username": "孙小敏",
+    "mobile": "13162051896",
+    "email": "Beenle48@163.com",
+    "nickname": "孙小敏",
+    "avatar_color": "blue-purple",
+    "department": "教研部",
+    "password": "$2a$10$81XVC.vP.dEEOefatYeXCO3i9eMSMSszRSQUCB6mLkpbQfuv/tKne",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 218
+  },
+  {
+    "username": "恩光",
+    "mobile": "18611151575",
+    "email": "1061500213@qq.com",
+    "nickname": "恩光",
+    "avatar_color": "blue-purple",
+    "department": "教研部",
+    "password": "$2a$10$5E0qvMz9SiZhL1OEcy2e8.NgIw9PRlpBZh/89r9YCKxs4LTb3nzcu",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 218
+  },
+  {
+    "username": "段晓雨",
+    "mobile": "18621630605",
+    "email": "786196561@qq.com",
+    "nickname": "段晓雨",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$4xrgQH/Oqhpcv9NEubGW2ez48uQcDAGHXSwKNQgPA4FP4KQDbkI1u",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 218
+  },
+  {
+    "username": "李沛",
+    "mobile": "18768119440",
+    "email": "450881502@qq.com",
+    "nickname": "李沛",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$VHCZ6oR8DD4yCgmeRXcB9eqdfr6AgILl8AGyusaAN1.cXVfK6R4fy",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 218
+  },
+  {
+    "username": "马琦纷",
+    "mobile": "13520477905",
+    "email": "13520477905@163.com",
+    "nickname": "马琦纷",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$RXIVJiPM5MwUHZDtQqEmMOeJ9AGRr56puNrdjrL8YJxSTA5nZdo.y",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 218
+  },
+  {
+    "username": "刘丹",
+    "mobile": "13702945812",
+    "email": "Melody121207@163.com",
+    "nickname": "刘丹",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$tytqibFBQufAINUl.nfgL.wH5m/jUNZD9ftkEbZEHqR3H5YTqlQti",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 218
+  },
+  {
+    "username": "朱达",
+    "mobile": "17521302778",
+    "email": "285986379@qq.com",
+    "nickname": "朱达",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$8IEvdoIi.BmpHpDWQKmywOxTm.PCGu8/g7VBdRQxF/v/otAr4GNWC",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 218
+  },
+  {
+    "username": "苏秋萍",
+    "mobile": "17623749512",
+    "email": "405322439@qq.com",
+    "nickname": "苏秋萍",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$DKqpPkGhZTxPfQLlTVxk7eZym9v23.5yX9/eI0HtoOqJK/M6ii11q",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 218
+  },
+  {
+    "username": "白小意",
+    "mobile": "18758306620",
+    "email": "784717170@qq.com",
+    "nickname": "白小意",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$bRDAjbAl4iiNPCZGGj1kq.vbZ3quhMZC8/HEAuagVL1Dej6mSyy1i",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 218
+  },
+  {
+    "username": "王以信",
+    "mobile": "18060740272",
+    "email": "1289761419@qq.com",
+    "nickname": "王以信",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$LXrv0XRIgqQuirvTeOD7N.bMVVgi30rQ90fMAtFhTcyT5Bhpgq/Wy",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 218
+  },
+  {
+    "username": "admin",
+    "email": "admin@example.com",
+    "nickname": "admin",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$JeoLBpnYcg09UMTcccfe6uGIDnYT/o.JdfMSn2OS9Th49Q5nYWVca",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": []
+  },
+  {
+    "username": "迦美",
+    "mobile": "15870619380",
+    "email": "1176403148@qq.com",
+    "nickname": "迦美",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$5EJVNt46Z1ASgv63fjwrKeuNmv4R72Vs.31xq3dyn5IKfibnE.RGC",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 218
+  },
+  {
+    "username": "lisa",
+    "mobile": "18210443249",
+    "email": "17638138817@qq.com",
+    "nickname": "lisa",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$x0ThhCkZ4QxV.HJSyUM2TOc2DqnDouERLDc0.XpmXy3y5V7HMnhb2",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 218
+  },
+  {
+    "username": "test",
+    "mobile": "18240413898",
+    "email": "ajhdbahk@qq.com",
+    "nickname": "test",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$E84du4V1iTmQg2/AcUOEXubZ2UolAa8h2g/ewHIST74NPlqyhlY3e",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 218
+  },
+  {
+    "username": "陶纵驰",
+    "mobile": "15694140140",
+    "email": "1746294996@qq.com",
+    "nickname": "陶纵驰",
+    "avatar_color": "yellow-orange",
+    "department": "伙伴",
+    "password": "$2a$10$osRw6MkBVm2CnuVMgO0jqutH7Y.UNqaT/EbPO74ahb5rUPFAyjOvq",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 213
+  },
+  {
+    "username": "侯玉洁",
+    "mobile": "18364144118",
+    "email": "a857567780z@qq.com",
+    "nickname": "侯玉洁",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$9tqZ4DuCmjxZvWlhZdX4ge/ik2vxmUnytPJQP5axURMcVJ0K/yRAq",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 212
+  },
+  {
+    "username": "test济南",
+    "mobile": "17748506840",
+    "email": "1631949616@qq.com",
+    "nickname": "test济南",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$xzgowl0znNBLSLWWGIBrAeDp4AOHdUsHD4fTjklIfMLPg4ZWggk2K",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 212
+  },
+  {
+    "username": "test 北京",
+    "mobile": "17717098201",
+    "email": "2345678765@qq.com",
+    "nickname": "test 北京",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$9iv0KNcLREhP9lEgHHIb9OtXV0H4FgSGcH7n.qcfXUwDIdTeuZF6W",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 211
+  },
+  {
+    "username": "test杭州",
+    "mobile": "18210443243",
+    "email": "adm1in@tangzai.com",
+    "nickname": "test杭州",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$cNBcSo5iWfTQxcWJMS7PeuNb28K3VyJ7l2nAOrI7q.Hm9JpAFFzte",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "test沈阳",
+    "mobile": "18210443240",
+    "email": "adm121in@tangzai.com",
+    "nickname": "test沈阳",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$f./yoe.GiXM5NmupUG2MFOhN9Ue4iSx6qtRUaHHEx3EEajRRwZI72",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 213
+  },
+  {
+    "username": "testuser",
+    "mobile": "13800000001",
+    "email": "test@test.com",
+    "nickname": "testuser",
+    "avatar_color": "blue-purple",
+    "department": "财务部",
+    "password": "$2a$10$kiZVVaYw/eMeEdpSUYEWYuVDvMrUr1nVGOMdezugtS7AUB49UQi.u",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 218
+  },
+  {
+    "username": "梁艳芳",
+    "mobile": "13998357009",
+    "email": "2742595161@qq.com",
+    "nickname": "梁艳芳",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$1j0nUUUiRbSIAncRvFRcQe7rnPa2xt5PXrnWXxwihHGTzvvSLSKJS",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 213
+  },
+  {
+    "username": "龙雅玲",
+    "mobile": "18341473380",
+    "email": "2043923440@qq.com",
+    "nickname": "龙雅玲",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$tLDWKamF28GjMGOqzCSAgujRwYDVBAwJt6SqyFo2aMXOejpkeDHN6",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 213
+  },
+  {
+    "username": "刘玉珠",
+    "mobile": "13840376741",
+    "email": "1136848723@qq.com",
+    "nickname": "刘玉珠",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$cWHPwwktaB94LM/88VovmeveVRJZxOowA8nXdFCc6bNtyT64ldJIi",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 213
+  },
+  {
+    "username": "于桐桐",
+    "mobile": "15710514892",
+    "email": "916755937@qq.com",
+    "nickname": "于桐桐",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$Yq0I39HHhR.bDq7AQe8tBeDQhYKPjhR23MiELA3grMqKfP4ErFtV6",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 213
+  },
+  {
+    "username": "杨洁",
+    "mobile": "13390107592",
+    "email": "1205522148@qq.com",
+    "nickname": "杨洁",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$R84NeUrqm7pjsywmReHBxO/mIgRGRF1txG.iMcbnpiZQPlL1erVru",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 213
+  },
+  {
+    "username": "张岐剑",
+    "mobile": "18304081582",
+    "email": "18304081582@163.com",
+    "nickname": "张岐剑",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$yw5x4M6maPv/EMKSYYitTuCFBZw7f.gSujhLJM6PLZRAg4yoa2vvG",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 213
+  },
+  {
+    "username": "玉莲",
+    "mobile": "17824910553",
+    "email": "1976419423@qq.com",
+    "nickname": "玉莲",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$Eh2PSHELhDtGywHF6XQIzeJSG6LFXFsNn4rqmnNlg9dqCZ53W6pSu",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 213
+  },
+  {
+    "username": "陈燚君",
+    "mobile": "13842098753",
+    "email": "1179908137@qq.com",
+    "nickname": "陈燚君",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$dPSVc6Gcpr.QVjKUSvzik.pHY68k.VR0lGeTMn2F4NnGzdoStkEv2",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 213
+  },
+  {
+    "username": "董瑞龙",
+    "mobile": "15104627496",
+    "email": "2216986434@qq.com",
+    "nickname": "董瑞龙",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$fZVEp8F1DtLsqZx8v5bp0.sNNVk6CgVxt0T468D31wDn0Mjh7lg9C",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 213
+  },
+  {
+    "username": "关嘉伟",
+    "mobile": "15542275912",
+    "email": "1848336169@qq.com",
+    "nickname": "关嘉伟",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$VF6UxJB3kh3GARyo96GSaOOzqe7YkH4qC/plEr7WqeDN/nL0X9vVG",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 213
+  },
+  {
+    "username": "刘永",
+    "mobile": "18341481920",
+    "email": "18341481920@163.com",
+    "nickname": "刘永",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$aGMb6Rw3A3do5Ho0.1a.IeinMQW5n44ILhN7C6pkJo5x3GMs9ESZy",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 213
+  },
+  {
+    "username": "刘罡",
+    "mobile": "18268883307",
+    "email": "15151871745@163.com",
+    "nickname": "刘罡",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$cr3rwi/3GuWJas6CCYz5UOqnU0780sPvnALGuActWvmmrhuwxS9lG",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "栾迎丽",
+    "mobile": "13050247172",
+    "email": "2785894480@qq.com",
+    "nickname": "栾迎丽",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$ab5oX.ibuQ5LgvBCg83BeefL2192b9Bpfek.CdN3Awy2K.s8sgkeS",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 213
+  },
+  {
+    "username": "蒋嫚嫚",
+    "mobile": "15104627495",
+    "email": "15104627495@163.com",
+    "nickname": "蒋嫚嫚",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$bNEPegWxcgtbazWXLPNN3Oq.818sXKklWYu7HYve4QPNN2tRzjcci",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 213
+  },
+  {
+    "username": "赵远泽",
+    "mobile": "17860638316",
+    "email": "1557885033@qq.com",
+    "nickname": "赵远泽",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$O/pv1k9QLuHwX.pb3ziXM.6PfZbr3a5mE9lljqZbqe7T1GsvRLMsy",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 212
+  },
+  {
+    "username": "欧阳丽",
+    "mobile": "15215610757",
+    "email": "1739126854@qq.com",
+    "nickname": "欧阳丽",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$ChHU6S7OZl8vFM70d9MnnuOKX/5kE0HFzrspp8vJlvHr/qb5X76iy",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "杨鹏",
+    "mobile": "13610837004",
+    "email": "1132408300@qq.com",
+    "nickname": "杨鹏",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$fRqM4S30bdvjo2kN4OnVwO1ymGxEExvp1B1g7agwHWpxeqhfrAqvq",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 213
+  },
+  {
+    "username": "李朋原",
+    "mobile": "19558106422",
+    "email": "lipengyuan2017@163.com",
+    "nickname": "李朋原",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$X3uCBlWmFF3rQpKWwRfk3uMNTb9hUU1Ntt6Ihvo5iIPxhuscqXmMe",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "马莲",
+    "mobile": "15600727712",
+    "email": "1102809703@qq.com",
+    "nickname": "马莲",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$NAbNLJQWxNU.77QjF/eVSuiQP.2aQpvWhMV/7GKOohw/p1mNrzrta",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "卢园",
+    "mobile": "18868191275",
+    "email": "1119523047@qq.com",
+    "nickname": "卢园",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$/aoi1Ni//cn7eX.7UWcpreDemK1jVeYxxOrsvnIon04JXG6TLy7Ui",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "林树松",
+    "mobile": "15103691937",
+    "email": "568561523@qq.com",
+    "nickname": "林树松",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$8mBG5PfppPpTaoDiEQxw5enblSvZUqwzccIeQaRgInIwW.I4mfFHC",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "包生艳",
+    "mobile": "18250742556",
+    "email": "1666515716@qq.com",
+    "nickname": "包生艳",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$Jb8IQXRpMHi.YCYtfn4FbucvynMuyC/fsd5XAPzCvogpqcw66aLLW",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "刘国庆",
+    "mobile": "13136116001",
+    "email": "710951218@qq.com",
+    "nickname": "刘国庆",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$ceV1RDCjQI3KPd8F2E1fmeMCgcLZgtior4ho6nW2gvrIiT/wMxO.C",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "王延云",
+    "mobile": "15968850040",
+    "email": "2396896124@qq.com",
+    "nickname": "王延云",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$De9gZNZrz36dYWGETUC3j.EXBy1Cu62oGhqiBFPLcwQnFmvbLAdfe",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "魏娟娟",
+    "mobile": "15285187371",
+    "email": "616800558@qq.com",
+    "nickname": "魏娟娟",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$qg1qET3THFA1OzoBLF39le9Z1jCyUamEd5L3V9Sl1uAfL10QJ2Mie",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "王茹琦",
+    "mobile": "15601812737",
+    "email": "1427565517@qq.com",
+    "nickname": "王茹琦",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$v/VATO2iUD7qLqNC/LLaGunPNNFlvmDMJSjRfL6Ik9VK3Y9bX5TH.",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "王玉丹",
+    "mobile": "13777448457",
+    "email": "1290053962@qq.com",
+    "nickname": "王玉丹",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$ztd/KI9Zjf7ryiMFhOywNOkHyuKwqy/Fund4SOCUAchhHUTnnzLDG",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "冯梦妮",
+    "mobile": "18715051851",
+    "email": "214122033@qq.com",
+    "nickname": "冯梦妮",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$oWSELfax5jMjGEIO01gIpuy/CAwKxQMMCUI/1l8WEQ8bf2P8.6iRG",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "黄秋云",
+    "mobile": "18707477035",
+    "email": "2440262271@qq.com",
+    "nickname": "黄秋云",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$.6E6botesHIrL3h3CvGM..goRRx7D3jay38Nm2UMen1gwvFpbsETa",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "张双燕",
+    "mobile": "18382224782",
+    "email": "2362398919@qq.com",
+    "nickname": "张双燕",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$wmycA5bKck4AtdlHW.4DIuia/U.Uq2IcRR2nvCbEnTjlZD25ji3eW",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "彭雪姣",
+    "mobile": "18555234158",
+    "email": "459806169@qq.com",
+    "nickname": "彭雪姣",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$HHFgsFacxg9kJv4z5/1qweyitl4YxRYd0ahxqlieLoo5nl/LTbtpm",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "李华昌",
+    "mobile": "15724285986",
+    "email": "luyang_6@126.com",
+    "nickname": "李华昌",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$ign3Tq0iC4DYx5B4TsCtYurdZV4s8.PPiKFtl6dgeZycDETrOn.0i",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "熊芳之",
+    "mobile": "17784061465",
+    "email": "316402489@qq.com",
+    "nickname": "熊芳之",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$ssUPNhuhJuUFHq0obykr1.c./u3JrFFh2DFneQZ4QSDApBYEvulUa",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "史雪红",
+    "mobile": "15063900375",
+    "email": "1477377274@qq.com",
+    "nickname": "史雪红",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$.75eE8sdPdB/CD3bX0Hxc.Jj6fdvLwyzLBbB5KunXQAWpjFO6d2g2",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "杨治远",
+    "mobile": "18919645291",
+    "email": "1454312592@qq.com",
+    "nickname": "杨治远",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$1ESY53IervUwBBbUOomeHus2GEMEa2lDLT4jfcMDRs8GEztRNZI6a",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "董定涛",
+    "mobile": "18844901009",
+    "email": "1533746042@qq.com",
+    "nickname": "董定涛",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$1u.J0bx95nQoR3xjy0n4MekENBIp9jok8xELXF3bWVX/gjEyXBxpm",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "陈金凤",
+    "mobile": "18167111390",
+    "email": "2058145890@qq.com",
+    "nickname": "陈金凤",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$1uPeqGSEp3G2r356dSjHaeByVh1.G1xvL/3qzXHC7K.tLpyoGfoTS",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "张文博",
+    "mobile": "15069069802",
+    "email": "976672007@qq.com",
+    "nickname": "张文博",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$TkmzMESALfU76Ay5Mx.CN.tNoLFfpgfIXlT9JNSpmdHK5W8KHVthG",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "张敬攀",
+    "mobile": "18106526090",
+    "email": "1074514087@qq.com",
+    "nickname": "张敬攀",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$FTXX.4UZSFffCcimj5ODSu5TTsP.4jw/TQhomxeWbHakViUSCVMoS",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "高彦平",
+    "mobile": "18300676214",
+    "email": "1184673899@qq.com",
+    "nickname": "高彦平",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$0wb64R5elUJSD0YNYxnCa.NCm64YrfIuQObm6RHSSNj6csa523WIi",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "牛丽媛",
+    "mobile": "19278048759",
+    "email": "kuaile476533646@qq.com",
+    "nickname": "牛丽媛",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$2ADuAplzNbYRiTVsRad9tO0A8asXO7WAzj8QQ2wZ1VLpJEwUaZYtC",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 212
+  },
+  {
+    "username": "董利颖",
+    "mobile": "17664050357",
+    "email": "lisasm1212@126.com",
+    "nickname": "董利颖",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$s9Cd3XQSDXi0TkKnWe8rZezmTTuDbkUUODyyyiESU9IBzUv3/atXS",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 212
+  },
+  {
+    "username": "王成鑫",
+    "mobile": "15335317805",
+    "email": "864993114@qq.com",
+    "nickname": "王成鑫",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$TpgoAPaBPuur8waz.wqsxOcgKcHCYM6JfLr0VqrltJF4ykk56.Y/6",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 212
+  },
+  {
+    "username": "张倩倩",
+    "mobile": "19863423797",
+    "email": "552042649@qq.com",
+    "nickname": "张倩倩",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$keV/r6xnSrpiuJeWau1Gj.aqzNGL79C34F5WNOjRQZALwRTy0QKVK",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 212
+  },
+  {
+    "username": "王珂",
+    "mobile": "18863423282",
+    "email": "2510685117@qq.com",
+    "nickname": "王珂",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$aCSV4ONMFK8Q87LFZ8qHwOYC9Ur.yZwrioC38SwGX0Sm00uEpr02S",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 212
+  },
+  {
+    "username": "曾式伟",
+    "mobile": "18806418486",
+    "email": "2549858978@qq.com",
+    "nickname": "曾式伟",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$Mf82nM5nkwGEBFhuf/jOpe.8vLLbIfbcicaWDmEbAu5UmUxpM44IC",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 212
+  },
+  {
+    "username": "郭子瑶",
+    "mobile": "18354125448",
+    "email": "1823740085@qq.com",
+    "nickname": "郭子瑶",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$AECbBwvrrWpY1CrDpXIV9uuBAqjnFzrc.fggn64V9jvu0oFqr1weO",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 212
+  },
+  {
+    "username": "张大为",
+    "mobile": "19223932270",
+    "email": "uuuuoooojjjj@icloud.com",
+    "nickname": "张大为",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$7nGKBREEajThmYZjOYIe5OwuZ7dDpJQGusmEVFHONXtqa5KBGM9KG",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 212
+  },
+  {
+    "username": "王娜",
+    "mobile": "18366107465",
+    "email": "1870436260@qq.com",
+    "nickname": "王娜",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$mPctugsublh56yBwa6cbEObIiSn.ulVOx.vd5PqzA54i8tC6Is6W2",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 212
+  },
+  {
+    "username": "陈王敏",
+    "mobile": "17600667742",
+    "email": "jscwm12345@163.com",
+    "nickname": "陈王敏",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$0Y/2OVbISSB.EOzSKUlax.vSbWWV7NfEWDhC7nO8K9/gQ12t7G/qO",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "杜鹃",
+    "mobile": "15588673256",
+    "email": "1627131772@qq.com",
+    "nickname": "杜鹃",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$Sd6uEQFF35Jqm3qe/t8bI.QZ9VfIGGqMzsWh8YmUWh6Q9rUJeyM6G",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 212
+  },
+  {
+    "username": "崔素敏",
+    "mobile": "15053160973",
+    "email": "1184756457@qq.com",
+    "nickname": "崔素敏",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$OJV/3omFvWIlLuVegfonKOdkraiB9glUaAIE/QuqScUi7B/T534au",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 212
+  },
+  {
+    "username": "刘兴",
+    "mobile": "18595269727",
+    "email": "724412829@qq.com",
+    "nickname": "刘兴",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$06lQ.cZV25Kr/HuVsq5Lf.sI6Zme5.WqrwYQFnajy4LU5O03fiXtq",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 212
+  },
+  {
+    "username": "李流平",
+    "mobile": "19285403926",
+    "email": "1443356373@qq.com",
+    "nickname": "李流平",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$SdM4JasEZmfCm8CMEZPAoOEToOzRrlPCKJBqkZ534s60xNnvMNwJu",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 212
+  },
+  {
+    "username": "齐美玲",
+    "mobile": "15823207443",
+    "email": "421312302@qq.com",
+    "nickname": "齐美玲",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$6EBJtzNic./.kojCKwuaseZeyDOL3/xMTCw0AYufe3Cl6OBR.Wkd6",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 212
+  },
+  {
+    "username": "张思慧",
+    "mobile": "19225479927",
+    "email": "dava69@qq.com",
+    "nickname": "张思慧",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$EpCi15Db8CzGj9VpLScKxemtTu/Idio8.z.ixPndYbR3k5LkBTlxy",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 212
+  },
+  {
+    "username": "伍吉丽",
+    "mobile": "15621874407",
+    "email": "1953698660@qq.com",
+    "nickname": "伍吉丽",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$Hx9Xh4DnNTzXayCm3BKFwOHhjUJFECoVFWMbgNi1Iw5sVV5hS30hC",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 212
+  },
+  {
+    "username": "于广磊",
+    "mobile": "18953101896",
+    "email": "861761837@qq.com",
+    "nickname": "于广磊",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$hA7bEKn5ZZaFZfHiz/iPi.q9XE8p7bSthLCDVvQgQCdy5REa5EVba",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 212
+  },
+  {
+    "username": "任晶晶",
+    "mobile": "19857170820",
+    "email": "867847448@qq.com",
+    "nickname": "任晶晶",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$mhsAVA0JcBKDMRNSGqvcTe45DIpAi7Nh/9KALv4tzVKqR0U3NO2CK",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "杨发惠",
+    "mobile": "13186837888",
+    "email": "531133917@qq.com",
+    "nickname": "杨发惠",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$kEGzXrgQjQVXhJ0tppQygOCa3piEz818tpgWQEkoUeJgG49.RSYRu",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "周明霞",
+    "mobile": "15651359316",
+    "email": "1072235977@qq.com",
+    "nickname": "周明霞",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$yIhuFICEInt2ft8nay1lweFBABS7dLBHmBg8KBq9s5rw4Ava07PFC",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "项家鹏",
+    "mobile": "18267855808",
+    "email": "754137943@qq.com",
+    "nickname": "项家鹏",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$5dzPQHuzPNnQm4RdiVtHvuDtomiapdFm0Qc0.DmgSybKQoO5pqlT2",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "黄志华",
+    "mobile": "13475408773",
+    "email": "1397172216@qq.com",
+    "nickname": "黄志华",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$GTLCI4wNOfrdwtxrOQlNJO9GD9aMlPubLzYdQ8ECw2yn2Njbp.CkC",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 212
+  },
+  {
+    "username": "刘小容",
+    "mobile": "18667332610",
+    "email": "1016683074@qq.com",
+    "nickname": "刘小容",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$kOfNoIadWz9gImF1dryGLOPaJmHUGY2m.2sO2dLkhh/SSMxZiafw2",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "叶林建",
+    "mobile": "17377628374",
+    "email": "775651289@qq.com",
+    "nickname": "叶林建",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$HPJH.RHWoIgAOWwHDZraO.VXg1TZeRiFiy2AOBWSCZHp4Z6Dlx1Ve",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "潘燕芳",
+    "mobile": "17801220347",
+    "email": "misspan_2022@qq.com",
+    "nickname": "潘燕芳",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$gpE0m5YvWFEBZX9cP4Sf8ORtCYL.LN.ktcBgo2uFveIRphbrGocDG",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "柯倩",
+    "mobile": "18862104518",
+    "email": "823549110@qq.com",
+    "nickname": "柯倩",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$FJvMdKpOW75oQ7u5cJb1Se1tyd31CW52bNhOgROW.KzxTSdaFZDhW",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "刘丽春",
+    "mobile": "18277194323",
+    "email": "1002661788@qq.com",
+    "nickname": "刘丽春",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$5ft73vj.pTL.kLWPUqN4rejQCroZhFDV6PT1FG1R6eddr9fcx/9yK",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "李金蕾",
+    "mobile": "15256976861",
+    "email": "1364131007@qq.com",
+    "nickname": "李金蕾",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$OIFFZ.O1ADeHkXWQOlNri.v35ezojfI1olha1jC9YE9loMENYYi7a",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "邝洋洋",
+    "mobile": "17602204205",
+    "email": "2567177438@qq.com",
+    "nickname": "邝洋洋",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$zwWVlkZZB5aFPD.6gxJ3SOyl4iGUTeAP3DsYDt7QR0dQI0.U5koym",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 211
+  },
+  {
+    "username": "肖萍",
+    "mobile": "13488945962",
+    "email": "13697754701@163.com",
+    "nickname": "肖萍",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$oGSSUjpz1P8ABxAcZfu/E.FjO6X0Weyzqk/Z.qpmrItgQ3uxEK9XC",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "杨东城",
+    "mobile": "15824423497",
+    "email": "809319209@qq.com",
+    "nickname": "杨东城",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$h24yIGRT/ZvYbZR30BhmBecJY8EkqW01TKOTXOBXjcPgk5nvQklty",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "徐卫",
+    "mobile": "13588176481",
+    "email": "1642006262@qq.com",
+    "nickname": "徐卫",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$MCp43wdd4bvRrS7koaGfA.62gjPqmzfm0ReVrnpK0OaQWPfV0LGRu",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "陈宇",
+    "mobile": "15993679966",
+    "email": "442120860@qq.com",
+    "nickname": "陈宇",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$Fo6qz11oG6IDtFcmR5xqluzJ.hYZnlWGgMInVTByvUcsYYOefexHi",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "荀俐伽",
+    "mobile": "18367136572",
+    "email": "494054472@qq.com",
+    "nickname": "荀俐伽",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$KMW4epqqiTs5EUif49Pr0uTKTsn0zi2TnslcNOg008EXbahvmqCwa",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "裴晓姗",
+    "mobile": "13051077207",
+    "email": "1325007801@qq.com",
+    "nickname": "裴晓姗",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$5B9D3OYYej8gizhVGqN0fu25MMAuUmt/3Lr4UwyjduNlqc/VlPNU6",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 211
+  },
+  {
+    "username": "杨贺淳",
+    "mobile": "17852156672",
+    "email": "334841176@qq.com",
+    "nickname": "杨贺淳",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$Ed42Ty7LHtMnTZnkLkkqyeynF3amWiHhNwdwPVsyIUcuWMPOEa8ty",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 211
+  },
+  {
+    "username": "张越",
+    "mobile": "17610467926",
+    "email": "17610467926@163.com",
+    "nickname": "张越",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$BIRR3xnoMbz6XVUJ4XQnZOBn.XxInPKo1Shgi9hSW3PoufkYmT/ua",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 211
+  },
+  {
+    "username": "李钰",
+    "mobile": "17621247572",
+    "email": "1712725545@qq.com",
+    "nickname": "李钰",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$BEeu28IzvFk902wYo5qtkOLay.vgMYXUlp9yPGyqWAN8gqv.w98eu",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 211
+  },
+  {
+    "username": "隋春磊",
+    "mobile": "15901240104",
+    "email": "813695254@qq.com",
+    "nickname": "隋春磊",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$gLqAs.PoPpQiJhahpiq8ZOHxLj.FRIY/stBnDZrQmv5.Qrsr17VBe",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 211
+  },
+  {
+    "username": "房岩",
+    "mobile": "17610612912",
+    "email": "973970812@qq.com",
+    "nickname": "房岩",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$mrKjgASCQqxnmzxsaB8D0eF4Olif3s5ICrH49OUiOQdoKLNtxlWEa",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 211
+  },
+  {
+    "username": "严兴兰",
+    "mobile": "17600975743",
+    "email": "923351573@qq.com",
+    "nickname": "严兴兰",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$WQUmyvPkCBJREUIZYevDDOi5l5Rxrvs0PGYaOpkBGp/a/tu1nHYuy",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 211
+  },
+  {
+    "username": "刘尚华",
+    "mobile": "17865186261",
+    "email": "1490589136@qq.com",
+    "nickname": "刘尚华",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$fSYbommAbQEZz5J.SsHZU.isRV7Yf5lTKKSBqGgk.LdiAwfWwqkPC",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 211
+  },
+  {
+    "username": "李江伟",
+    "mobile": "13552879741",
+    "email": "1058684289@qq.com",
+    "nickname": "李江伟",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$9KMuViRLu05rveuHFoyid.Z1MuoWaUsfeIPvMbtcw7VumOy4mk5nO",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 211
+  },
+  {
+    "username": "王婷",
+    "mobile": "15587189312",
+    "email": "1145317280@qq.com",
+    "nickname": "王婷",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$j3S0gL0WOxElcGeXFE.AreBbCMmFqLERGsomN7nk/wjcpmn582kUe",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "彭玲玲",
+    "mobile": "15701148719",
+    "email": "906998027@qq.com",
+    "nickname": "彭玲玲",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$tx9oV5RUWiJSIUXkvTgo4OUlCATEScqE5HsMdWqkblXw3ENDvIcYG",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 211
+  },
+  {
+    "username": "楚闪威",
+    "mobile": "18257128440",
+    "email": "416386557@qq.com",
+    "nickname": "楚闪威",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$JURFUb71Ww0MxDB62B7Lvu5UJJSui8EIUM.Y.NIRpf23YzpC1Tx3u",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "何丽婷",
+    "mobile": "15057507322",
+    "email": "956624138@qq.com",
+    "nickname": "何丽婷",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$BPz5kDigYQ1Dcw0yp2a0Z.vsfMDDkSJacNgS4fYUbvo8zYYV2fYXy",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "王艳",
+    "mobile": "13474178504",
+    "email": "1427849471@qq.com",
+    "nickname": "王艳",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$dtz60ys8lRU3gg89fcautOrd2W/G6zHC9nEssvrbDVkKkbNfIOsnG",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 211
+  },
+  {
+    "username": "尹利艳",
+    "mobile": "18287409292",
+    "email": "1262598162@qq.com",
+    "nickname": "尹利艳",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$mV0B63GZthZ1tSJsQ4mBoeBN8wI2chphyo0IGR3ptI8vg5FSSwl7C",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 211
+  },
+  {
+    "username": "甄改艳",
+    "mobile": "17695947997",
+    "email": "1647973666@qq.com",
+    "nickname": "甄改艳",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$23uNAGHyWv7ysmwm..e4weSC14vZdt1hF3trqe2qJnxcSPQOSxFsK",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 211
+  },
+  {
+    "username": "钱文韬",
+    "mobile": "18548919402",
+    "email": "1134947803@qq.com",
+    "nickname": "钱文韬",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$FZkTHdzOurNODkLWjoC7hukuo1t2cmBUfli67efNsAbu2Jq/wrdxO",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 211
+  },
+  {
+    "username": "杜逸锋",
+    "mobile": "16601333302",
+    "email": "1572171151@qq.com",
+    "nickname": "杜逸锋",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$4/AqnczIaeIYRX7EQa1WeePJgYhnTYjFzB4EXPkxVf7WCKhA3EY0G",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 211
+  },
+  {
+    "username": "刘晓",
+    "mobile": "15005087187",
+    "email": "2234771055@qq.com",
+    "nickname": "刘晓",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$GK98v8eTL0KG/mRbPrlA7e8KM50PgLjrmCnXJdT2CH9DLypwXmPJC",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 211
+  },
+  {
+    "username": "陈良珍",
+    "mobile": "13174535987",
+    "email": "1799582230@qq.com",
+    "nickname": "陈良珍",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$oimIRZd9zzjwZSs9EjmZROjWH/9jbsouqb8rlZSLjWy/FYxeoBi5a",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 211
+  },
+  {
+    "username": "卫丽萍",
+    "mobile": "17621328521",
+    "email": "446158830@qq.com",
+    "nickname": "卫丽萍",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$xq.b6BlcyB3A91V4sAZsHelYkF8iFvEa/IhdbI24jctMd/6NKkTza",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 211
+  },
+  {
+    "username": "朱雨婷",
+    "mobile": "15705201731",
+    "email": "3104105386@qq.com",
+    "nickname": "朱雨婷",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$2I9GGf9Gf2.upGiJneccf.YMg/npDx02giI.IAQ5yLK7mFISBCIoO",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "付星星",
+    "mobile": "17857113296",
+    "email": "244615798@qq.com",
+    "nickname": "付星星",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$M32pR8SK0hkQ1A8bA2dMV.U4sJXLbEClxrKu5yCiM6WCk7141QHKS",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "洪来扣",
+    "mobile": "17710039212",
+    "email": "1053080544@qq.com",
+    "nickname": "洪来扣",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$oyjMy/Uy9yGpY5wUocs3buZxjiErfhQTdfGqcx01uobXf4W3pizL.",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 211
+  },
+  {
+    "username": "张军苗",
+    "mobile": "18331572803",
+    "email": "18331572803@163.com",
+    "nickname": "张军苗",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$IwOfSBPSSo4j12RLcSvwN.DTRTCx7/30Pea9f6eGwUfAnqBfQZ6BO",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 211
+  },
+  {
+    "username": "郑佳雯",
+    "mobile": "17601027712",
+    "email": "1641278178@qq.com",
+    "nickname": "郑佳雯",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$SrEHJud/M3na8mGrwHhZMeCo8lGy/MnbKdxVhfMKHoiyHIlgoxP3G",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 211
+  },
+  {
+    "username": "严雪莲",
+    "mobile": "19821637327",
+    "email": "1508997172@qq.com",
+    "nickname": "严雪莲",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$THWFlet0WVVVe175IeEJ6eyeGGhx/rRW65jWqbMEjBWwts67IPHpu",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 218
+  },
+  {
+    "username": "兰平",
+    "mobile": "18459111156",
+    "email": "690043935@qq.com",
+    "nickname": "兰平",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$oZlFpidMz2SSxAGpnVbtn.pfG70qW/etnFAlqI9JltbSxmGO91MvO",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 218
+  },
+  {
+    "username": "邓享杰",
+    "mobile": "19157754797",
+    "email": "353068664@qq.com",
+    "nickname": "邓享杰",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$5VhzdPVs5JFU2g.c6SPC6.2E90fdII4JIr5GDIzc5v.2rjCql0zIq",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "李富瑶",
+    "mobile": "14706301272",
+    "email": "1847636763@qq.com",
+    "nickname": "李富瑶",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$JWd0zvufLAGyK9aELXWGbeHhSyFGRFJRqHI5go1SnPYKsSnqrqxeG",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 212
+  },
+  {
+    "username": "test北京",
+    "mobile": "13852085546",
+    "email": "779695941@qq.com",
+    "nickname": "test北京",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$s6iyy5XvjomG7c/AfVpmceDcZQHHftFpGy9lfv/9ecagGYaYH2IVW",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 211
+  },
+  {
+    "username": "刘营营",
+    "mobile": "13359492624",
+    "email": "1120084772@qq.com",
+    "nickname": "刘营营",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$ysu0d2IhzHrI5jtz0SY8gO8.VQhOGKFMj2DcgzD/3QgbxIOzulLLe",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 211
+  },
+  {
+    "username": "庄鹏程",
+    "mobile": "15869635296",
+    "email": "592617859@qq.com",
+    "nickname": "庄鹏程",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$3hyFnw36Oh547Ypvh.m6BeNlhfRE6mGxKsmyOXYBsVKjXxqa4.MOW",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 211
+  },
+  {
+    "username": "钟米年",
+    "mobile": "15906686657",
+    "email": "miko0220@qq.com",
+    "nickname": "钟米年",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$/27sQpB4Vo.HS2ho.Avp5.PdXjhz0xPplPI6dgUmxoO3qk/WWXupG",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  },
+  {
+    "username": "罗金链",
+    "mobile": "19881418060",
+    "email": "jenny520jesus@163.com",
+    "nickname": "罗金链",
+    "avatar_color": "blue-purple",
+    "department": "伙伴",
+    "password": "$2a$10$AwE/.PSXT3K/MHibaD84w.8VkWvYf9FPYnOfJszFxu0xPR08bTb3e",
+    "mobile_confirmed": 0,
+    "is_admin": false,
+    "role": [
+      "user"
+    ],
+    "permission": [],
+    "token": [],
+    "city": 215
+  }
+]
